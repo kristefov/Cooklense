@@ -17,10 +17,10 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+    addUser: async (parent, { userData: userInput }) => {
+      const user = await User.create({userInput});
+      const token = signToken(userData);
+      return { token, userData };
     },
     
 
@@ -56,7 +56,7 @@ const resolvers = {
     },
 
     
-    removeBook: async (parent, { recipeId }, context) => {
+    removeRecipe: async (parent, { recipeId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You must be logged in");
       }
