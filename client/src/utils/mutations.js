@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+
 export const ADD_USER = gql`
   mutation addUser($userData: UserInput!) {
     addUser(userData: $userData) {
@@ -52,3 +53,4 @@ export const REMOVE_RECIPE = gql`
     }
   }
 `;
+
