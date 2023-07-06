@@ -1,32 +1,26 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
-import Homepage from "../src/pages/Homepage"
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import SignUp from "./pages/SignUp";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
+
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: '/graphql',
 });
 
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem('id_token');
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
@@ -42,11 +36,11 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
+          <Navbar />
           <Routes>
-            <Route path="/" element={<Homepage />}/>
-            <Route  path="/sign-up" element={<SignUp />}/>
-            <Route  path="/login" element={<Login />}/>
-            <Route  path="/profile" element={<Profile />}/>
+            <Route path="/" element={<Home />} />
+            {/* <Route /> */}
+            <Route element={<h1 className="display-2">Wrong page!</h1>} />
           </Routes>
         </>
       </Router>
