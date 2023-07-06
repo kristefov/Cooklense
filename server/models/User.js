@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedRecipies: [recipeSchema]
+    savedRecipes: [recipeSchema]
   },
 );
 
