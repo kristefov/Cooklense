@@ -1,6 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
+import Homepage from "../src/pages/Homepage"
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import SignUp from "./pages/SignUp";
 import {
   ApolloClient,
   InMemoryCache,
@@ -12,7 +16,7 @@ import {
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
-import { Homepage, Login, SignUp, Profile } from "../src/pages/"
+
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
