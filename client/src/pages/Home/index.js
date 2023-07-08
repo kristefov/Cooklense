@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { recipeSearch } from "../../utils/API";
 import {
   Container,
@@ -9,7 +9,7 @@ import {
   InputGroup,
   FormControl,
   Alert,
-  Card
+  Card,
 } from "react-bootstrap";
 
 const options = [
@@ -19,8 +19,24 @@ const options = [
   //   { value: "searchCategory", label: "Category" },
 ];
 
+const useLocalStorageState = (key, defaultValue) => {
+  const [state, setState] = useState(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : defaultValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
+
+  return [state, setState];
+};
+
 const Home = () => {
-  const [searchedMeals, setSearchedMeals] = useState([]);
+  const [searchedMeals, setSearchedMeals] = useLocalStorageState(
+    "searchedMeals",
+    []
+  );
   const [searchInput, setSearchInput] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
   const [showAlert, setShowAlert] = useState(false);
