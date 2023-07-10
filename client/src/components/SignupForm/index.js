@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
-import Auth from "../../utils/auth";
+import Auth from '../../utils/auth';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
 
@@ -21,7 +21,7 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
   // define mutation
-  const [createUser] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -30,6 +30,12 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const { firstName, lastName, username, email, password } = userFormData;
+        if (!firstName || !lastName || !username || !email || !password) {
+            setShowAlert(true);
+            showAlert('field missing or incomplete');
+            return;
+        }
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -38,10 +44,20 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
-    try {
-      const { data } = await createUser(userFormData);
-      console.log(data);
-      Auth.login(data.createUser.token);
+      try {
+        const { data } = await addUser({
+            variables: { userData: {...userFormData}  },
+        });
+        
+        const userData = {
+          token: Auth.login(data.addUser.token),
+          userId: data.addUser.user._id,
+          firstName: data.addUser.user.firstName,
+          lastName: data.addUser.user.lastName,
+          username: data.addUser.user.username,
+          email: data.addUser.user.email
+      };
+      console.log(userData);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
