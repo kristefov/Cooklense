@@ -6,6 +6,15 @@ const recipeSchema = require('./Recipe');
 
 const userSchema = new Schema(
   {
+
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
@@ -20,6 +29,9 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    avatar: {
+      type: String,
     },
     savedRecipes: [recipeSchema]
   },
