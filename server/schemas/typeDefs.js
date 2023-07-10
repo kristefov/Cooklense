@@ -8,9 +8,12 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
+    firstName: String!
+    lastName: String!
     username: String!
     email: String!
     recipeCount: Int
+    avatar: String
     savedRecipes: [Recipe]
   }
 
@@ -29,9 +32,12 @@ const typeDefs = gql`
   }
 
   input UserInput {
+    firstName: String!
+    lastName: String!
     username: String!
     email: String!
     password: String!
+    avatar: String
   }
 
   type Query {
