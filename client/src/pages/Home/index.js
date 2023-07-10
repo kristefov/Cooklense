@@ -13,9 +13,8 @@ import {
 } from "react-bootstrap";
 
 const options = [
-  { value: "", label: "Search by" },
-  { value: "searchName", label: " Name" },
-  { value: "searchIngredient", label: "Ingredient" },
+  { value: "searchName", label: "Search by Name" },
+  { value: "searchIngredient", label: "Search by Ingredient" },
   //   { value: "searchCategory", label: "Category" },
 ];
 
@@ -37,8 +36,8 @@ const Home = () => {
     "searchedMeals",
     []
   );
-  const [searchInput, setSearchInput] = useState("");
-  const [dropdownValue, setDropdownValue] = useState("");
+  const [searchInput, setSearchInput] = useState('');
+  const [dropdownValue, setDropdownValue] = useState('searchName');
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSearch = async (e) => {
