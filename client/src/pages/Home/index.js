@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { recipeSearch } from "../../utils/API";
+import { Link } from "react-router-dom";
 import {
   Container,
   Col,
@@ -36,8 +37,8 @@ const Home = () => {
     "searchedMeals",
     []
   );
-  const [searchInput, setSearchInput] = useState('');
-  const [dropdownValue, setDropdownValue] = useState('searchName');
+  const [searchInput, setSearchInput] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("searchName");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSearch = async (e) => {
@@ -135,18 +136,23 @@ const Home = () => {
           {searchedMeals.map((meal) => {
             return (
               <Col md="4" key={meal.idMeal} className="mb-4">
-                <Card key={meal.idMeal} border="dark">
-                  {meal.strMealThumb ? (
-                    <Card.Img
-                      src={meal.strMealThumb}
-                      alt={`The picture for ${meal.strMeal}`}
-                      variant="top"
-                    />
-                  ) : null}
-                  <Card.Body>
-                    <Card.Title>{meal.strMeal}</Card.Title>
-                  </Card.Body>
-                </Card>
+                <Link
+                  to={`/recipe/${meal.idMeal}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Card key={meal.idMeal} border="dark">
+                    {meal.strMealThumb ? (
+                      <Card.Img
+                        src={meal.strMealThumb}
+                        alt={`The picture for ${meal.strMeal}`}
+                        variant="top"
+                      />
+                    ) : null}
+                    <Card.Body>
+                      <Card.Title>{meal.strMeal}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Link>
               </Col>
             );
           })}
