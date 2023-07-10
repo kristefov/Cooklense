@@ -5,6 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import SingleRecipe from './pages/SingleRecipe';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -38,8 +39,8 @@ function App() {
         <>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            {/* <Route /> */}
+            <Route path="/" Component={Home} />
+            <Route path="/recipe/:id" Component={SingleRecipe} />
             <Route element={<h1 className="display-2">Wrong page!</h1>} />
           </Routes>
         </>
