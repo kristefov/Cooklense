@@ -3,37 +3,23 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert,FloatingLabel } from 'react-bootstrap';
 
-
+import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { login } from '../../reducers/authReducer';
 
-const LoginForm = ({handleModalClose}) => {
-
-  const navigate = useNavigate();
+const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser] = useMutation(LOGIN_USER);
-  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
- 
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = userFormData;
-        if ( !email || !password) {
-            setShowAlert(true);
-            showAlert('field missing or incomplete');
-            return;
-        }
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -44,27 +30,17 @@ const LoginForm = ({handleModalClose}) => {
 
     try {
       const { data } = await loginUser({
-        variables: { ...userFormData }
+        variables: {...userFormData} 
       });
 
-      dispatch(
-        login({
-          token: data.loginUser.token,
-          username: data.loginUser.user.username,
-          userId: data.loginUser.user._id,
-          email: data.loginUser.user.email,
-          avatar: data.loginUser.user.avatar,
-        })
-      );
-      localStorage.setItem("id_token", data.loginUser.token);
-      handleModalClose()
-      navigate("/");
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
     setUserFormData({
+      username: '',
       email: '',
       password: '',
     });
