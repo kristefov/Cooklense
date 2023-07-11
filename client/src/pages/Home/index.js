@@ -142,11 +142,12 @@ const Home = () => {
                   <Card key={meal.idMeal} border="dark">
                     {meal.strMealThumb ? (
                       <Card.Img
-                        src={meal.strMealThumb}
+                        src={`${meal.strMealThumb}/preview`}
                         alt={`The picture for ${meal.strMeal}`}
                         variant="top"
                       />
                     ) : null}
+                      
                     <Card.Body>
                       <Card.Title>{meal.strMeal}</Card.Title>
                     </Card.Body>
