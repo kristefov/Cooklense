@@ -1,10 +1,10 @@
 // NAVBAR
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab, Col, Row } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, Col, Row, BreadcrumbItem } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
+
 import Auth from '../../utils/auth';
 
 const AppNavbar = () => {
@@ -39,13 +39,7 @@ const AppNavbar = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Container fluid-direction='row'>
-        <Breadcrumb className='mt-3' >
-          <Breadcrumb.Item as={Link} to='/' active>Home</Breadcrumb.Item>
-          <Breadcrumb.Item  as={Link} >Share this Recipe</Breadcrumb.Item>
-          
-        </Breadcrumb>
-        </Container>
+
         {/* set modal data up */}
         <Modal
           size='lg'
