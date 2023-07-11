@@ -118,7 +118,7 @@ const SignupForm = () => {
 
 
 
-          
+
         </Form.Group>
 
 
@@ -126,7 +126,7 @@ const SignupForm = () => {
         <Form.Group className='mb-3'>
           
           <FloatingLabel
-          for="username"
+          htmlFor="username"
           label="Your Username"
           className="mb-3"
         >
@@ -147,7 +147,7 @@ const SignupForm = () => {
         <Form.Group className='mb-3'>
           
           <FloatingLabel
-          for="email"
+          htmlFor="email"
           label="Email address"
           className="mb-3"
         >
@@ -169,7 +169,6 @@ const SignupForm = () => {
             value={userFormData.password}
             required
           />
-          <label for="password">Password</label>
         </Form.Floating>
             <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
           </Form.Group>

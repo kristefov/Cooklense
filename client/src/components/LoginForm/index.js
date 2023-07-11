@@ -55,7 +55,7 @@ const LoginForm = () => {
         <Form.Group className='mb-3'>
           
         <FloatingLabel
-        for="email"
+        htmlFor="email"
         label="Email address"
         className="mb-3"
       >
@@ -77,7 +77,6 @@ const LoginForm = () => {
           value={userFormData.password}
           required
         />
-        <label for="password">Password</label>
       </Form.Floating>
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
