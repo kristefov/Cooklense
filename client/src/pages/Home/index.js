@@ -148,11 +148,13 @@ const Home = () => {
                   <Card key={meal.idMeal} border="dark">
                     {meal.strMealThumb ? (
                       <Card.Img
-                        src={meal.strMealThumb}
+                        src={`${meal.strMealThumb}/preview`}
                         alt={`The picture for ${meal.strMeal}`}
                         variant="top"
                       />
-                    ) : null}
+                    ) : {`https://place-hold.it/300x300?text=${meal.strMeal}&fontsize=23`}
+                         }
+                      
                     <Card.Body>
                       <Card.Title>{meal.strMeal}</Card.Title>
                     </Card.Body>
