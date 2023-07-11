@@ -4,7 +4,7 @@ import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
 
-const AppFooterBar = () => {
+const Footer = () => {
     // set modal display state
   
     return (
@@ -22,5 +22,5 @@ const AppFooterBar = () => {
       );
     }
   
-  export default AppFooterBar;
+  export default Footer;
   

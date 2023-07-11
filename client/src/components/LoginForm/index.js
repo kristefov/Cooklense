@@ -1,7 +1,7 @@
 // LOGIN FORM
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert,FloatingLabel } from 'react-bootstrap';
 
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
@@ -53,28 +53,32 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
+          
+        <FloatingLabel
+        for="email"
+        label="Email address"
+        className="mb-3"
+      >
+        <Form.Control name="email" type="email" placeholder="name@example.com"
+         onChange={handleInputChange}
             value={userFormData.email}
-            required
-          />
+            required />
+      </FloatingLabel>
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
+        <Form.Floating>
+        <Form.Control
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={handleInputChange}
+          value={userFormData.password}
+          required
+        />
+        <label for="password">Password</label>
+      </Form.Floating>
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button

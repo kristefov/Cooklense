@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import SingleRecipe from './pages/SingleRecipe';
 
@@ -45,6 +46,7 @@ function App() {
           </Routes>
         </>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }
