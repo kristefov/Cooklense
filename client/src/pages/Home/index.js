@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { recipeSearch } from "../../utils/API";
 import { Link } from "react-router-dom";
+import Collapse from 'react-bootstrap/Collapse';
+import Fade from 'react-bootstrap/Fade';
 import {
   Container,
   Col,
@@ -11,6 +13,8 @@ import {
   FormControl,
   Alert,
   Card,
+  Breadcrumb
+
 } from "react-bootstrap";
 
 const options = [
@@ -76,6 +80,7 @@ const Home = () => {
 
   return (
     <>
+          
       <Container style={{ marginTop: "10vh" }}>
         <h1>Search for recipes!</h1>
         <Form onSubmit={handleSearch}>

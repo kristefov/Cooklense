@@ -29,7 +29,7 @@ const SingleRecipe = () => {
               ingredients.push({ ingredient, measure });
             }
           }
-
+console.log(recipe)
           setSelectedRecipe(recipe);
           setIngredients(ingredients);
         } catch (error) {

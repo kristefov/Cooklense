@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import SingleRecipe from './pages/SingleRecipe';
+import BreadCrumbsiteComponent from './components/BreadCrumbs';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -39,6 +40,7 @@ function App() {
       <Router>
         <>
           <Navbar />
+          <BreadCrumbsiteComponent />
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/recipe/:id" Component={SingleRecipe} />
