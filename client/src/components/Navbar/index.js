@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab, Col, Row, BreadcrumbItem } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
+import { logout } from '../../reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Auth from '../../utils/auth';
 
 const AppNavbar = () => {
     // set modal display state
     const [showModal, setShowModal] = useState(false);
-  
+    const dispatch = useDispatch()
+    const {auth} = useSelector(state => state)
     return (
       <>
         <Navbar bg='light' expand='lg'>
@@ -25,12 +27,12 @@ const AppNavbar = () => {
                   Search For Recipes
                 </Nav.Link>
                 {/* if user is logged in show saved books and logout */}
-                {Auth.loggedIn() ? (
+                {auth.isLoggedIn ? (
                   <>
                     <Nav.Link as={Link} to='/collections'>
                       Collections
                     </Nav.Link>
-                    <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                    <Nav.Link onClick={() => dispatch(logout())}>Logout</Nav.Link>
                   </>
                 ) : (
                   <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

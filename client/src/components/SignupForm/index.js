@@ -5,14 +5,12 @@ import { Form, Button, Alert, FloatingLabel } from "react-bootstrap";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-
-import Auth from '../../utils/auth';
+import { signup} from "../../reducers/authReducer";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-import { signup } from "../../reducers/authReducer";
 
-const SignupForm = () => {
+
+const SignupForm = ({handleModalClose}) => {
   // set initial form state
   const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({
@@ -59,7 +57,7 @@ const SignupForm = () => {
         });
         
         const userData = {
-          token: Auth.login(data.addUser.token),
+          token: data.addUser.token,
           userId: data.addUser.user._id,
           firstName: data.addUser.user.firstName,
           lastName: data.addUser.user.lastName,
@@ -67,7 +65,8 @@ const SignupForm = () => {
           email: data.addUser.user.email
       };
       dispatch(signup(userData))
-      localStorage.setItem("id_token", data.signup.token);
+      localStorage.setItem("id_token", data.addUser.token);
+      handleModalClose()
       navigate('/')
     } catch (err) {
       console.error(err);

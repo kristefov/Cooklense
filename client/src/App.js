@@ -1,29 +1,39 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { setContext } from '@apollo/client/link/context';
-
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import SingleRecipe from './pages/SingleRecipe';
-import BreadCrumbsiteComponent from './components/BreadCrumbs';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import { setContext } from "@apollo/client/link/context";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import SingleRecipe from "./pages/SingleRecipe";
+import BreadCrumbsiteComponent from "./components/BreadCrumbs";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
-
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -35,19 +45,27 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const { auth } = useSelector((state) => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.isLoggedIn) {
+      navigate("/");
+    }
+  }, [auth.isLoggedIn, navigate]);
+
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Navbar />
-          <BreadCrumbsiteComponent />
-          <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/recipe/:id" Component={SingleRecipe} />
-            <Route element={<h1 className="display-2">Wrong page!</h1>} />
-          </Routes>
-        </>
-      </Router>
+      <>
+        <Navbar />
+        <BreadCrumbsiteComponent />
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/recipe/:id" Component={SingleRecipe} />
+          <Route element={<h1 className="display-2">Wrong page!</h1>} />
+        </Routes>
+      </>
+
       <Footer />
     </ApolloProvider>
   );
