@@ -4,7 +4,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import Auth from '../../utils/auth';
+
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
 import { signup } from "../../reducers/authReducer";
@@ -56,7 +56,7 @@ const SignupForm = () => {
         });
         
         const userData = {
-          token: Auth.login(data.addUser.token),
+          token: data.addUser.user.token,
           userId: data.addUser.user._id,
           firstName: data.addUser.user.firstName,
           lastName: data.addUser.user.lastName,
