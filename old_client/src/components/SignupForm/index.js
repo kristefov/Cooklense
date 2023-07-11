@@ -1,19 +1,13 @@
 // SIGNUP FORM
 import React, { useState } from "react";
-
 import { Form, Button, Alert, FloatingLabel } from "react-bootstrap";
 
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
-
+import Auth from '../../utils/auth';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-import { signup } from "../../reducers/authReducer";
 
 const SignupForm = () => {
   // set initial form state
-  const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,8 +22,6 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   // define mutation
   const [addUser] = useMutation(ADD_USER);
-
-  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -58,16 +50,14 @@ const SignupForm = () => {
         });
         
         const userData = {
-          token: data.addUser.user.token,
+          token: Auth.login(data.addUser.token),
           userId: data.addUser.user._id,
           firstName: data.addUser.user.firstName,
           lastName: data.addUser.user.lastName,
           username: data.addUser.user.username,
           email: data.addUser.user.email
       };
-      dispatch(signup(userData))
-      localStorage.setItem("id_token", data.signup.token);
-      navigate('/')
+      console.log(userData);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
