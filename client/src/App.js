@@ -52,7 +52,7 @@ function App() {
     if (!auth.isLoggedIn) {
       navigate("/");
     }
-  }, [auth.isLoggedIn, navigate]);
+  },[]);
 
   return (
     <ApolloProvider client={client}>
