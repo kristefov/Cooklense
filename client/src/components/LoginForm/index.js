@@ -76,6 +76,7 @@ const LoginForm = () => {
           onChange={handleInputChange}
           value={userFormData.password}
           required
+          autocomplete="off"
         />
       </Form.Floating>
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
