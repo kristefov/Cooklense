@@ -80,7 +80,17 @@ const Home = () => {
 
   return (
     <>
-          
+            <Container fluid-direction='row'>
+        <Breadcrumb separator={"-->"}>
+
+          <Breadcrumb.Item href="/">
+            Back to Search
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active to={Link}>
+           Result: Geeks for Geeks
+          </Breadcrumb.Item>
+        </Breadcrumb>
+        </Container>
       <Container style={{ marginTop: "10vh" }}>
         <h1>Search for recipes!</h1>
         <Form onSubmit={handleSearch}>
