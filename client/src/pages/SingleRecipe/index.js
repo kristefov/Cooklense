@@ -15,7 +15,9 @@ const SingleRecipe = () => {
       const fetchData = async () => {
         try {
           const response = await recipeSearch("searchById", id);
+          
           const recipe = response && response.meals[0];
+          console.log(selectedRecipe)
 
           const ingredients = [];
           for (let i = 1; i <= 20; i++) {
@@ -27,6 +29,7 @@ const SingleRecipe = () => {
               ingredients.push({ ingredient, measure });
             }
           }
+console.log(recipe)
           setSelectedRecipe(recipe);
           setIngredients(ingredients);
         } catch (error) {
@@ -37,7 +40,8 @@ const SingleRecipe = () => {
       fetchData();
     } else {
       const recipes = JSON.parse(storedData);
-      const selectedRecipe = recipes.find((item) => item.idMeal === id);
+      const recipe = recipes.find((item) => item.idMeal === id);
+      const selectedRecipe = recipe && recipe.allData.meal;
 
       const ingredients = [];
       for (let i = 1; i <= 20; i++) {
@@ -55,6 +59,10 @@ const SingleRecipe = () => {
     }
   }, [id, storedData]);
 
+  if (!storedData && !selectedRecipe) {
+    return <div>no data</div>;
+  }
+
   return (
     <Container className="my-4">
       {selectedRecipe && (
@@ -63,7 +71,7 @@ const SingleRecipe = () => {
             <Col md={4}>
               <Card.Img
                 variant="top"
-                src={`${selectedRecipe.strMealThumb}/preview`}
+                src={selectedRecipe.strMealThumb}
                 alt={selectedRecipe.strMeal}
               />
             </Col>
