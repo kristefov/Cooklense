@@ -45,7 +45,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const { auth } = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
