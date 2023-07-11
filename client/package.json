@@ -4,7 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "@apollo/client": "^3.7.16",
+    "@apollo/client": "^3.7.17",
+    "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -13,8 +14,14 @@
     "react": "^16.13.1",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "^5.0.1"
+    "react-file-base64": "^1.0.3",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.1",
+    "react-scripts": "^5.0.1",
+    "react-scroll-into-view": "^1.12.1",
+    "react-spring": "^9.7.2",
+    "react-toastify": "^9.1.3",
+    "socket.io-client": "^4.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
