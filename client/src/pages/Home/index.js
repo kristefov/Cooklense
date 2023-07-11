@@ -152,8 +152,7 @@ const Home = () => {
                         alt={`The picture for ${meal.strMeal}`}
                         variant="top"
                       />
-                    ) : {`https://place-hold.it/300x300?text=${meal.strMeal}&fontsize=23`}
-                         }
+                    ) : null}
                       
                     <Card.Body>
                       <Card.Title>{meal.strMeal}</Card.Title>
