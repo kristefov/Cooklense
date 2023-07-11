@@ -12,7 +12,7 @@ const AppNavbar = () => {
     // set modal display state
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
-    const {auth} = useSelector(state => state)
+    const auth = useSelector(state => state.auth)
     return (
       <>
         <Navbar bg='light' expand='lg'>
