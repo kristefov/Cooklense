@@ -18,6 +18,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import SingleRecipe from "./pages/SingleRecipe";
+import SearchResults from './pages/SearchResults';
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
 
 // Construct our main GraphQL API endpoint
@@ -62,6 +63,7 @@ function App() {
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
+          <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
       </>
