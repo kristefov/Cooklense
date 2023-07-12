@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -14,56 +14,13 @@ import {
 const options = [
   { value: "name", label: "Search by Name" },
   { value: "ingredient", label: "Search by Ingredient" },
-  //   { value: "searchCategory", label: "Category" },
 ];
 
-// const useLocalStorageState = (key, defaultValue) => {
-//   const [state, setState] = useState(() => {
-//     const storedValue = localStorage.getItem(key);
-//     return storedValue ? JSON.parse(storedValue) : defaultValue;
-//   });
-
-  // useEffect(() => {
-  //   localStorage.setItem(key, JSON.stringify(state));
-  // }, [key, state]);
-
-  // return [state, setState];
-// };
-
 const Home = () => {
-  // const [searchedMeals, setSearchedMeals] = useLocalStorageState(
-  //   "searchedMeals",
-  //   []
-  // );
+
   const [searchInput, setSearchInput] = useState("");
   const [dropdownValue, setDropdownValue] = useState(options[0].value);
   const [showAlert, setShowAlert] = useState(false);
-
-  // useEffect(() => {
-  //   setSearchedMeals([]);
-  // }, []);
-
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!searchInput || !dropdownValue) {
-  //     setShowAlert(true);
-  //   } else {
-  //     console.log("Search input:", searchInput);
-  //     console.log("Dropdown value:", dropdownValue);
-
-  //     setSearchInput("");
-  //     setDropdownValue("");
-
-  //     try {
-  //       const { meals } = await recipeSearch(dropdownValue, searchInput);
-  //       console.log(meals);
-  //       setSearchedMeals(meals);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
 
   const handleAlertDismiss = () => {
     setShowAlert(false);
