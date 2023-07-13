@@ -10,15 +10,14 @@ const SearchResults = () => {
   const { searchType, searchValue } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   useEffect(() => {
     const getSearchData = async () => {
       try {
         const { meals } = await recipeSearch(searchType, searchValue);
-        // console.log(meals)
-         let test = appendIngredients(meals);
-        console.log(test)
-        setSearchResults(meals);
+        let mealsWithIngredients = appendIngredients(meals);
+        setSearchResults(mealsWithIngredients);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -31,54 +30,60 @@ const SearchResults = () => {
 
   const appendIngredients = (data) => {
     return data.map((meal) => {
-      const ingredientNames = Object
-        .keys(meal)
+      const ingredientNames = Object.keys(meal)
         .filter((key) => key.startsWith("strIngredient"))
         .map((key) => {
           const ingredient = meal[key];
           return ingredient ? ingredient.toLowerCase() : ingredient;
         })
         .filter((ingredient) => ingredient !== "");
-  
+
       return {
         ...meal,
-        ingredientNames: ingredientNames
+        ingredientNames: ingredientNames,
       };
     });
   };
-  
 
   const handleFilterClick = (e) => {
-    console.log(e.target);
+    const ingredient = e.target.name;
+    if (e.target.checked) {
+      setCheckedIngredients([...checkedIngredients, ingredient]);
+    } else {
+      setCheckedIngredients(
+        checkedIngredients.filter((item) => item !== ingredient)
+      );
+    }
   };
 
-  const handleProductChange = (e) => {
-    console.log(e.target);
-  };
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
   }
+
+  const filteredResults = searchResults.filter((meal) => {
+    return checkedIngredients.every((ingredient) =>
+      meal.ingredientNames.some(
+        (ingredientName) =>
+          ingredientName && ingredientName.includes(ingredient.toLowerCase())
+      )
+    );
+  });
 
   return (
     <Container>
       <Row>
         <Col sm={3}>
           <h2 className="pt-3">Options:</h2>
-          <SearchFilter
-            onChange={handleProductChange}
-            onClick={handleFilterClick}
-          />
+          <SearchFilter onClick={handleFilterClick} />
         </Col>
         <Col sm={9}>
-          {searchResults ? (
+          {filteredResults.length ? (
             <Container>
               <h2 className="pt-3">
-                {searchResults.length
-                  ? `Viewing ${searchResults.length} results:`
-                  : ""}
+                Viewing {filteredResults.length} results:
               </h2>
               <Row>
-                {searchResults.map((meal) => {
+                {filteredResults.map((meal) => {
                   return (
                     <Col md="4" key={meal.idMeal} className="mb-4">
                       <Link
@@ -106,7 +111,7 @@ const SearchResults = () => {
             </Container>
           ) : (
             <Container className="d-flex justify-content-center align-items-start mt-5">
-              <h3>No results found for {searchValue}</h3>
+              <h3>No results for your selection</h3>
               <Link to="/">
                 <Button variant="primary">Go Back</Button>
               </Link>
