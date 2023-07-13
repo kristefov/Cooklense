@@ -17,6 +17,7 @@ const options = {
     cheddar: "Cheddar",
   },
   meatFish: {
+    beef: "Beef",
     pork: "Pork",
     chicken: "Chicken",
     prawn: "Prawn",
