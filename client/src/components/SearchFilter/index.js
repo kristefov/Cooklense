@@ -36,11 +36,11 @@ const options = {
   },
 };
 
-const SearchFilter = ({ onChange, onClick }) => {
+const SearchFilter = ({ onClick }) => {
     
   return (
     <Container>
-      <Form onChange={onChange}>
+      <Form>
         <Form.Label>This Product Contains:</Form.Label>
         {Object.keys(options.general).map((key) => (
           <Form.Check
