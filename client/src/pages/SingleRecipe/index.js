@@ -8,6 +8,7 @@ import { recipeSearch } from "../../utils/API";
 import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
 import { appendIngredients } from "../../utils/appendIngredients";
+import  Box from "../../components/Box";
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -65,6 +66,7 @@ const SingleRecipe = () => {
  
 
   return (
+
     <Container className="my-4">
       {selectedRecipe && (
         <Card>
@@ -113,8 +115,12 @@ const SingleRecipe = () => {
               {selectedRecipe.strInstructions}
             </small>
           </Card.Footer>
+          
+          <Box strYoutube={selectedRecipe.strYoutube} />
         </Card>
-      )}
+
+
+      )         }
     </Container>
   );
 };

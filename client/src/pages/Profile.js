@@ -1,6 +1,6 @@
 import React from 'react';
-
-import { Navbar, Nav, Container, Col, Row, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Tabs, Container, Col, Row, Image, Button } from 'react-bootstrap';
 
 function Profile() {
   return (
