@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client';
 import { recipeSearch } from "../../utils/API";
 
 const SearchResults = () => {
   const { searchType, searchValue } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  
+  const auth = useSelector(state => state.auth)
 
   useEffect(() => {
     const getSearchData = async () => {
       try {
         const { meals } = await recipeSearch(searchType, searchValue);
+        console.log(meals)
         setSearchResults(meals);
         setLoading(false);
       } catch (error) {
@@ -24,6 +29,20 @@ const SearchResults = () => {
 
     getSearchData();
   }, [searchType, searchValue]);
+
+
+  const saveRecipe = (meal) => {
+ 
+
+    try {
+      
+    } catch (error) {
+      
+    }
+    
+    
+      }
+    
 
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
@@ -65,7 +84,17 @@ const SearchResults = () => {
                   ) : null}
 
                   <Card.Body>
-                    <Card.Title>{meal.strMeal}</Card.Title>
+                    <Card.Title>{meal.strMeal}</Card.Title> 
+                    {auth.isLoggedIn && (
+                      <Button
+                        disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                        className='btn-block btn-info'
+                        onClick={() => handleSaveBook(book.bookId)}>
+                        {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                          ? 'This book has already been saved!'
+                          : 'Save this Book!'}
+                      </Button>
+                    )}                  
                   </Card.Body>
                 </Card>
               </Link>

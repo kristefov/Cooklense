@@ -43,6 +43,7 @@ const LoginForm = ({ handleModalClose }) => {
           userId: data.loginUser.user._id,
           email: data.loginUser.user.email,
           avatar: data.loginUser.user.avatar,
+          savedRecipes: data.loginUser.user.savedRecipes,
         })
       );
       localStorage.setItem("id_token", data.loginUser.token);
