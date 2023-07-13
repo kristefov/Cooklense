@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 import { useMutation, useQuery } from "@apollo/client";
@@ -47,17 +47,18 @@ const SingleRecipe = () => {
     fetchData();
   }, [id]);
 
+  const isRecipeSaved = data?.me?.savedRecipes.some(recipe => recipe.idMeal === selectedRecipe?.idMeal);
+
   const handleSaveRecipe = async () => {
     const { idMeal, strMeal, strMealThumb } = selectedRecipe;
-    
-    const isRecipeSaved = data.me.savedRecipes.some(recipe => recipe.idMeal === idMeal);
+
     if (isRecipeSaved) {
       console.log(`Recipe with idMeal ${idMeal} is already saved.`);
       return;
     }
 
     try {
-      const { data } = await saveRecipe({
+      await saveRecipe({
         variables: { recipeData: { idMeal, strMeal, strMealThumb } },
       });
 
@@ -86,9 +87,15 @@ const SingleRecipe = () => {
                     <Button>
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
-                    <Button onClick={() => handleSaveRecipe()}>
-                      <FontAwesomeIcon icon={faPlus} /> Add to collection
-                    </Button>
+                    {isRecipeSaved ? (
+                <Button disabled variant="success">
+                  <FontAwesomeIcon icon={faCheck} /> Recipe saved
+                </Button>
+              ) : (
+                <Button onClick={() => handleSaveRecipe()}>
+                  <FontAwesomeIcon icon={faPlus} /> Add to collection
+                </Button>
+              )}
                   </>
                 )}
                 <Table striped bordered>
