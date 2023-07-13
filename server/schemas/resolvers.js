@@ -53,13 +53,13 @@ const resolvers = {
       return updatedUser;
     },
 
-    removeRecipe: async (parent, { recipeId }, context) => {
+    removeRecipe: async (parent, { idMeal }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You must be logged in");
       }
       const updatedUser = await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $pull: { savedRecipes: { recipeId: recipeId } } },
+        { $pull: { savedRecipes: { idMeal: idMeal } } },
         { new: true }
       );
 

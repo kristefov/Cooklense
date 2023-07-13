@@ -3,15 +3,16 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchFilter from "../../components/SearchFilter";
-
+import { useMutation } from '@apollo/client'; 
 import { recipeSearch } from "../../utils/API";
-
+ 
 const SearchResults = () => {
   const { searchType, searchValue } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
-
+  const auth = useSelector(state => state.auth)
+ 
   useEffect(() => {
     const getSearchData = async () => {
       try {
@@ -24,10 +25,10 @@ const SearchResults = () => {
         setLoading(false);
       }
     };
-
+ 
     getSearchData();
   }, [searchType, searchValue]);
-
+ 
   const appendIngredients = (data) => {
     return data.map((meal) => {
       const ingredientNames = Object.keys(meal)
@@ -37,14 +38,14 @@ const SearchResults = () => {
           return ingredient ? ingredient.toLowerCase() : ingredient;
         })
         .filter((ingredient) => ingredient !== "");
-
+ 
       return {
         ...meal,
         ingredientNames: ingredientNames,
       };
     });
   };
-
+ 
   const handleFilterClick = (e) => {
     const ingredient = e.target.name;
     if (e.target.checked) {
@@ -55,11 +56,11 @@ const SearchResults = () => {
       );
     }
   };
-
+ 
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
   }
-
+ 
   const filteredResults = searchResults.filter((meal) => {
     return checkedIngredients.every((ingredient) =>
       meal.ingredientNames.some(
@@ -68,7 +69,7 @@ const SearchResults = () => {
       )
     );
   });
-
+ 
   return (
     <Container>
       <Row>
@@ -98,7 +99,7 @@ const SearchResults = () => {
                               variant="top"
                             />
                           ) : null}
-
+ 
                           <Card.Body>
                             <Card.Title>{meal.strMeal}</Card.Title>
                           </Card.Body>
@@ -122,5 +123,5 @@ const SearchResults = () => {
     </Container>
   );
 };
-
+ 
 export default SearchResults;

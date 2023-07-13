@@ -16,16 +16,15 @@ const typeDefs = gql`
   }
   type Recipe {
     _id: ID!
-    recipeId: ID!
-    label: String!
-    uri: [String]
-    image: String
+    idMeal: ID!
+    strMeal: String
+    strMealThumb: String
   }
   input RecipeInput {
-    uri: [String]
-    label: String!
-    image: String
-    recipeId: ID!
+    _id: ID!
+    idMeal: ID!
+    strMeal: String
+    strMealThumb: String
   }
   input UserInput {
     firstName: String!

@@ -8,7 +8,9 @@ export const authReducer = createSlice({
     username: "",
     userId: "",
     email: "",
-    avatar: "",},
+    avatar: "",
+    savedRecipes: [],
+  },
   },
   reducers: {
     login(state, action) {
@@ -21,6 +23,7 @@ export const authReducer = createSlice({
           userId: action.payload.userId,
           email: action.payload.email,
           avatar: action.payload.avatar,
+          savedRecipes: action.payload.savedRecipes,
         },
       };
     },
