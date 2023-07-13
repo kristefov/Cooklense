@@ -116,7 +116,7 @@ const Home = () => {
         </Form>
         <Row>
           <Col xs={12} md={8}>
-          <div>
+            <div>
               <select value={selectedCountry} onChange={handleCountryChange}>
                 <option value="">Select a cusine</option>
                 {allCountries.map((country, index) => (
