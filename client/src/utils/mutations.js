@@ -33,10 +33,10 @@ export const SAVE_RECIPE = gql`
       _id
       username
       savedRecipes {
-        uri
-        label
-        image
-        recipeId
+        _id
+        idMeal
+        strMeal
+        strMealThumb
       }
     }
   }
@@ -47,10 +47,10 @@ export const REMOVE_RECIPE = gql`
       username
       recipeCount
       savedRecipes {
-        uri
-        label
-        image
-        recipeId
+        _id
+        idMeal
+        strMeal
+        strMealThumb
       }
     }
   }

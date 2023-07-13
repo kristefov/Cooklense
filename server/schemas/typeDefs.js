@@ -16,13 +16,12 @@ const typeDefs = gql`
   }
   type Recipe {
     _id: ID!
-    idMeal: ID!
+    idMeal: String
     strMeal: String
     strMealThumb: String
   }
   input RecipeInput {
-    _id: ID!
-    idMeal: ID!
+    idMeal: String
     strMeal: String
     strMealThumb: String
   }
