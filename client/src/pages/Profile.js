@@ -6,6 +6,7 @@ function Profile() {
   return (
 <>
 <Container className="p-3 container-fluid d-flex flex-column align-center">
+  <Row>
       <h1>Profile</h1>
       <div class="card">
         <Image class="card-img-top" src="holder.js/100x180/?text=Image cap" alt="Card image cap"></Image>
@@ -19,10 +20,10 @@ function Profile() {
           <li class="list-group-item">Item 3</li>
         </ul>
       </div>
-     
+      </Row>
     </Container>
     </>
   );
 }
 
-export default Profile
+export default Profile;

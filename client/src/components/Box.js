@@ -3,9 +3,9 @@ import ReactPlayer from 'react-player';
 
 const Box = ({strYoutube}) => {
   return (
-   
-    <div className="box">
     <>
+    <div className="box">
+  
       <div className='player-wrapper'>
         <ReactPlayer
           url={strYoutube}
@@ -15,9 +15,9 @@ const Box = ({strYoutube}) => {
           height='100%'
         />
       </div>
-      </>
+    
     </div>
-
+    </>
   );
 }
 export default Box;
