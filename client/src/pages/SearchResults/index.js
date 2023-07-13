@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchFilter from "../../components/SearchFilter";
-import { useMutation } from '@apollo/client'; 
+ 
 import { recipeSearch } from "../../utils/API";
  
 const SearchResults = () => {
@@ -11,7 +11,6 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
-  // const auth = useSelector(state => state.auth)
  
   useEffect(() => {
     const getSearchData = async () => {
