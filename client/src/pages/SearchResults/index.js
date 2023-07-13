@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchFilter from "../../components/SearchFilter";
-import { useMutation } from '@apollo/client'; 
+import { appendIngredients } from "../../utils/appendIngredients";
 import { recipeSearch } from "../../utils/API";
  
 const SearchResults = () => {
@@ -28,23 +28,7 @@ const SearchResults = () => {
  
     getSearchData();
   }, [searchType, searchValue]);
- 
-  const appendIngredients = (data) => {
-    return data.map((meal) => {
-      const ingredientNames = Object.keys(meal)
-        .filter((key) => key.startsWith("strIngredient"))
-        .map((key) => {
-          const ingredient = meal[key];
-          return ingredient ? ingredient.toLowerCase() : ingredient;
-        })
-        .filter((ingredient) => ingredient !== "");
- 
-      return {
-        ...meal,
-        ingredientNames: ingredientNames,
-      };
-    });
-  };
+
  
   const handleFilterClick = (e) => {
     const ingredient = e.target.name;
