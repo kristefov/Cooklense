@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 import SearchFilter from "../../components/SearchFilter";
 import { appendIngredients } from "../../utils/appendIngredients";
 import { recipeSearch } from "../../utils/API";
- 
+import RecipeCard from "../../components/RecipeCard";
+
 const SearchResults = () => {
   const { searchType, searchValue } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   // const auth = useSelector(state => state.auth)
- 
+
   useEffect(() => {
     const getSearchData = async () => {
       try {
@@ -25,11 +26,10 @@ const SearchResults = () => {
         setLoading(false);
       }
     };
- 
+
     getSearchData();
   }, [searchType, searchValue]);
 
- 
   const handleFilterClick = (e) => {
     const ingredient = e.target.name;
     if (e.target.checked) {
@@ -40,11 +40,11 @@ const SearchResults = () => {
       );
     }
   };
- 
+
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
   }
- 
+
   const filteredResults = searchResults.filter((meal) => {
     return checkedIngredients.every((ingredient) =>
       meal.ingredientNames.some(
@@ -53,7 +53,7 @@ const SearchResults = () => {
       )
     );
   });
- 
+
   return (
     <Container>
       <Row>
@@ -68,30 +68,9 @@ const SearchResults = () => {
                 Viewing {filteredResults.length} results:
               </h2>
               <Row>
-                {filteredResults.map((meal) => {
-                  return (
-                    <Col md="4" key={meal.idMeal} className="mb-4">
-                      <Link
-                        to={`/recipe/${meal.idMeal}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        <Card key={meal.idMeal} border="dark">
-                          {meal.strMealThumb ? (
-                            <Card.Img
-                              src={`${meal.strMealThumb}/preview`}
-                              alt={`The picture for ${meal.strMeal}`}
-                              variant="top"
-                            />
-                          ) : null}
- 
-                          <Card.Body>
-                            <Card.Title>{meal.strMeal}</Card.Title>
-                          </Card.Body>
-                        </Card>
-                      </Link>
-                    </Col>
-                  );
-                })}
+                {filteredResults.map((meal) => (
+                  <RecipeCard meal={meal} />
+                ))}
               </Row>
             </Container>
           ) : (
@@ -107,5 +86,5 @@ const SearchResults = () => {
     </Container>
   );
 };
- 
+
 export default SearchResults;
