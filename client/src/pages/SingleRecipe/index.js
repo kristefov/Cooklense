@@ -8,7 +8,7 @@ import { recipeSearch } from "../../utils/API";
 import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
 import { appendIngredients } from "../../utils/appendIngredients";
-import { Box } from "../../components/Box";
+
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const SingleRecipe = () => {
   const [ingredients, setIngredients] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [saveRecipe] = useMutation(SAVE_RECIPE)
-  
+  const [youtubeUrl, setYoutubeUrl] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +35,7 @@ const SingleRecipe = () => {
         }
   
         const recipeWithIngredients = appendIngredients([recipe])[0];
-  
+        setYoutubeUrl(recipeWithIngredients.strYoutube);
         setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
       } catch (error) {
@@ -55,8 +55,8 @@ const SingleRecipe = () => {
     try {
       const { data } = await saveRecipe({variables: {recipeData: {idMeal, strMeal, strMealThumb} }});
       console.log(data)
-    } catch (error) {
-      throw new error
+    } catch(Erorr){
+      throw new Error('Le problem with le handleSaveRecipe that used the selectedRecipe data to save to the database') ;
     }
     
 
@@ -69,7 +69,7 @@ const SingleRecipe = () => {
 
     <Container className="my-4">
       {selectedRecipe && (
-        <>
+   
         <Card>
           <Row>
             <Col md={4}>
@@ -116,14 +116,13 @@ const SingleRecipe = () => {
               {selectedRecipe.strInstructions}
             </small>
           </Card.Footer>
-
-          <Box strYoutube={selectedRecipe.strYoutube}  />
-    
+  
         </Card>
 
-        </>
+    
       ) 
       }
+
     </Container>
   );
 };

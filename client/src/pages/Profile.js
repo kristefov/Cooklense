@@ -6,8 +6,15 @@ function Profile() {
   return (
 <>
 <Container className="p-3 container-fluid d-flex flex-column align-center">
+
   <Row>
       <h1>Profile</h1>
+  </Row>
+  <Container>
+  <Row>
+    
+    </Row>
+    <Row>
       <div class="card">
         <Image class="card-img-top" src="holder.js/100x180/?text=Image cap" alt="Card image cap"></Image>
         <div class="card-body">
@@ -21,6 +28,7 @@ function Profile() {
         </ul>
       </div>
       </Row>
+      </Container>
     </Container>
     </>
   );
