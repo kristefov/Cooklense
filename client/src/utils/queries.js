@@ -5,9 +5,13 @@ export const GET_ME = gql`
         me {
             _id
             username
-            email
+            firstName
+            lastName
+            avatar
             savedRecipes {
                 idMeal
+                strMeal
+                strMealThumb
             }
         }
     }
