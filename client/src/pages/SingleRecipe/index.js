@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Table } from "react-bootstrap";
-
+import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 
 const SingleRecipe = () => {
   const { id } = useParams();
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [ingredients, setIngredients] = useState([]);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
-        
+
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
           const ingredientKey = `strIngredient${i}`;
@@ -25,7 +28,7 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-        
+
         setSelectedRecipe(recipe);
         setIngredients(ingredients);
       } catch (error) {
@@ -51,6 +54,16 @@ const SingleRecipe = () => {
             <Col md={8}>
               <Card.Body>
                 <Card.Title>{selectedRecipe.strMeal}</Card.Title>
+                {isLoggedIn && (
+                  <>
+                    <Button>
+                      <FontAwesomeIcon icon={faList} /> Add to shopping list
+                    </Button>
+                    <Button>
+                      <FontAwesomeIcon icon={faPlus} /> Add to collection
+                    </Button>
+                  </>
+                )}
                 <Table striped bordered>
                   <thead>
                     <tr>
