@@ -1,6 +1,4 @@
 import { gql } from "@apollo/client";
-
-
 export const ADD_USER = gql`
   mutation addUser($userData: UserInput!) {
     addUser(userData: $userData) {
@@ -29,7 +27,6 @@ export const LOGIN_USER = gql`
     }
   }
 `;
-
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($recipeData: RecipeInput!) {
     saveRecipe(recipeData: $recipeData) {
@@ -44,7 +41,6 @@ export const SAVE_RECIPE = gql`
     }
   }
 `;
-
 export const REMOVE_RECIPE = gql`
   mutation removeRecipe($recipeId: String!) {
     removeRecipe(recipeId: $recipeId) {
@@ -59,4 +55,3 @@ export const REMOVE_RECIPE = gql`
     }
   }
 `;
-

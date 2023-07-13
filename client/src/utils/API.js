@@ -1,5 +1,5 @@
 export const recipeSearch = async (query, value) => {
-  if (query === "searchName") {
+  if (query === "name") {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`
     );
@@ -7,7 +7,7 @@ export const recipeSearch = async (query, value) => {
     return data;
   };
 
-  if (query === "searchIngredient") {
+  if (query === "ingredient") {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`
     );
