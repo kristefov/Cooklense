@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
+import { GET_ME } from "../../utils/queries";
 import { appendIngredients } from "../../utils/appendIngredients";
 
 const SingleRecipe = () => {
@@ -14,14 +15,15 @@ const SingleRecipe = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const [saveRecipe] = useMutation(SAVE_RECIPE)
-  
+  const [saveRecipe] = useMutation(SAVE_RECIPE);
+  const { data } = useQuery(GET_ME);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
-  
+
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
           const ingredientKey = `strIngredient${i}`;
@@ -32,37 +34,37 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-  
+
         const recipeWithIngredients = appendIngredients([recipe])[0];
-  
+
         setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchData();
   }, [id]);
 
-
-
   const handleSaveRecipe = async () => {
-    console.log(selectedRecipe)
-    const {idMeal, strMeal, strMealThumb } = selectedRecipe
-   
-    try {
-      const { data } = await saveRecipe({variables: {recipeData: {idMeal, strMeal, strMealThumb} }});
-      console.log(data)
-    } catch (error) {
-      throw new error
-    }
+    const { idMeal, strMeal, strMealThumb } = selectedRecipe;
     
+    const isRecipeSaved = data.me.savedRecipes.some(recipe => recipe.idMeal === idMeal);
+    if (isRecipeSaved) {
+      console.log(`Recipe with idMeal ${idMeal} is already saved.`);
+      return;
+    }
 
-  
-}
+    try {
+      const { data } = await saveRecipe({
+        variables: { recipeData: { idMeal, strMeal, strMealThumb } },
+      });
 
- 
+    } catch (error) {
+      throw new error();
+    }
+  };
 
   return (
     <Container className="my-4">
@@ -85,7 +87,7 @@ const SingleRecipe = () => {
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
                     <Button onClick={() => handleSaveRecipe()}>
-                      <FontAwesomeIcon  icon={faPlus} /> Add to collection
+                      <FontAwesomeIcon icon={faPlus} /> Add to collection
                     </Button>
                   </>
                 )}
