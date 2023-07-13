@@ -4,9 +4,9 @@ import { Container, Form } from "react-bootstrap";
 const options = {
   general: {
     sugar: "Sugar",
-    eggs: "Eggs",
+    egg: "Eggs",
     flour: "Flour",
-    nuts: "Nuts",
+    nut: "Nuts",
   },
   dairy: {
     milk: "Milk",
@@ -37,6 +37,7 @@ const options = {
 };
 
 const SearchFilter = ({ onChange, onClick }) => {
+    
   return (
     <Container>
       <Form onChange={onChange}>
