@@ -63,7 +63,7 @@ const SignupForm = ({handleModalClose}) => {
           lastName: data.addUser.user.lastName,
           username: data.addUser.user.username,
           email: data.addUser.user.email,
-          savedRecipes: data.loginUser.user.savedRecipes,
+          savedRecipes: data.addUser.user.savedRecipes || [],
       };
       dispatch(signup(userData))
       localStorage.setItem("id_token", data.addUser.token);

@@ -11,7 +11,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
-  const auth = useSelector(state => state.auth)
+  // const auth = useSelector(state => state.auth)
  
   useEffect(() => {
     const getSearchData = async () => {

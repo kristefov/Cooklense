@@ -39,6 +39,8 @@ const SingleRecipe = () => {
     fetchData();
   }, [id]);
 
+ 
+
   return (
     <Container className="my-4">
       {selectedRecipe && (
