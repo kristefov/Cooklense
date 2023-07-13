@@ -5,18 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
+import { useMutation } from "@apollo/client";
+import { SAVE_RECIPE } from "../../utils/mutations";
 
 const SingleRecipe = () => {
   const { id } = useParams();
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
+  const [saveRecipe] = useMutation(SAVE_RECIPE)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
+        
 
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
@@ -31,6 +35,7 @@ const SingleRecipe = () => {
 
         setSelectedRecipe(recipe);
         setIngredients(ingredients);
+        
       } catch (error) {
         console.log(error);
       }
@@ -38,6 +43,23 @@ const SingleRecipe = () => {
 
     fetchData();
   }, [id]);
+
+
+
+  const handleSaveRecipe = async () => {
+    console.log(selectedRecipe)
+    const {idMeal, strMeal, strMealThumb } = selectedRecipe
+   
+    try {
+      const { data } = await saveRecipe({variables: {recipeData: {idMeal, strMeal, strMealThumb} }});
+      console.log(data)
+    } catch (error) {
+      throw new error
+    }
+    
+
+  
+}
 
  
 
@@ -61,8 +83,8 @@ const SingleRecipe = () => {
                     <Button>
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
-                    <Button>
-                      <FontAwesomeIcon icon={faPlus} /> Add to collection
+                    <Button onClick={() => handleSaveRecipe()}>
+                      <FontAwesomeIcon  icon={faPlus} /> Add to collection
                     </Button>
                   </>
                 )}
