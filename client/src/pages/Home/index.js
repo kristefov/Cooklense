@@ -50,7 +50,7 @@ const Home = () => {
     const selectedCountry = e.target.value;
     setSelectedCountry(selectedCountry);
     if (selectedCountry !== "") {
-      navigate(`/search/cusine/${selectedCountry}`);
+      navigate(`/search/cuisine/${selectedCountry}`);
     }
   };
 
@@ -118,7 +118,7 @@ const Home = () => {
           <Col xs={12} md={8}>
             <div>
               <select value={selectedCountry} onChange={handleCountryChange}>
-                <option value="">Select a cusine</option>
+                <option value="">Select a cuisine</option>
                 {allCountries.map((country, index) => (
                   <option key={index} value={country.strArea}>
                     {country.strArea}

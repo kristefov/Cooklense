@@ -23,7 +23,7 @@ export const recipeSearch = async (query, value) => {
     return data;
   }
 
-  if(query === "cusine") {
+  if(query === "cuisine") {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`
     );
