@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
+import { appendIngredients } from "../../utils/appendIngredients";
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -20,8 +21,7 @@ const SingleRecipe = () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
-        
-
+  
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
           const ingredientKey = `strIngredient${i}`;
@@ -32,15 +32,16 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-
-        setSelectedRecipe(recipe);
+  
+        const recipeWithIngredients = appendIngredients([recipe])[0];
+  
+        setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
-        
       } catch (error) {
         console.log(error);
       }
     };
-
+  
     fetchData();
   }, [id]);
 
