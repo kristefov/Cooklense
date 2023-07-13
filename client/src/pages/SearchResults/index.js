@@ -85,7 +85,7 @@ const SearchResults = () => {
 
                   <Card.Body>
                     <Card.Title>{meal.strMeal}</Card.Title> 
-                    {auth.isLoggedIn && (
+                    {/* {auth.isLoggedIn && (
                       <Button
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
                         className='btn-block btn-info'
@@ -94,7 +94,7 @@ const SearchResults = () => {
                           ? 'This book has already been saved!'
                           : 'Save this Book!'}
                       </Button>
-                    )}                  
+                    )}                   */}
                   </Card.Body>
                 </Card>
               </Link>
