@@ -11,8 +11,9 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  
+  const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
+
 
   useEffect(() => {
     const getSearchData = async () => {
@@ -29,20 +30,6 @@ const SearchResults = () => {
 
     getSearchData();
   }, [searchType, searchValue]);
-
-
-  const saveRecipe = (meal) => {
- 
-
-    try {
-      
-    } catch (error) {
-      
-    }
-    
-    
-      }
-    
 
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
@@ -84,17 +71,7 @@ const SearchResults = () => {
                   ) : null}
 
                   <Card.Body>
-                    <Card.Title>{meal.strMeal}</Card.Title> 
-                    {/* {auth.isLoggedIn && (
-                      <Button
-                        disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveBook(book.bookId)}>
-                        {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-                          ? 'This book has already been saved!'
-                          : 'Save this Book!'}
-                      </Button>
-                    )}                   */}
+                    <Card.Title>{meal.strMeal}</Card.Title>                  
                   </Card.Body>
                 </Card>
               </Link>
