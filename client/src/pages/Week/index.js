@@ -43,9 +43,9 @@ const HorizontalScrollableWindow = () => {
         <Button variant="danger" onClick={() => handleRemoveMeal(meal.idMeal)}>
           <FontAwesomeIcon icon={faTimes} />
         </Button>
-        <Button variant="primary" onClick={() => handleMoveToDay(meal.idMeal, weekday)}>
+        {/* <Button variant="primary" onClick={() => handleMoveToDay(meal.idMeal, weekday)}>
           <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        </Button> */}
       </div>
     </div>
   ));
