@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Button,
   ButtonGroup,
@@ -20,10 +20,25 @@ import { GET_ME } from "../../utils/queries";
 import RecipeCard from "../../components/RecipeCard";
 
 function Profile() {
-  const { data } = useQuery(GET_ME);
+  const { data, loading } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
-  const userDataState = data?.me ?? {};
+  const userDataState = data?.me;
   console.log(userDataState);
+
+  const count = useMemo(() => {
+    if (!userDataState?.savedRecipes) {
+      return 0;
+    }
+    const countArray = userDataState.savedRecipes;
+    let count = 0;
+    for (let i = 0; i < countArray.length; i++) {
+      // if entity is object, increase objectsLen by 1, which is the stores the total number of objects in array.
+      if (countArray[i] instanceof Object) {
+        count++;
+      }
+    }
+    return count;
+  }, [userDataState?.savedRecipes]);
 
   //  const [userDataState, setUserDataState] = useState();
 
@@ -52,16 +67,11 @@ function Profile() {
     }
   };
 
-  // let countArray = userDataState.savedRecipes;
-  // console.log(countArray);
-  // let count = 0;
-  // for (let i = 0; i < countArray.length; i++) {
-  //   // if entity is object, increase objectsLen by 1, which is the stores the total number of objects in array.
-  //   if (countArray[i] instanceof Object) {
-  //     count++;
-  //   }
-  // }
-  // console.log(count);
+  if (loading) {
+    return <h2>loading</h2>;
+  }
+
+  console.log(count);
 
   return (
     <>
@@ -104,7 +114,7 @@ function Profile() {
                                         <p className="small text-muted mb-1">
                                           Collections
                                         </p>
-                                        <p className="mb-0"></p>
+                                        <p className="mb-0">{count}</p>
                                       </Col>
                                       <Col className="px-3">
                                         <p className="small text-muted mb-1">
