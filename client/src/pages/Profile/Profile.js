@@ -22,25 +22,31 @@ import RecipeCard from "../../components/RecipeCard";
 function Profile() {
   const { data } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
-  const userData = data?.me ?? {};
-  console.log(userData);
+  const userDataState = data?.me ?? {};
+  console.log(userDataState);
 
-  const [userDataState, setUserDataState] = useState();
+  //  const [userDataState, setUserDataState] = useState();
 
-  useEffect(() => {
-    if (userData) {
-      setUserDataState(userData);
-    }
-  }, [userData]);
-  if (!userDataState) {
-    return <div>Loading...</div>;
-  }
+  // useEffect(() => {
+  //   if (userData) {
+  //     setUserDataState(userData);
+  //   }
+  // }, [userData]);
+  // if (!userDataState) {
+  //   return <div>Loading...</div>;
+  // }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target).entries());
+    const form = event.target;
+    const formData = Object.fromEntries(
+      Array.from(new FormData(form).entries()).filter(([, value]) =>
+        Boolean(value)
+      )
+    );
     console.log(formData);
     try {
-      await updateUser({ variables: formData });
+      await updateUser({ variables: { userData: formData } });
+      form.reset();
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +131,10 @@ function Profile() {
                             <Card.Body>
                               <Container typeof="" className="container-fluid">
                                 <Row>
-                                  <Form onSubmit={handleSubmit}>
+                                  <Form
+                                    onSubmit={handleSubmit}
+                                    autoComplete="off"
+                                  >
                                     <Form.Group className="mb-3">
                                       <Form.Label htmlFor="firstName">
                                         First Name
@@ -134,7 +143,6 @@ function Profile() {
                                         type="text"
                                         placeholder={userDataState.firstName}
                                         name="firstName"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -144,7 +152,7 @@ function Profile() {
                                       </Form.Label>
                                       <Form.Control
                                         type="text"
-                                        placeholder={userData.lastName}
+                                        placeholder={userDataState.lastName}
                                         name="lastName"
                                       />
                                     </Form.Group>
@@ -157,6 +165,7 @@ function Profile() {
                                         Username
                                       </Form.Label>
                                       <Form.Control
+                                        autoComplete="off"
                                         type="text"
                                         placeholder={userDataState.username}
                                         name="username"
