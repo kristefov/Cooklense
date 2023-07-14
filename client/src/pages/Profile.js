@@ -84,30 +84,22 @@ function Profile(){
               </Col>
         </Col>
     </Row>
-  <Row>
-     <Col>
-  <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
-      <Row>
-        <Col sm={4}>
-          <ListGroup>
-            <ListGroup.Item action href="#link1">
-              Link 1
-            </ListGroup.Item>
-            <ListGroup.Item action href="#link2">
-              Link 2
-            </ListGroup.Item>
-          </ListGroup>
+    <Row xs={1} md={2} className="g-4">
+      {Array.from({ length: 4 }).map((_, idx) => (
+        <Col key={idx}>
+          <Card>
+            <Card.Img variant="top" src="holder.js/100px160" />
+            <Card.Body>
+              <Card.Title>Card title</Card.Title>
+              <Card.Text>
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </Col>
-        <Col sm={8}>
-          <Tab.Content>
-            <Tab.Pane eventKey="#link1">Tab pane content 1</Tab.Pane>
-            <Tab.Pane eventKey="#link2">Tab pane content 2</Tab.Pane>
-          </Tab.Content>
-        </Col>
-      </Row>
-    </Tab.Container>
-    </Col>
-
+      ))}
     </Row>
 
       </Container>
