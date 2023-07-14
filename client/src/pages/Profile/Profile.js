@@ -46,6 +46,17 @@ function Profile() {
     }
   };
 
+  // let countArray = userDataState.savedRecipes;
+  // console.log(countArray);
+  // let count = 0;
+  // for (let i = 0; i < countArray.length; i++) {
+  //   // if entity is object, increase objectsLen by 1, which is the stores the total number of objects in array.
+  //   if (countArray[i] instanceof Object) {
+  //     count++;
+  //   }
+  // }
+  // console.log(count);
+
   return (
     <>
       <Container className="p-3 container-fluid d-flex flex-column align-center">
@@ -76,16 +87,18 @@ function Profile() {
                                     />
                                   </Row>
                                   <Col className="flex-grow-1 ms-3">
-                                    <h5 className="mb-1">Danny McLoan</h5>
-                                    <p className="mb-2 pb-1">
-                                      Senior Journalist
-                                    </p>
+                                    <h5 className="mb-1">
+                                      {userDataState.firstName}
+                                    </h5>
+                                    <h5 className="mb-2 pb-1">
+                                      {userDataState.lastName}
+                                    </h5>
                                     <Col className="d-flex justify-content-start rounded-3 p-2 mb-2">
                                       <Col>
                                         <p className="small text-muted mb-1">
                                           Collections
                                         </p>
-                                        <p className="mb-0">41</p>
+                                        <p className="mb-0"></p>
                                       </Col>
                                       <Col className="px-3">
                                         <p className="small text-muted mb-1">
