@@ -44,8 +44,8 @@ const SingleRecipe = () => {
         setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
         setYouTubeLink(youTubeEmbed);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        throw new Error("Failed to fetch recipe data");
       }
     };
 
