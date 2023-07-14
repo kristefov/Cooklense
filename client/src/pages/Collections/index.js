@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { GET_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { Container, Row, Col, Image } from "react-bootstrap";
@@ -7,12 +8,17 @@ import RecipeCard from "../../components/RecipeCard";
 const Collections = () => {
   const [userData, setUserData] = useState(null);
   const { data } = useQuery(GET_ME);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
     if (data) {
       setUserData(data);
     }
   }, [data]);
+
+  if (!isLoggedIn) {
+    return <div>You need to be logged in to view this page.</div>;
+  }
 
   if (!userData) {
     return <div>Loading...</div>;

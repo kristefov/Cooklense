@@ -13,6 +13,18 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const UPDATE_USER = gql`
+  mutation updateUser($userData: UserInput!) {
+    updateUser(userData: $userData) {
+      _id
+      username
+      firstName
+      lastName
+      avatar
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
