@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tab, Container, Col, Row, Image, Button,Card, InputGroup, Form, ButtonGroup   } from 'react-bootstrap';
+import { Tab, Container, Col, Row, Image, Button,Card, InputGroup, Form, ButtonGroup,FloatingLabel  } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
@@ -54,12 +54,108 @@ function Profile(){
       </Row>
     </Tab.Container>
     </Col>
+    <Container>
+      <h2>
+        Update User Information
+      </h2>
+      <Row>
+      <Form.Group className="mb-3">
+          <Form.Label htmlFor="firstName">First Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Your First Name"
+            name="firstName"
+            // onChange={handleInputChange}
+            // value={userFormData.firstName}
+            required
+          />
+        
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="lastName">Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Your Last Name"
+            name="lastName"
+            // onChange={handleInputChange}
+            // value={userFormData.lastName}
+            required
+          />
+         
+
+
+
+
+        </Form.Group>
+
+
+
+        <Form.Group className='mb-3'>
+          
+          <FloatingLabel
+          htmlFor="username"
+          label="Your Username"
+          className="mb-3"
+        >
+          <Form.Control
+            type="text"
+            placeholder="Your username"
+            name="username"
+            // onChange={handleInputChange}
+            // value={userFormData.username}
+            required
+             />
+        </FloatingLabel>
+       
+          </Form.Group>
+
+        <Form.Group className='mb-3'>
+          
+          <FloatingLabel
+          htmlFor="email"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control name="email" type="email" placeholder="name@example.com"
+          //  onChange={handleInputChange}
+          //     value={userFormData.email}
+              required />
+        </FloatingLabel>
+            <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          </Form.Group>
+  
+          <Form.Group className='mb-3'>
+          <Form.Floating>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            // onChange={handleInputChange}
+            // value={userFormData.password}
+            required
+          />
+        </Form.Floating>
+            <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="avatar">Avatar</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Avatar"
+            name="avatar"
+            // onChange={handleInputChange}
+            // value={userFormData.avatar}
+            required
+          />
+        </Form.Group>
+
+      </Row>
+    </Container>
 
     </Row>
     <Row>
-      <Col xs={8} md={10}>
-            Cho nado
-      </Col>
       <Col xs={4} md={2}>
           <Card>        <Image class="card-img-top" src="holder.js/100x180/?text=Image cap" alt="Card image cap"></Image>
             <div class="card-body">
