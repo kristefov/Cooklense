@@ -9,18 +9,49 @@ import { Link } from 'react-router-dom';
 
 const WeekPlan = () => {
     // set modal display state
-  
-    return (
-        <section className="bg-body-tetriary text-tetriary mt-5">
-            <Container className="p-3 container-fluid d-flex flex-column align-center">
-            <Row className='align-center justify-content-center flex-row'>
-                 <h5 className="text-center mt-2 mb-4 text-tetriary">Week Plan</h5>
-            </Row>
-            <Col className="col-2 text-center">
-
-            </Col>
-            </Container>
-        </section>
-    );
-}
+        const board = {
+          columns: [
+            {
+              id: 1,
+              title: "todo",
+              cards: [{ id: 1, title: "テスト", description: "内容" }]
+            },
+            { id: 2, title: "in progress", cards: [] },
+            { id: 3, title: "done", cards: [] }
+          ]
+        };
+      
+        const onNewCard = (draftCard) => ({
+          id: new Date().getTime(),
+          ...draftCard
+        });
+      
+        const onNewColumn = (draftColumn) => ({
+          id: new Date().getTime(),
+          ...draftColumn
+        });
+      
+        return (
+          <div>
+            <h1>Hello CodeSandbox</h1>
+            <h2>Start editing to see some magic happen!</h2>
+      
+            <Board
+              initialBoard={board}
+              allowAddCard={{ on: "top" }}
+              allowAddColumn={{ on: "right" }}
+              allowRemoveCard
+              allowRenameColumn
+              onCardNew={console.log}
+              onCardRemove={console.log}
+              onColumnNew={console.log}
+              onColumnRemove={console.log}
+              onColumnRename={console.log}
+              onNewCardConfirm={onNewCard}
+              onNewColumnConfirm={onNewColumn}
+            />
+          </div>
+        );
+      }
+      
 export default WeekPlan;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tab, Container, Col, Row, Image, Button,Card, InputGroup, Form, ButtonGroup, ListGroupItem   } from 'react-bootstrap';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Tab, Container, Col, Row, Image, Button,Card, InputGroup, Form, ButtonGroup,FloatingLabel,ListGroup  } from 'react-bootstrap';
 
 
 
@@ -60,16 +59,105 @@ function Profile(){
                     <Card>
                         <Card.Header>Quote</Card.Header>
                         <Card.Body>
-                          <blockquote className="blockquote mb-0">
-                            <p>
-                              {' '}
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                              posuere erat a ante.{' '}
-                            </p>
-                            <footer className="blockquote-footer">
-                              Someone famous in <cite title="Source Title">Source Title</cite>
-                            </footer>
-                          </blockquote>
+ <Container>
+      <h2>
+        Update User Information
+      </h2>
+      <Row>
+      <Form.Group className="mb-3">
+          <Form.Label htmlFor="firstName">First Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Your First Name"
+            name="firstName"
+            // onChange={handleInputChange}
+            // value={userFormData.firstName}
+            required
+          />
+        
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="lastName">Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Your Last Name"
+            name="lastName"
+            // onChange={handleInputChange}
+            // value={userFormData.lastName}
+            required
+          />
+         
+
+
+
+
+        </Form.Group>
+
+
+
+        <Form.Group className='mb-3'>
+          
+          <FloatingLabel
+          htmlFor="username"
+          label="Your Username"
+          className="mb-3"
+        >
+          <Form.Control
+            type="text"
+            placeholder="Your username"
+            name="username"
+            // onChange={handleInputChange}
+            // value={userFormData.username}
+            required
+             />
+        </FloatingLabel>
+       
+          </Form.Group>
+
+        <Form.Group className='mb-3'>
+          
+          <FloatingLabel
+          htmlFor="email"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control name="email" type="email" placeholder="name@example.com"
+          //  onChange={handleInputChange}
+          //     value={userFormData.email}
+              required />
+        </FloatingLabel>
+            <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          </Form.Group>
+  
+          <Form.Group className='mb-3'>
+          <Form.Floating>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            // onChange={handleInputChange}
+            // value={userFormData.password}
+            required
+          />
+        </Form.Floating>
+            <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="avatar">Avatar</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Avatar"
+            name="avatar"
+            // onChange={handleInputChange}
+            // value={userFormData.avatar}
+            required
+          />
+        </Form.Group>
+
+      </Row>
+    </Container>
                         </Card.Body>
                     </Card>
                     </Col>
@@ -98,7 +186,6 @@ function Profile(){
         </Col>
       ))}
     </Row>
-
       </Container>
     </Container>
     </>
