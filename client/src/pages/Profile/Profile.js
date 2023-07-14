@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   ButtonGroup,
@@ -17,12 +17,24 @@ import {
 import { Link } from "react-router-dom";
 import { UPDATE_USER } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
+import RecipeCard from "../../components/RecipeCard";
 
 function Profile() {
   const { data } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
   const userData = data?.me ?? {};
   console.log(userData);
+
+  const [userDataState, setUserDataState] = useState();
+
+  useEffect(() => {
+    if (userData) {
+      setUserDataState(userData);
+    }
+  }, [userData]);
+  if (!userDataState) {
+    return <div>Loading...</div>;
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target).entries());
@@ -107,10 +119,8 @@ function Profile() {
                                       </Form.Label>
                                       <Form.Control
                                         type="text"
-                                        placeholder="Your First Name"
+                                        placeholder={userDataState.firstName}
                                         name="firstName"
-                                        // onChange={handleInputChange}
-                                        // value={userFormData.firstName}
                                         required
                                       />
                                     </Form.Group>
@@ -121,62 +131,51 @@ function Profile() {
                                       </Form.Label>
                                       <Form.Control
                                         type="text"
-                                        placeholder="Your Last Name"
+                                        placeholder={userData.lastName}
                                         name="lastName"
-                                        // onChange={handleInputChange}
-                                        // value={userFormData.lastName}
                                       />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3">
                                       <Form.Label
                                         htmlFor="username"
-                                        label="Your Username"
                                         className="mb-3"
                                       >
                                         Username
                                       </Form.Label>
                                       <Form.Control
                                         type="text"
-                                        placeholder="Your username"
+                                        placeholder={userDataState.username}
                                         name="username"
-                                        // onChange={handleInputChange}
-                                        // value={userFormData.username}
                                       />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3">
-                                      <FloatingLabel
+                                      <Form.Label
                                         htmlFor="email"
                                         label="Email address"
                                         className="mb-3"
                                       >
-                                        <Form.Control
-                                          name="email"
-                                          type="email"
-                                          placeholder="name@example.com"
-                                          //  onChange={handleInputChange}
-                                          //     value={userFormData.email}
-                                        />
-                                      </FloatingLabel>
+                                        Email
+                                      </Form.Label>
+                                      <Form.Control
+                                        name="email"
+                                        type="email"
+                                        placeholder={userDataState.email}
+                                      />
+
                                       <Form.Control.Feedback type="invalid">
                                         Email is required!
                                       </Form.Control.Feedback>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3">
-                                      <Form.Floating>
-                                        <Form.Control
-                                          name="password"
-                                          type="password"
-                                          placeholder="Password"
-                                          // onChange={handleInputChange}
-                                          // value={userFormData.password}
-                                        />
-                                      </Form.Floating>
-                                      <Form.Control.Feedback type="invalid">
-                                        Password is required!
-                                      </Form.Control.Feedback>
+                                      <Form.Label>Password</Form.Label>
+                                      <Form.Control
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                      />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3">
@@ -187,8 +186,6 @@ function Profile() {
                                         type="text"
                                         placeholder="Avatar"
                                         name="avatar"
-                                        // onChange={handleInputChange}
-                                        // value={userFormData.avatar}
                                       />
                                     </Form.Group>
                                     <Button type="submit">Save</Button>
@@ -205,24 +202,9 @@ function Profile() {
               </Col>
             </Col>
           </Row>
-          <Row xs={1} md={2} xl={3} className="g-4">
-            {Array.from({ length: 9 }).map((_, idx) => (
-              <Col key={idx}>
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src="https://picsum.photos/300/100/?blur=2"
-                  />
-                  <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
+          <Row>
+            {userDataState?.savedRecipes?.map((meal) => (
+              <RecipeCard meal={meal} key={meal.id} />
             ))}
           </Row>
         </Container>
