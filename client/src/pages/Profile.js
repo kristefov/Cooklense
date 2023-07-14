@@ -19,7 +19,7 @@ function Profile(){
           <Col xs={8} md={10} lg={10}>
             <Col>
                 <Row>
-                <Container className="section vh-100">
+                <Container className="section">
               <Container className="container py-5 h-100">
                 <Row className="row d-flex justify-content-center align-items-center h-100">
                   <Col className="col col-md-4 col-lg-4 col-xl-4">
@@ -30,10 +30,10 @@ function Profile(){
                       <Row className='mb-3'>
                           <Card.Img xs={2} src="https://picsum.photos/300/300/?blur=2" fluid alt="Generic placeholder image" className="img-fluid" roundedCircle />
                           </Row>
-                          <Row className="flex-grow-1 ms-3">
+                          <Col className="flex-grow-1 ms-3">
                             <h5 className="mb-1">Danny McLoan</h5>
                             <p className="mb-2 pb-1" >Senior Journalist</p>
-                            <Row className="d-flex justify-content-start rounded-3 p-2 mb-2">
+                            <Col className="d-flex justify-content-start rounded-3 p-2 mb-2">
                               <Col>
                                 <p className="small text-muted mb-1">Collections</p>
                                 <p className="mb-0">41</p>
@@ -47,9 +47,9 @@ function Profile(){
                                 <p className="mb-0">8.5</p>
                               </Col>
 
-                            </Row>
+                            </Col>
 
-                          </Row>
+                          </Col>
                           </Col>
                         </Row>
                       </Card.Body>
@@ -57,12 +57,9 @@ function Profile(){
                     </Col>
                     <Col className="col col-md-8 col-lg-8 col-xl-8">
                     <Card>
-                        <Card.Header>Quote</Card.Header>
+                        <Card.Header>       Update User Information</Card.Header>
                         <Card.Body>
- <Container>
-      <h2>
-        Update User Information
-      </h2>
+ <Container typeof='' className='container-fluid'>
       <Row>
       <Form.Group className="mb-3">
           <Form.Label htmlFor="firstName">First Name</Form.Label>
