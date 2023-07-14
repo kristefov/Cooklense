@@ -16,7 +16,12 @@ function Profile(){
   </Row>
   <Container>
   <Row>
-     
+    <Col>
+    
+    </Col>
+    </Row>
+  <Row>
+     <Col>
   <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
       <Row>
         <Col sm={4}>
@@ -37,7 +42,7 @@ function Profile(){
         </Col>
       </Row>
     </Tab.Container>
-
+    </Col>
 
     </Row>
     <Row>
