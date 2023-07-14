@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GET_ME } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import RecipeCard from "../../components/RecipeCard";
 
 const Collections = () => {
+  const [userData, setUserData] = useState(null);
   const { data } = useQuery(GET_ME);
-  console.log(data.me.savedRecipes);
+
+  useEffect(() => {
+    if (data) {
+      setUserData(data);
+    }
+  }, [data]);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <Row>
         <Col sm={2} className="text-center">
-          {data.avatar ? (
-            <Image src={data.avatar} rounded className="img-fluid" />
+          {userData.avatar ? (
+            <Image src={userData.avatar} rounded className="img-fluid" />
           ) : (
             <Image src="avatar.png" rounded className="img-fluid" />
           )}
-          <p className="mt-3">{data.me.username}</p>
+          <p className="mt-3">{userData.me.username}</p>
         </Col>
         <Col>
           <Row>
-            {data.me.savedRecipes.map((meal) => (
-              <RecipeCard meal={meal} />
+            {userData.me.savedRecipes.map((meal) => (
+              <RecipeCard meal={meal} key={meal.id} />
             ))}
           </Row>
         </Col>
