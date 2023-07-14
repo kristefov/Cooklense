@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
+import { GET_ME } from "../../utils/queries";
 import { appendIngredients } from "../../utils/appendIngredients";
 
 
@@ -15,14 +16,18 @@ const SingleRecipe = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [ingredients, setIngredients] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const [saveRecipe] = useMutation(SAVE_RECIPE)
-  const [youtubeUrl, setYoutubeUrl] = useState(null);
+  const [saveRecipe] = useMutation(SAVE_RECIPE);
+  const { data } = useQuery(GET_ME);
+  const [youTubeLink, setYouTubeLink] = useState();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
-  
+        let youTube = recipe.strYoutube;
+        var youTubeEmbed = youTube.replace("watch?v=", "embed/");
+
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
           const ingredientKey = `strIngredient${i}`;
@@ -33,37 +38,40 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-  
+
         const recipeWithIngredients = appendIngredients([recipe])[0];
-        setYoutubeUrl(recipeWithIngredients.strYoutube);
+
         setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
+        setYouTubeLink(youTubeEmbed);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchData();
   }, [id]);
 
-
+  const isRecipeSaved = data?.me?.savedRecipes.some(
+    (recipe) => recipe.idMeal === selectedRecipe?.idMeal
+  );
 
   const handleSaveRecipe = async () => {
-    console.log(selectedRecipe)
-    const {idMeal, strMeal, strMealThumb } = selectedRecipe
-   
-    try {
-      const { data } = await saveRecipe({variables: {recipeData: {idMeal, strMeal, strMealThumb} }});
-      console.log(data)
-    } catch(Erorr){
-      throw new Error('Le problem with le handleSaveRecipe that used the selectedRecipe data to save to the database') ;
+    const { idMeal, strMeal, strMealThumb } = selectedRecipe;
+
+    if (isRecipeSaved) {
+      console.log(`Recipe with idMeal ${idMeal} is already saved.`);
+      return;
     }
-    
 
-  
-}
-
- 
+    try {
+      await saveRecipe({
+        variables: { recipeData: { idMeal, strMeal, strMealThumb } },
+      });
+    } catch (error) {
+      throw new error();
+    }
+  };
 
   return (
 
@@ -87,9 +95,15 @@ const SingleRecipe = () => {
                     <Button>
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
-                    <Button onClick={() => handleSaveRecipe()}>
-                      <FontAwesomeIcon  icon={faPlus} /> Add to collection
-                    </Button>
+                    {isRecipeSaved ? (
+                      <Button disabled variant="success">
+                        <FontAwesomeIcon icon={faCheck} /> Recipe saved
+                      </Button>
+                    ) : (
+                      <Button onClick={() => handleSaveRecipe()}>
+                        <FontAwesomeIcon icon={faPlus} /> Add to collection
+                      </Button>
+                    )}
                   </>
                 )}
                 <Table striped bordered>
@@ -116,7 +130,19 @@ const SingleRecipe = () => {
               {selectedRecipe.strInstructions}
             </small>
           </Card.Footer>
-  
+          <Container>
+            <Row>
+              <Card className="border border-true">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={`${youTubeLink}?autoplay=1&mute=1&loop=1&modestbranding=1`}
+                    title="YouTube video"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </Card>
+            </Row>
+          </Container>
         </Card>
 
     
