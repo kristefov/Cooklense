@@ -67,7 +67,10 @@ function App() {
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
           <Route path="/profile" Component={Profile} />
-          <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
+          <Route
+            path="/search/:searchType/:searchValue"
+            Component={SearchResults}
+          />
           <Route path="/collections" Component={Collections} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>

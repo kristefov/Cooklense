@@ -23,6 +23,11 @@ const resolvers = {
       return { token, user };
     },
 
+    updateUser: async (parent, { userData }, context) => {
+      if(!context.user) throw new AuthenticationError("You must be logged in")
+      const user = await User.findByIdAndUpdate(context.user._id, userData, {runValidators: true, new: true});
+      return user
+    },
     loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

@@ -26,21 +26,24 @@ const typeDefs = gql`
     strMealThumb: String
   }
   input UserInput {
-    firstName: String!
-    lastName: String!
-    username: String!
-    email: String!
-    password: String!
+    firstName: String
+    lastName: String
+    username: String
+    email: String
+    password: String
     avatar: String
   }
   type Query {
     me: User!
   }
+
+
   type Mutation {
     addUser(userData: UserInput!): Auth
     loginUser(email: String!, password: String!): Auth
     saveRecipe(recipeData: RecipeInput!): User
     removeRecipe(recipeId: String!): User
+    updateUser(userData: UserInput!): User
   }
 `;
 module.exports = typeDefs;
