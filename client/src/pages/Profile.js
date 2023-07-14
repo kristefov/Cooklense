@@ -25,13 +25,13 @@ function Profile(){
                 <Row className="row d-flex justify-content-center align-items-center h-100">
                   <Col className="col col-md-4 col-lg-4 col-xl-4">
                     <Card className="card">
-                      <Card.Body className="card-body p-1">
-                        <Container className="d-flex flex-column text-black">
-                          <Container className="flex-shrink-1">
+                      <Card.Body className="card-body p-0">
+                        <Row className="d-flex flex-column text-black">
+                      <Col>
+                      <Row className='mb-3'>
                           <Card.Img xs={2} src="https://picsum.photos/300/300/?blur=2" fluid alt="Generic placeholder image" className="img-fluid" roundedCircle />
-                        
-                          </Container>
-                          <Container className="flex-grow-1 ms-3">
+                          </Row>
+                          <Row className="flex-grow-1 ms-3">
                             <h5 className="mb-1">Danny McLoan</h5>
                             <p className="mb-2 pb-1" >Senior Journalist</p>
                             <Row className="d-flex justify-content-start rounded-3 p-2 mb-2">
@@ -50,8 +50,9 @@ function Profile(){
 
                             </Row>
 
-                          </Container>
-                        </Container>
+                          </Row>
+                          </Col>
+                        </Row>
                       </Card.Body>
                       </Card>
                     </Col>
@@ -77,18 +78,14 @@ function Profile(){
             </Container>
             </Row>
         </Col>
-                
-                  <Col className='d-flex justify-content-center'>
-              <Button variant="secondary">Change</Button>
-              <Button variant="secondary">Save</Button>
-              </Col>
+
         </Col>
     </Row>
-    <Row xs={1} md={2} className="g-4">
-      {Array.from({ length: 4 }).map((_, idx) => (
+    <Row xs={1} md={2} xl={3} className="g-4">
+      {Array.from({ length: 9 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
-            <Card.Img variant="top" src="holder.js/100px160" />
+            <Card.Img variant="top" src="https://picsum.photos/300/100/?blur=2" />
             <Card.Body>
               <Card.Title>Card title</Card.Title>
               <Card.Text>
