@@ -10,6 +10,7 @@ import { SAVE_RECIPE } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
 import { appendIngredients } from "../../utils/appendIngredients";
 
+
 const SingleRecipe = () => {
   const { id } = useParams();
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -73,8 +74,10 @@ const SingleRecipe = () => {
   };
 
   return (
+
     <Container className="my-4">
       {selectedRecipe && (
+   
         <Card>
           <Row>
             <Col md={4}>
@@ -141,7 +144,11 @@ const SingleRecipe = () => {
             </Row>
           </Container>
         </Card>
-      )}
+
+    
+      ) 
+      }
+
     </Container>
   );
 };

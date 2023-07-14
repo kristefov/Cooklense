@@ -21,7 +21,7 @@ import SingleRecipe from "./pages/SingleRecipe";
 import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
-
+import Profile from "./pages/Profile";
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -64,10 +64,8 @@ function App() {
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
-          <Route
-            path="/search/:searchType/:searchValue"
-            Component={SearchResults}
-          />
+          <Route path="/profile" Component={Profile} />
+          <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
           <Route path="/collections" Component={Collections} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
