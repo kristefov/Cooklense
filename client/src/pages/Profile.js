@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tab, Container, Col, Row, Image, Button } from 'react-bootstrap';
+import { Tab, Container, Col, Row, Image, Button,Card, InputGroup, Form, ButtonGroup   } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
@@ -16,9 +16,20 @@ function Profile(){
   </Row>
   <Container>
   <Row>
-    <Col>
-    
-    </Col>
+
+    <Col xs={2} md={2}>
+          <Image xs={2} src="https://picsum.photos/300/300/?blur=2" fluid  roundedCircle />
+          <Col className='d-flex justify-content-center'>
+      <Button variant="secondary">Change</Button>
+      <Button variant="secondary">Save</Button>
+      </Col>
+        </Col>
+      <Col xs={3} md={2}>
+      <Form.Group controlId="formFileLg" className="mb-3">
+        <Form.Label>Large file input example</Form.Label>
+        <Form.Control type="file" size="lg" />
+      </Form.Group>
+      </Col>
     </Row>
   <Row>
      <Col>
@@ -46,18 +57,22 @@ function Profile(){
 
     </Row>
     <Row>
-      <div class="card">
-        <Image class="card-img-top" src="holder.js/100x180/?text=Image cap" alt="Card image cap"></Image>
-        <div class="card-body">
-          <h4 class="card-title">Title</h4>
-          <p class="card-text">Text</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Item 1</li>
-          <li class="list-group-item">Item 2</li>
-          <li class="list-group-item">Item 3</li>
-        </ul>
-      </div>
+      <Col xs={8} md={10}>
+            Cho nado
+      </Col>
+      <Col xs={4} md={2}>
+          <Card>        <Image class="card-img-top" src="holder.js/100x180/?text=Image cap" alt="Card image cap"></Image>
+            <div class="card-body">
+              <h4 class="card-title">Title</h4>
+              <p class="card-text">Text</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Item 1</li>
+              <li class="list-group-item">Item 2</li>
+              <li class="list-group-item">Item 3</li>
+            </ul>
+      </Card>
+      </Col>
       </Row>
       </Container>
     </Container>
