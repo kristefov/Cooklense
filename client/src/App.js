@@ -1,27 +1,26 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
-import { setContext } from "@apollo/client/link/context";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
+  InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import SingleRecipe from "./pages/SingleRecipe";
-import SearchResults from "./pages/SearchResults";
-import Collections from "./pages/Collections";
+import { setContext } from "@apollo/client/link/context";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
-import Profile from "./pages/Profile";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import Collections from "./pages/Collections";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile/Profile";
+import SearchResults from "./pages/SearchResults";
+import SingleRecipe from "./pages/SingleRecipe";
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -65,7 +64,10 @@ function App() {
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
           <Route path="/profile" Component={Profile} />
-          <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
+          <Route
+            path="/search/:searchType/:searchValue"
+            Component={SearchResults}
+          />
           <Route path="/collections" Component={Collections} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
