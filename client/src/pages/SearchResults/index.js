@@ -69,7 +69,7 @@ const SearchResults = () => {
               </h2>
               <Row>
                 {filteredResults.map((meal) => (
-                  <RecipeCard meal={meal} />
+                  <RecipeCard key={meal.idMeal} meal={meal} />
                 ))}
               </Row>
             </Container>
