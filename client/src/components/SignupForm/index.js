@@ -5,12 +5,11 @@ import { Form, Button, Alert, FloatingLabel } from "react-bootstrap";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signup} from "../../reducers/authReducer";
+import { signup } from "../../reducers/authReducer";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
 
-
-const SignupForm = ({handleModalClose}) => {
+const SignupForm = ({ handleModalClose }) => {
   // set initial form state
   const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({
@@ -38,11 +37,11 @@ const SignupForm = ({handleModalClose}) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { firstName, lastName, username, email, password } = userFormData;
-        if (!firstName || !lastName || !username || !email || !password) {
-            setShowAlert(true);
-            showAlert('field missing or incomplete');
-            return;
-        }
+    if (!firstName || !lastName || !username || !email || !password) {
+      setShowAlert(true);
+      showAlert("field missing or incomplete");
+      return;
+    }
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -51,24 +50,24 @@ const SignupForm = ({handleModalClose}) => {
       event.stopPropagation();
     }
 
-      try {
-        const { data } = await addUser({
-            variables: { userData: {...userFormData}  },
-        });
-        
-        const userData = {
-          token: data.addUser.token,
-          userId: data.addUser.user._id,
-          firstName: data.addUser.user.firstName,
-          lastName: data.addUser.user.lastName,
-          username: data.addUser.user.username,
-          email: data.addUser.user.email,
-          savedRecipes: data.addUser.user.savedRecipes || [],
+    try {
+      const { data } = await addUser({
+        variables: { userData: { ...userFormData } },
+      });
+
+      const userData = {
+        token: data.addUser.token,
+        userId: data.addUser.user._id,
+        firstName: data.addUser.user.firstName,
+        lastName: data.addUser.user.lastName,
+        username: data.addUser.user.username,
+        email: data.addUser.user.email,
+        savedRecipes: data.addUser.user.savedRecipes || [],
       };
-      dispatch(signup(userData))
+      dispatch(signup(userData));
       localStorage.setItem("id_token", data.addUser.token);
-      handleModalClose()
-      navigate('/')
+      handleModalClose();
+      navigate("/");
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -81,7 +80,6 @@ const SignupForm = ({handleModalClose}) => {
       email: "",
       password: "",
       avatar: "",
-      
     });
   };
 
@@ -98,7 +96,6 @@ const SignupForm = ({handleModalClose}) => {
         >
           Something went wrong with your signup!
         </Alert>
-
         <Form.Group className="mb-3">
           <Form.Label htmlFor="firstName">First Name</Form.Label>
           <Form.Control
@@ -127,63 +124,58 @@ const SignupForm = ({handleModalClose}) => {
           <Form.Control.Feedback type="invalid">
             Last Name is required!
           </Form.Control.Feedback>
-
-
-
-
         </Form.Group>
-
-
-
-        <Form.Group className='mb-3'>
-          
+        <Form.Group className="mb-3">
           <FloatingLabel
-          htmlFor="username"
-          label="Your Username"
-          className="mb-3"
-        >
-          <Form.Control
-            type="text"
-            placeholder="Your username"
-            name="username"
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-             />
-        </FloatingLabel>
-        <Form.Control.Feedback type="invalid">
+            htmlFor="username"
+            label="Your Username"
+            className="mb-3"
+          >
+            <Form.Control
+              type="text"
+              placeholder="Your username"
+              name="username"
+              onChange={handleInputChange}
+              value={userFormData.username}
+              required
+            />
+          </FloatingLabel>
+          <Form.Control.Feedback type="invalid">
             Username is required!
           </Form.Control.Feedback>
-          </Form.Group>
+        </Form.Group>
 
-        <Form.Group className='mb-3'>
-          
-          <FloatingLabel
-          htmlFor="email"
-          label="Email address"
-          className="mb-3"
-        >
-          <Form.Control name="email" type="email" placeholder="name@example.com"
-           onChange={handleInputChange}
+        <Form.Group className="mb-3">
+          <FloatingLabel htmlFor="email" label="Email address" className="mb-3">
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="name@example.com"
+              onChange={handleInputChange}
               value={userFormData.email}
-              required />
-        </FloatingLabel>
-            <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-          </Form.Group>
-  
-          <Form.Group className='mb-3'>
+              required
+            />
+          </FloatingLabel>
+          <Form.Control.Feedback type="invalid">
+            Email is required!
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
           <Form.Floating>
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-        </Form.Floating>
-            <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-          </Form.Group>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            />
+          </Form.Floating>
+          <Form.Control.Feedback type="invalid">
+            Password is required!
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label htmlFor="avatar">Avatar</Form.Label>
