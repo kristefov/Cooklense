@@ -23,6 +23,7 @@ import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
 import Profile from "./pages/Profile";
+import Week from './pages/Week';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -70,6 +71,7 @@ function App() {
           <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
           <Route path="/collections" Component={Collections} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
+          <Route path='/week' Component={Week} />
         </Routes>
       </>
 
