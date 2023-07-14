@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Button,
   ButtonGroup,
@@ -21,31 +21,58 @@ import RecipeCard from "../../components/RecipeCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Profile() {
-  const { data } = useQuery(GET_ME);
+  const { data, loading } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
-  const userData = data?.me ?? {};
-  console.log(userData);
+  const userDataState = data?.me;
+  console.log(userDataState);
 
-  const [userDataState, setUserDataState] = useState();
-
-  useEffect(() => {
-    if (userData) {
-      setUserDataState(userData);
+  const count = useMemo(() => {
+    if (!userDataState?.savedRecipes) {
+      return 0;
     }
-  }, [userData]);
-  if (!userDataState) {
-    return <div>Loading...</div>;
-  }
+    const countArray = userDataState.savedRecipes;
+    let count = 0;
+    for (let i = 0; i < countArray.length; i++) {
+      // if entity is object, increase objectsLen by 1, which is the stores the total number of objects in array.
+      if (countArray[i] instanceof Object) {
+        count++;
+      }
+    }
+    return count;
+  }, [userDataState?.savedRecipes]);
+
+  //  const [userDataState, setUserDataState] = useState();
+
+  // useEffect(() => {
+  //   if (userData) {
+  //     setUserDataState(userData);
+  //   }
+  // }, [userData]);
+  // if (!userDataState) {
+  //   return <div>Loading...</div>;
+  // }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target).entries());
+    const form = event.target;
+    const formData = Object.fromEntries(
+      Array.from(new FormData(form).entries()).filter(([, value]) =>
+        Boolean(value)
+      )
+    );
     console.log(formData);
     try {
-      await updateUser({ variables: formData });
+      await updateUser({ variables: { userData: formData } });
+      form.reset();
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return <h2>loading</h2>;
+  }
+
+  console.log(count);
 
   return (
     <>
@@ -81,16 +108,18 @@ function Profile() {
                                     />
                                   </Row>
                                   <Col className="flex-grow-1 ms-3">
+
                                     <h5 className="mb-1">{userDataState.username}</h5>
                                     <p className="mb-2 pb-1">
                                     {userDataState.firstName} {userDataState.lastName}
                                     </p>
+
                                     <Col className="d-flex justify-content-start rounded-3 p-2 mb-2">
                                       <Col>
                                         <p className="small text-muted mb-1">
                                           Collections
                                         </p>
-                                        <p className="mb-0">41</p>
+                                        <p className="mb-0">{count}</p>
                                       </Col>
                                       <Col className="px-3">
                                         <p className="small text-muted mb-1">
@@ -117,7 +146,7 @@ function Profile() {
                             <Card.Body>
                               <Container typeof="" className="container-fluid">
                                 <Row>
-                                   <Form className="d-flex flex-row flex-grow-0 flex-wrap gap-0 align-items-center justify-content-between" onSubmit={handleSubmit}>
+                                   <Form className="d-flex flex-row flex-grow-0 flex-wrap gap-0 align-items-center justify-content-between"    autoComplete="off" onSubmit={handleSubmit}>
                                    
                                       <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg" >
                                         <Form.Label htmlFor="firstName">
@@ -128,7 +157,7 @@ function Profile() {
                                           placeholder={
                                             userDataState.firstName
                                           }
-                                   
+                                      autoComplete="off"
                                           name="firstName"
                                           required
                                
@@ -146,7 +175,7 @@ function Profile() {
                                             userDataState.lastName
                                           }
                                           name="lastName"
-                 
+                    autoComplete="off"
                                           required
                                         />
                                       </Form.Group>
@@ -160,7 +189,7 @@ function Profile() {
                                         </Form.Label>
                                         <Form.Control
                                           type="text"
-                        
+                           autoComplete="off"
                                           placeholder={
                                             userDataState.username
                                           }
@@ -169,6 +198,7 @@ function Profile() {
                                 
                                         />
                                       </Form.Group>
+
 
                                       <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
                                         <Form.Label
