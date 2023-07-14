@@ -47,10 +47,11 @@ Run npm install to install dependencies.
 Run npm start to start the web server and connect
 
 ## Usage
-Clone the repository from GitHub
-Install node.js
-Run npm install to install dependencies.
-Run npm start to start the web server and connect
+
+Use the following command to run the application on the development server:
+
+npm run develop
+ 
 
 ## License
 Licenced under:
