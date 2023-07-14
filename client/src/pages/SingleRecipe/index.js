@@ -17,12 +17,15 @@ const SingleRecipe = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [saveRecipe] = useMutation(SAVE_RECIPE);
   const { data } = useQuery(GET_ME);
+  const [youTubeLink, setYouTubeLink] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await recipeSearch("searchById", id);
         const recipe = response && response.meals[0];
+        let youTube = recipe.strYoutube;
+        var youTubeEmbed = youTube.replace("watch?v=", "embed/");
 
         const ingredients = [];
         for (let i = 1; i <= 20; i++) {
@@ -39,6 +42,7 @@ const SingleRecipe = () => {
 
         setSelectedRecipe(recipeWithIngredients);
         setIngredients(ingredients);
+        setYouTubeLink(youTubeEmbed);
       } catch (error) {
         console.log(error);
       }
@@ -47,7 +51,9 @@ const SingleRecipe = () => {
     fetchData();
   }, [id]);
 
-  const isRecipeSaved = data?.me?.savedRecipes.some(recipe => recipe.idMeal === selectedRecipe?.idMeal);
+  const isRecipeSaved = data?.me?.savedRecipes.some(
+    (recipe) => recipe.idMeal === selectedRecipe?.idMeal
+  );
 
   const handleSaveRecipe = async () => {
     const { idMeal, strMeal, strMealThumb } = selectedRecipe;
@@ -61,7 +67,6 @@ const SingleRecipe = () => {
       await saveRecipe({
         variables: { recipeData: { idMeal, strMeal, strMealThumb } },
       });
-
     } catch (error) {
       throw new error();
     }
@@ -88,14 +93,14 @@ const SingleRecipe = () => {
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
                     {isRecipeSaved ? (
-                <Button disabled variant="success">
-                  <FontAwesomeIcon icon={faCheck} /> Recipe saved
-                </Button>
-              ) : (
-                <Button onClick={() => handleSaveRecipe()}>
-                  <FontAwesomeIcon icon={faPlus} /> Add to collection
-                </Button>
-              )}
+                      <Button disabled variant="success">
+                        <FontAwesomeIcon icon={faCheck} /> Recipe saved
+                      </Button>
+                    ) : (
+                      <Button onClick={() => handleSaveRecipe()}>
+                        <FontAwesomeIcon icon={faPlus} /> Add to collection
+                      </Button>
+                    )}
                   </>
                 )}
                 <Table striped bordered>
@@ -122,6 +127,19 @@ const SingleRecipe = () => {
               {selectedRecipe.strInstructions}
             </small>
           </Card.Footer>
+          <Container>
+            <Row>
+              <Card className="border border-true">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={`${youTubeLink}?autoplay=1&mute=1&loop=1&modestbranding=1`}
+                    title="YouTube video"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </Card>
+            </Row>
+          </Container>
         </Card>
       )}
     </Container>
