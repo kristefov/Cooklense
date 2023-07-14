@@ -22,7 +22,7 @@ import SingleRecipe from "./pages/SingleRecipe";
 import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile/Profile";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
