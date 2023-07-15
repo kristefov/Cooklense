@@ -101,7 +101,7 @@ const RecipeCard = ({ meal }) => {
           <Modal.Footer>
             <Button
               variant="secondary"
-              key={userRecipes.idMeal}
+              key={meal.idMeal}
               onClick={handleCloseModal}
             >
               Close
