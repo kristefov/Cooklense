@@ -24,6 +24,7 @@ import Collections from "./pages/Collections";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
 import Week from './pages/Week';
 import Profile from "./pages/Profile/Profile";
+import ShoppingList from './pages/ShoppingList';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -73,8 +74,9 @@ function App() {
             Component={SearchResults}
           />
           <Route path="/collections" Component={Collections} />
-          <Route element={<h1 className="display-2">Wrong page!</h1>} />
           <Route path='/week' Component={Week} />
+          <Route path='/list' Component={ShoppingList} />
+          <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
       </>
 
