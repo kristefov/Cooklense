@@ -14,6 +14,14 @@ export const GET_ME = gql`
         strMeal
         strMealThumb
       }
+      weekPlan {
+        day
+        recipeData {
+          idMeal
+          strMeal
+          strMealThumb
+        }
+      }
     }
   }
 `;

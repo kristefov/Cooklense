@@ -1,0 +1,41 @@
+.column {
+    flex: 1;
+    min-width: 200px;
+    min-height: 600px;
+    margin-right: 10px;
+    border-right: 1px solid black;
+  }
+  
+  .column-header {
+    text-align: center;
+    margin-bottom: auto;
+  }
+  
+  .column .card-content {
+    height: 100px;
+    margin: 10px;
+  }
+  
+  .meal-item {
+    background-color: slategray;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .meal-item p {
+    margin: 0;
+    word-wrap: break-word;
+  }
+  
+  .meal-item-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+  }
+  

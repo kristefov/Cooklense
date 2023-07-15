@@ -39,13 +39,13 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($recipeData: RecipeInput!) {
     saveRecipe(recipeData: $recipeData) {
-      _id
       username
+      _id
       savedRecipes {
-        _id
         idMeal
         strMeal
         strMealThumb
@@ -63,6 +63,38 @@ export const REMOVE_RECIPE = gql`
         idMeal
         strMeal
         strMealThumb
+      }
+    }
+  }
+`;
+
+export const ADD_TO_WEEKPLAN = gql`
+  mutation AddToWeekPlan($day: String!, $recipeData: RecipeInput!) {
+    addToWeekPlan(day: $day, recipeData: $recipeData) {
+      username
+      weekPlan {
+        day
+        recipeData {
+          idMeal
+          strMeal
+          strMealThumb
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
+  mutation removeMealFromWeekPlan($idMeal: String) {
+    mutationName(idMeal: $idMeal) {
+      username
+      weekPlan {
+        day
+        recipeData {
+          idMeal
+          strMeal
+          strMealThumb
+        }
       }
     }
   }

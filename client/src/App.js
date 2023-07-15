@@ -22,6 +22,7 @@ import SingleRecipe from "./pages/SingleRecipe";
 import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
 import BreadCrumbsiteComponent from "./components/BreadCrumbs";
+import Week from './pages/Week';
 import Profile from "./pages/Profile/Profile";
 
 // Construct our main GraphQL API endpoint
@@ -73,6 +74,7 @@ function App() {
           />
           <Route path="/collections" Component={Collections} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
+          <Route path='/week' Component={Week} />
         </Routes>
       </>
 
