@@ -83,3 +83,19 @@ export const ADD_TO_WEEKPLAN = gql`
     }
   }
 `;
+
+export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
+  mutation removeMealFromWeekPlan($idMeal: ID!) {
+    mutationName(idMeal: $idMeal) {
+      username
+      weekPlan {
+        day
+        recipeData {
+          idMeal
+          strMeal
+          strMealThumb
+        }
+      }
+    }
+  }
+`;
