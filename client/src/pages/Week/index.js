@@ -23,20 +23,20 @@ const WeekPlan = () => {
 
   const handleRemoveMeal = async (idMeal) => {
     console.log(data)
-    try {
-      await removeMealFromWeekPlan({
-        variables: {
-          idMeal: idMeal,
-        },
-      });
+    // try {
+    //   await removeMealFromWeekPlan({
+    //     variables: {
+    //       idMeal: idMeal,
+    //     },
+    //   });
 
-      const updatedWeekPlan = savedWeekPlan.filter(
-        (meal) => meal.idMeal !== idMeal
-      );
-      setSavedWeekPlan(updatedWeekPlan);
-    } catch (error) {
-      console.log("Error removing meal:", error);
-    }
+    //   const updatedWeekPlan = savedWeekPlan.filter(
+    //     (meal) => meal.idMeal !== idMeal
+    //   );
+    //   setSavedWeekPlan(updatedWeekPlan);
+    // } catch (error) {
+    //   console.log("Error removing meal:", error);
+    // }
   };
 
   const mealItems = (meals) =>
