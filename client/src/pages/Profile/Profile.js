@@ -128,18 +128,6 @@ function Profile() {
                                         </p>
                                         <p className="mb-0">{count}</p>
                                       </Col>
-                                      <Col className="px-3">
-                                        <p className="small text-muted mb-1">
-                                          Favorites
-                                        </p>
-                                        <p className="mb-0">976</p>
-                                      </Col>
-                                      <Col>
-                                        <p className="small text-muted mb-1">
-                                          Activity %
-                                        </p>
-                                        <p className="mb-0">8.5</p>
-                                      </Col>
                                     </Col>
                                   </Col>
                                 </Col>
@@ -167,7 +155,6 @@ function Profile() {
                                         placeholder={userDataState.firstName}
                                         autoComplete="off"
                                         name="firstName"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -180,7 +167,6 @@ function Profile() {
                                         placeholder={userDataState.lastName}
                                         name="lastName"
                                         autoComplete="off"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -196,7 +182,6 @@ function Profile() {
                                         autoComplete="off"
                                         placeholder={userDataState.username}
                                         name="username"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -212,7 +197,6 @@ function Profile() {
                                         name="email"
                                         type="email"
                                         placeholder={userDataState.email}
-                                        required
                                       />
 
                                       <Form.Control.Feedback type="invalid">
@@ -226,7 +210,6 @@ function Profile() {
                                         name="password"
                                         type="password"
                                         placeholder="Password"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -236,7 +219,6 @@ function Profile() {
                                         name="confirmPassword"
                                         type="password"
                                         placeholder="Confirm Password"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -244,24 +226,14 @@ function Profile() {
                                       <Form.Label htmlFor="avatar">
                                         Avatar
                                       </Form.Label>
-                                      <Col className="d-flex">
-                                        <Form.Control
-                                          type="text"
-                                          placeholder={userDataState.avatar}
-                                          name="avatar"
-                                          value={userDataState.avatar}
-                                        />
-                                        <Image
-                                          width="64px"
-                                          className="img-fluid w-25"
-                                          height="64px"
-                                          src={userDataState.avatar}
-                                        />
-                                      </Col>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder="Avatar"
+                                        name="avatar"
+                                      />
                                     </Form.Group>
-                                    <Col className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3">
-                                      <Button type="submit">Save</Button>
-                                    </Col>
+
+                                    <Button type="submit">Save</Button>
                                   </Form>
                                 </Row>
                               </Container>
