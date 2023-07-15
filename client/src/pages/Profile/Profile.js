@@ -24,6 +24,7 @@ function Profile() {
   const { data, loading } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
   const userDataState = data?.me;
+
   console.log(userDataState);
 
   const count = useMemo(() => {
@@ -93,25 +94,31 @@ function Profile() {
                             <Card.Body className="card-body p-0">
                               <Row className="d-flex flex-column text-black">
                                 <Col>
-                                  <Row className="mb-3" style={{ 
-                                    background: { 
-                                      backgroundRepeat: "no-repeat", 
-                                      backgroundSize: "cover", 
-                                      backgroundImage: `url(${userDataState.avatar} }}` 
-                                    }                                }}>
+                                  <Row
+                                    className="mb-3"
+                                    style={{
+                                      background: {
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        backgroundImage: `url(${userDataState.avatar} }}`,
+                                      },
+                                    }}
+                                  >
                                     <Card.Img
                                       xs={2}
                                       src={userDataState.avatar}
-                                                                      alt="Generic placeholder image"
+                                      alt="Generic placeholder image"
                                       className="img-fluid"
                                       roundedCircle
                                     />
                                   </Row>
                                   <Col className="flex-grow-1 ms-3">
-
-                                    <h5 className="mb-1">{userDataState.username}</h5>
+                                    <h5 className="mb-1">
+                                      {userDataState.username}
+                                    </h5>
                                     <p className="mb-2 pb-1">
-                                    {userDataState.firstName} {userDataState.lastName}
+                                      {userDataState.firstName}{" "}
+                                      {userDataState.lastName}
                                     </p>
 
                                     <Col className="d-flex justify-content-start rounded-3 p-2 mb-2">
@@ -146,141 +153,126 @@ function Profile() {
                             <Card.Body>
                               <Container typeof="" className="container-fluid">
                                 <Row>
-                                   <Form className="d-flex flex-row flex-grow-0 flex-wrap gap-0 align-items-center justify-content-between"    autoComplete="off" onSubmit={handleSubmit}>
-                                   
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg" >
-                                        <Form.Label htmlFor="firstName">
-                                          First Name
-                                        </Form.Label>
-                                        <Form.Control
-                                          type="text"
-                                          placeholder={
-                                            userDataState.firstName
-                                          }
-                                      autoComplete="off"
-                                          name="firstName"
-                                          required
-                               
-                                        />
-                                      </Form.Group>
+                                  <Form
+                                    className="d-flex flex-row flex-grow-0 flex-wrap gap-0 align-items-center justify-content-between"
+                                    autoComplete="off"
+                                    onSubmit={handleSubmit}
+                                  >
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label htmlFor="firstName">
+                                        First Name
+                                      </Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder={userDataState.firstName}
+                                        autoComplete="off"
+                                        name="firstName"
+                                        required
+                                      />
+                                    </Form.Group>
 
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label htmlFor="lastName">
-                                          Last Name
-                                        </Form.Label>
-                                        <Form.Control
-                                          type="text"
-                              
-                                          placeholder={
-                                            userDataState.lastName
-                                          }
-                                          name="lastName"
-                    autoComplete="off"
-                                          required
-                                        />
-                                      </Form.Group>
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label htmlFor="lastName">
+                                        Last Name
+                                      </Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder={userDataState.lastName}
+                                        name="lastName"
+                                        autoComplete="off"
+                                        required
+                                      />
+                                    </Form.Group>
 
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label
-                                          htmlFor="username"
-                                          className="mb-3"
-                                        >
-                                          Username
-                                        </Form.Label>
-                                        <Form.Control
-                                          type="text"
-                           autoComplete="off"
-                                          placeholder={
-                                            userDataState.username
-                                          }
-                                          name="username"
-                                          required
-                                
-                                        />
-                                      </Form.Group>
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label
+                                        htmlFor="username"
+                                        className="mb-3"
+                                      >
+                                        Username
+                                      </Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        autoComplete="off"
+                                        placeholder={userDataState.username}
+                                        name="username"
+                                        required
+                                      />
+                                    </Form.Group>
 
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label
+                                        htmlFor="email"
+                                        label="Email address"
+                                        className="mb-3"
+                                      >
+                                        Email
+                                      </Form.Label>
+                                      <Form.Control
+                                        name="email"
+                                        type="email"
+                                        placeholder={userDataState.email}
+                                        required
+                                      />
 
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label
-                                          htmlFor="email"
-                                          label="Email address"
-                                          className="mb-3"
-                                        >
-                                          Email
-                                        </Form.Label>
-                                        <Form.Control
-                                          name="email"
-                                          type="email"
-                                
-                                          placeholder={userDataState.email}
-                                          required
-                                    
-                                        />
+                                      <Form.Control.Feedback type="invalid">
+                                        Email is required!
+                                      </Form.Control.Feedback>
+                                    </Form.Group>
 
-                                        <Form.Control.Feedback type="invalid">
-                                          Email is required!
-                                        </Form.Control.Feedback>
-                                      </Form.Group>
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label>Password</Form.Label>
+                                      <Form.Control
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                        required
+                                      />
+                                    </Form.Group>
 
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label>
-                                          Password
-                                        </Form.Label>
-                                        <Form.Control
-                                          name="password"
-                                          type="password"
-                                          placeholder="Password"
-                                          required
-                                 
-                                        />
-                                      </Form.Group>
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label>Confirm Password</Form.Label>
+                                      <Form.Control
+                                        name="confirmPassword"
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        required
+                                      />
+                                    </Form.Group>
 
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label>
-                                          Confirm Password
-                                        </Form.Label>
-                                        <Form.Control
-                                          name="confirmPassword"
-                                          type="password"
-                                          placeholder="Confirm Password"
-                                          required
-                       
-                                        />
-                                      </Form.Group>
-
-                                      <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
-                                        <Form.Label htmlFor="avatar">
-                                          Avatar
-                                        </Form.Label>
-                                        <Col className="d-flex">
-
+                                    <Form.Group className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3 input-group-lg">
+                                      <Form.Label htmlFor="avatar">
+                                        Avatar
+                                      </Form.Label>
+                                      <Col className="d-flex">
                                         <Form.Control
                                           type="text"
                                           placeholder={userDataState.avatar}
                                           name="avatar"
                                           value={userDataState.avatar}
-                                 
                                         />
-                                       <Image width="64px" className="img-fluid w-25" height="64px" src={userDataState.avatar}/>
-                                       </Col>
-                                      </Form.Group>
-                                      <Col className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3"> 
-                                       <Button type="submit">Save</Button>
-                                       </Col>
-                                                                          
-                                   
-                                    </Form>
-                                  </Row>
-                                </Container>
-                              </Card.Body>
-                            </Card>
-                          </Col>
-                        </Row>
-                      </Container>
+                                        <Image
+                                          width="64px"
+                                          className="img-fluid w-25"
+                                          height="64px"
+                                          src={userDataState.avatar}
+                                        />
+                                      </Col>
+                                    </Form.Group>
+                                    <Col className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3">
+                                      <Button type="submit">Save</Button>
+                                    </Col>
+                                  </Form>
+                                </Row>
+                              </Container>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
                     </Container>
-                  </Row>
-                </Col>
-            
+                  </Container>
+                </Row>
+              </Col>
             </Col>
           </Row>
           <Row>

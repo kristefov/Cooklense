@@ -54,10 +54,9 @@ export const SAVE_RECIPE = gql`
   }
 `;
 export const REMOVE_RECIPE = gql`
-  mutation removeRecipe($recipeId: String!) {
-    removeRecipe(recipeId: $recipeId) {
+  mutation removeRecipe($idMeal: String!) {
+    removeRecipe(idMeal: $idMeal) {
       username
-      recipeCount
       savedRecipes {
         _id
         idMeal

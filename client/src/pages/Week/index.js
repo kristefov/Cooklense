@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
@@ -17,26 +17,26 @@ const WeekPlan = () => {
   useEffect(() => {
     if (data && data.me && data.me.weekPlan) {
       setSavedWeekPlan(data.me.weekPlan);
-      console.log(savedWeekPlan)
+      console.log(savedWeekPlan);
     }
-  }, [data]);
+  }, [data, savedWeekPlan]);
 
   const handleRemoveMeal = async (idMeal) => {
-    console.log(data)
-    // try {
-    //   await removeMealFromWeekPlan({
-    //     variables: {
-    //       idMeal: idMeal,
-    //     },
-    //   });
+    console.log(data);
+    try {
+      await removeMealFromWeekPlan({
+        variables: {
+          idMeal: idMeal,
+        },
+      });
 
-    //   const updatedWeekPlan = savedWeekPlan.filter(
-    //     (meal) => meal.idMeal !== idMeal
-    //   );
-    //   setSavedWeekPlan(updatedWeekPlan);
-    // } catch (error) {
-    //   console.log("Error removing meal:", error);
-    // }
+      const updatedWeekPlan = savedWeekPlan.filter(
+        (meal) => meal.idMeal !== idMeal
+      );
+      setSavedWeekPlan(updatedWeekPlan);
+    } catch (error) {
+      console.log("Error removing meal:", error);
+    }
   };
 
   const mealItems = (meals) =>
@@ -47,7 +47,9 @@ const WeekPlan = () => {
           style={{ textDecoration: "none", color: "black" }}
           className="meal-link"
         >
-          <p className="mt-1">{meal.strMeal}</p>
+          <div>
+            <p className="mt-1">{meal.strMeal}</p>
+          </div>
         </Link>
 
         <div className="meal-item-buttons">

@@ -51,6 +51,7 @@ const typeDefs = gql`
     addUser(userData: UserInput!): Auth
     loginUser(email: String!, password: String!): Auth
     saveRecipe(recipeData: RecipeInput!): User
+    removeRecipe(idMeal: String!): User
     updateUser(userData: UserInput!): User
     addToWeekPlan(day: String!, recipeData: RecipeInput!): User
     removeMealFromWeekPlan(idMeal: String): User
