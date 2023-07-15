@@ -7,8 +7,6 @@ import {
   Container,
   Modal,
   Tab,
-  Col,
-  Row,
   ThemeProvider,
 } from "react-bootstrap";
 import SignUpForm from "../SignupForm";
@@ -46,7 +44,10 @@ const AppNavbar = () => {
                         Profile
                       </Nav.Link>
                       <Nav.Link as={Link} to="/week">
-                        Weekplan
+                        Week Plan
+                      </Nav.Link>
+                      <Nav.Link as={Link} to="/list">
+                        Shopping List
                       </Nav.Link>
                       <Nav.Link as={Link} to="/collections">
                         Collections

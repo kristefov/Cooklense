@@ -6,7 +6,11 @@ import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_TO_WEEKPLAN, SAVE_RECIPE } from "../../utils/mutations";
+import {
+  ADD_TO_WEEKPLAN,
+  SAVE_RECIPE,
+  ADD_TO_SHOPPING_LIST,
+} from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
 import { appendIngredients } from "../../utils/appendIngredients";
 
@@ -27,7 +31,7 @@ const SingleRecipe = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [saveRecipe] = useMutation(SAVE_RECIPE);
   const [addToDay] = useMutation(ADD_TO_WEEKPLAN);
-  const [selectedDay, setSelectedDay] = useState("");
+  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST);
   const { data } = useQuery(GET_ME);
   const [youTubeLink, setYouTubeLink] = useState();
 
@@ -49,7 +53,6 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-
         const recipeWithIngredients = appendIngredients([recipe])[0];
 
         setSelectedRecipe(recipeWithIngredients);
@@ -87,16 +90,34 @@ const SingleRecipe = () => {
   const handleAddToDay = async (e) => {
     const choosenDay = e.target.value;
     const { idMeal, strMeal, strMealThumb } = selectedRecipe;
-    
-    console.log(idMeal,'\n', strMeal,'\n', strMealThumb)
+
+    console.log(idMeal, "\n", strMeal, "\n", strMealThumb);
     try {
       await addToDay({
-        variables: { day: choosenDay, recipeData: { idMeal, strMeal, strMealThumb }},
+        variables: {
+          day: choosenDay,
+          recipeData: { idMeal, strMeal, strMealThumb },
+        },
       });
     } catch (error) {
       throw new Error(error);
     }
     return;
+  };
+
+  const handleAddToShoppingList = async () => {
+    const updatedIngredientList = ingredients.map(({ measure, ingredient }) => `${measure} ${ingredient}`);
+    console.log(updatedIngredientList)
+    try {
+      await addToShoppingList({
+        variables: {
+          ingredients: [...updatedIngredientList],
+        },
+      });
+      console.log("Item added to shopping list");
+    } catch (error) {
+      console.error("Error adding item to shopping list:", error);
+    }
   };
 
   return (
@@ -116,7 +137,7 @@ const SingleRecipe = () => {
                 <Card.Title>{selectedRecipe.strMeal}</Card.Title>
                 {isLoggedIn && (
                   <>
-                    <Button>
+                    <Button onClick={handleAddToShoppingList}>
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
                     {isRecipeSaved ? (
