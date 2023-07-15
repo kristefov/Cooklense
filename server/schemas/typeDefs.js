@@ -54,6 +54,7 @@ const typeDefs = gql`
     removeRecipe(recipeId: String!): User
     updateUser(userData: UserInput!): User
     addToWeekPlan(day: String!, recipeData: RecipeInput!): User
+    removeMealFromWeekPlan(idMeal: ID!): User
   }
 `;
 module.exports = typeDefs;

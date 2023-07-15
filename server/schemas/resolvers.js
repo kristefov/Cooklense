@@ -87,6 +87,20 @@ const resolvers = {
 
       return updatedUser;
     },
+
+    removeMealFromWeekPlan: async (_, { idMeal }, { user }) => {
+      if(!user) {
+        throw new AuthenticationError("You must be logged in");
+      };
+
+      const updatedUser = await User.findOneAndRemove(
+        { _id: user._id },
+        { $pull: { weekPlan: { recipeData: { idMeal: idMeal }}}},
+        { new: true }
+      );
+
+      return updatedUser;
+    },
   },
 };
 
