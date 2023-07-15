@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE } from "../../utils/mutations";
-import ShoppingList from '../../components/ShoppingList';
+import {ShoppingList} from '../../components/ShoppingList';
 
 const SingleRecipe = () => {
   const { id } = useParams();
