@@ -1,19 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Container,
-  FloatingLabel,
-  Form,
-  Image,
-  InputGroup,
-  ListGroup,
-  Row,
-  Tab,
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UPDATE_USER } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
@@ -42,16 +29,6 @@ function Profile() {
     return count;
   }, [userDataState?.savedRecipes]);
 
-  //  const [userDataState, setUserDataState] = useState();
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     setUserDataState(userData);
-  //   }
-  // }, [userData]);
-  // if (!userDataState) {
-  //   return <div>Loading...</div>;
-  // }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -77,19 +54,13 @@ function Profile() {
 
   return (
     <>
-      <Container
-        breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-        minBreakpoint="xxs"
-        className="p-3 container-fluid d-flex flex-column align-center"
-      >
+      <Container>
         <Row>
           <h1>Profile</h1>
         </Row>
         <Container>
-          <Row className="justify-content-center">
-            <Col
-              breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-            >
+          <Row>
+            <Col>
               <Col>
                 <Row>
                   <Container className="section">
@@ -104,7 +75,6 @@ function Profile() {
                                     className="mb-3"
                                     style={{
                                       background: {
-                                        backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover",
                                         backgroundImage: `url(${userDataState.avatar} }}`,
                                       },
@@ -143,7 +113,7 @@ function Profile() {
                         </Col>
                         <Col className="col col-md-8 col-lg-8 col-xl-8">
                           <Card>
-                            <Card.Header> Update User Information</Card.Header>
+                            <Card.Header>Update User Information</Card.Header>
                             <Card.Body>
                               <Container typeof="" className="container-fluid">
                                 <Row>
