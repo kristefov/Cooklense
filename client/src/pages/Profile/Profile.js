@@ -77,13 +77,19 @@ function Profile() {
 
   return (
     <>
-      <Container className="p-3 container-fluid d-flex flex-column align-center">
+      <Container
+        breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+        minBreakpoint="xxs"
+        className="p-3 container-fluid d-flex flex-column align-center"
+      >
         <Row>
           <h1>Profile</h1>
         </Row>
         <Container>
-          <Row>
-            <Col xs={8} md={10} lg={10}>
+          <Row className="justify-content-center">
+            <Col
+              breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+            >
               <Col>
                 <Row>
                   <Container className="section">
