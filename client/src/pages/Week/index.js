@@ -10,19 +10,17 @@ import { useQuery, useMutation } from "@apollo/client";
 
 const WeekPlan = () => {
   const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  const { data } = useQuery(GET_ME);
-  const [removeMealFromWeekPlan] = useMutation(REMOVE_MEAL_FROM_WEEKPLAN);
   const [savedWeekPlan, setSavedWeekPlan] = useState([]);
+  const { loading, data } = useQuery(GET_ME, { fetchPolicy: "network-only" });
+  const [removeMealFromWeekPlan] = useMutation(REMOVE_MEAL_FROM_WEEKPLAN);
 
   useEffect(() => {
-    if (data && data.me && data.me.weekPlan) {
+    if (!loading && data && data.me && data.me.weekPlan) {
       setSavedWeekPlan(data.me.weekPlan);
-      console.log(savedWeekPlan);
     }
-  }, [data, savedWeekPlan]);
+  }, [loading, data]);
 
   const handleRemoveMeal = async (idMeal) => {
-    console.log(data);
     try {
       await removeMealFromWeekPlan({
         variables: {
@@ -76,6 +74,10 @@ const WeekPlan = () => {
       </div>
     );
   });
+
+  if (loading) {
+    return <p>Loading...</p>; // Render a loading indicator while data is being fetched
+  }
 
   return (
     <Container fluid>
