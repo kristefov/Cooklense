@@ -13,7 +13,10 @@ const SearchResults = () => {
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const { pathname } = useLocation();
-  const showFilters = pathname.includes('category') || pathname.includes('cuisine') ? false : true;
+  const showFilters =
+    pathname.includes("category") || pathname.includes("cuisine")
+      ? false
+      : true;
   // const auth = useSelector(state => state.auth)
 
   useEffect(() => {
@@ -58,12 +61,12 @@ const SearchResults = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className="justify-content-center">
         {showFilters ? (
           <Col sm={3}>
-          <h2 className="pt-3">Options:</h2>
-          <SearchFilter onClick={handleFilterClick} />
-        </Col>
+            <h2 className="pt-3">Options:</h2>
+            <SearchFilter onClick={handleFilterClick} />
+          </Col>
         ) : null}
         <Col sm={9}>
           {filteredResults.length ? (
