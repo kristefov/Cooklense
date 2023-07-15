@@ -38,7 +38,6 @@ const options = {
 };
 
 const SearchFilter = ({ onClick }) => {
-    
   return (
     <Container>
       <Form>
