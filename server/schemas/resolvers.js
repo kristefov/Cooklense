@@ -24,9 +24,12 @@ const resolvers = {
     },
 
     updateUser: async (parent, { userData }, context) => {
-      if(!context.user) throw new AuthenticationError("You must be logged in")
-      const user = await User.findByIdAndUpdate(context.user._id, userData, {runValidators: true, new: true});
-      return user
+      if (!context.user) throw new AuthenticationError("You must be logged in");
+      const user = await User.findByIdAndUpdate(context.user._id, userData, {
+        runValidators: true,
+        new: true,
+      });
+      return user;
     },
     loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -65,6 +68,20 @@ const resolvers = {
       const updatedUser = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $pull: { savedRecipes: { idMeal: idMeal } } },
+        { new: true }
+      );
+
+      return updatedUser;
+    },
+
+    addToWeekPlan: async (_, { day, recipeData }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError("You must be logged in");
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        { _id: user._id },
+        { $addToSet: { weekPlan: { day: day, recipeData: recipeData } } },
         { new: true }
       );
 
