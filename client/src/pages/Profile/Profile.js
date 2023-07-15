@@ -1,19 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Container,
-  FloatingLabel,
-  Form,
-  Image,
-  InputGroup,
-  ListGroup,
-  Row,
-  Tab,
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UPDATE_USER } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
@@ -42,16 +29,6 @@ function Profile() {
     return count;
   }, [userDataState?.savedRecipes]);
 
-  //  const [userDataState, setUserDataState] = useState();
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     setUserDataState(userData);
-  //   }
-  // }, [userData]);
-  // if (!userDataState) {
-  //   return <div>Loading...</div>;
-  // }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -77,13 +54,13 @@ function Profile() {
 
   return (
     <>
-      <Container className="p-3 container-fluid d-flex flex-column align-center">
+      <Container>
         <Row>
           <h1>Profile</h1>
         </Row>
         <Container>
           <Row>
-            <Col xs={8} md={10} lg={10}>
+            <Col>
               <Col>
                 <Row>
                   <Container className="section">
@@ -98,7 +75,6 @@ function Profile() {
                                     className="mb-3"
                                     style={{
                                       background: {
-                                        backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover",
                                         backgroundImage: `url(${userDataState.avatar} }}`,
                                       },
@@ -128,18 +104,6 @@ function Profile() {
                                         </p>
                                         <p className="mb-0">{count}</p>
                                       </Col>
-                                      <Col className="px-3">
-                                        <p className="small text-muted mb-1">
-                                          Favorites
-                                        </p>
-                                        <p className="mb-0">976</p>
-                                      </Col>
-                                      <Col>
-                                        <p className="small text-muted mb-1">
-                                          Activity %
-                                        </p>
-                                        <p className="mb-0">8.5</p>
-                                      </Col>
                                     </Col>
                                   </Col>
                                 </Col>
@@ -149,7 +113,7 @@ function Profile() {
                         </Col>
                         <Col className="col col-md-8 col-lg-8 col-xl-8">
                           <Card>
-                            <Card.Header> Update User Information</Card.Header>
+                            <Card.Header>Update User Information</Card.Header>
                             <Card.Body>
                               <Container typeof="" className="container-fluid">
                                 <Row>
@@ -167,7 +131,6 @@ function Profile() {
                                         placeholder={userDataState.firstName}
                                         autoComplete="off"
                                         name="firstName"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -180,7 +143,6 @@ function Profile() {
                                         placeholder={userDataState.lastName}
                                         name="lastName"
                                         autoComplete="off"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -196,7 +158,6 @@ function Profile() {
                                         autoComplete="off"
                                         placeholder={userDataState.username}
                                         name="username"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -212,7 +173,6 @@ function Profile() {
                                         name="email"
                                         type="email"
                                         placeholder={userDataState.email}
-                                        required
                                       />
 
                                       <Form.Control.Feedback type="invalid">
@@ -226,7 +186,6 @@ function Profile() {
                                         name="password"
                                         type="password"
                                         placeholder="Password"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -236,7 +195,6 @@ function Profile() {
                                         name="confirmPassword"
                                         type="password"
                                         placeholder="Confirm Password"
-                                        required
                                       />
                                     </Form.Group>
 
@@ -244,24 +202,14 @@ function Profile() {
                                       <Form.Label htmlFor="avatar">
                                         Avatar
                                       </Form.Label>
-                                      <Col className="d-flex">
-                                        <Form.Control
-                                          type="text"
-                                          placeholder={userDataState.avatar}
-                                          name="avatar"
-                                          value={userDataState.avatar}
-                                        />
-                                        <Image
-                                          width="64px"
-                                          className="img-fluid w-25"
-                                          height="64px"
-                                          src={userDataState.avatar}
-                                        />
-                                      </Col>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder="Avatar"
+                                        name="avatar"
+                                      />
                                     </Form.Group>
-                                    <Col className="mb-3 col-xs-12 col-md-6 col-lg-6 px-3">
-                                      <Button type="submit">Save</Button>
-                                    </Col>
+
+                                    <Button type="submit">Save</Button>
                                   </Form>
                                 </Row>
                               </Container>

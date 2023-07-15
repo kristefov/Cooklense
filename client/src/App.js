@@ -21,8 +21,8 @@ import Home from "./pages/Home";
 import SingleRecipe from "./pages/SingleRecipe";
 import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
-import BreadCrumbsiteComponent from "./components/BreadCrumbs";
-import Week from './pages/Week';
+
+import Week from "./pages/Week";
 import Profile from "./pages/Profile/Profile";
 import ShoppingList from './pages/ShoppingList';
 
@@ -64,7 +64,7 @@ function App() {
     <ApolloProvider client={client}>
       <>
         <Navbar />
-        <BreadCrumbsiteComponent />
+
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
