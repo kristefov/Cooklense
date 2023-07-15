@@ -85,7 +85,7 @@ export const ADD_TO_WEEKPLAN = gql`
 
 export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
   mutation removeMealFromWeekPlan($idMeal: String) {
-    mutationName(idMeal: $idMeal) {
+    removeMealFromWeekPlan(idMeal: $idMeal) {
       username
       weekPlan {
         day
@@ -104,6 +104,15 @@ export const ADD_TO_SHOPPING_LIST = gql`
     addToShoppingList(ingredients: $ingredients) {
       _id
       username
+      shoppingList
+    }
+  }
+`;
+
+export const REMOVE_INGREDIENT_FROM_SHOPPING_LIST = gql`
+  mutation removeIngredientFromShoppingList($ingredient: String!) {
+    removeIngredientFromShoppingList(ingredient: $ingredient) {
+      _id
       shoppingList
     }
   }
