@@ -61,18 +61,18 @@ const resolvers = {
       return updatedUser;
     },
 
-    removeRecipe: async (parent, { idMeal }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError("You must be logged in");
-      }
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { savedRecipes: { idMeal: idMeal } } },
-        { new: true }
-      );
+    // removeRecipe: async (parent, { idMeal }, context) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError("You must be logged in");
+    //   }
+    //   const updatedUser = await User.findOneAndUpdate(
+    //     { _id: context.user._id },
+    //     { $pull: { savedRecipes: { idMeal: idMeal } } },
+    //     { new: true }
+    //   );
 
-      return updatedUser;
-    },
+    //   return updatedUser;
+    // },
 
     addToWeekPlan: async (_, { day, recipeData }, { user }) => {
       if (!user) {
