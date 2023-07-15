@@ -115,6 +115,13 @@ const SingleRecipe = () => {
           </Card.Footer>
         </Card>
       )}
+      
+      {isLoggedIn && (
+        <ShoppingList
+          shoppingList={ingredients.map((ingredient) => ingredient.ingredient)}
+          setShoppingList={setIngredients}
+        />
+      )}
     </Container>
   );
 };
