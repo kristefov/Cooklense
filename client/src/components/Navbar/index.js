@@ -7,9 +7,6 @@ import {
   Container,
   Modal,
   Tab,
-  Col,
-  Row,
-  BreadcrumbItem,
 } from "react-bootstrap";
 import SignUpForm from "../SignupForm";
 import LoginForm from "../LoginForm";
@@ -34,15 +31,15 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to="/">
                 Search For Recipes
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
               {auth.isLoggedIn ? (
                 <>
                   <Nav.Link as={Link} to="/profile">
                     Profile
                   </Nav.Link>
                   <Nav.Link as={Link} to="/week">
-                    week
+                    Week Plan
                   </Nav.Link>
+                  <Nav.Link as={Link} to='/list'>Shopping List</Nav.Link>
                   <Nav.Link as={Link} to="/collections">
                     Collections
                   </Nav.Link>
