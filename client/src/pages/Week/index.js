@@ -1,75 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
+import { GET_ME } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
-const week = {
-  MON: [
-    {
-      idMeal: 52795,
-      strMeal: "Chicken Handi",
-    },
-    {
-      idMeal: 4124,
-      strMeal: "pierogi",
-    },
-  ],
-  THU: [
-    {
-      idMeal: 5141,
-      strMeal: "beef",
-    },
-  ],
-};
-
-const HorizontalScrollableWindow = () => {
+const WeekPlan = () => {
   const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const { data } = useQuery(GET_ME);
+  const [savedWeekPlan, setSavedWeekPlan] = useState([]);
 
-  const [selectedDay, setSelectedDay] = useState(null);
+  useEffect(() => {
+    if (data && data.me && data.me.weekPlan) {
+      setSavedWeekPlan(data.me.weekPlan);
+    }
+  }, [data]);
 
-  const handleMoveToDay = (mealId, targetDay) => {
-    console.log(`Moving meal with id ${mealId} to ${targetDay}`);
-  };
 
   const handleRemoveMeal = (mealId) => {
     console.log(`Removing meal with id ${mealId}`);
   };
 
-  const mealItems = (meals, weekday) =>
-    meals.map((meal) => (
-      <div className="meal-item" key={meal.idMeal}>
-        <Link
-          to={`/recipe/${meal.idMeal}`}
-          style={{ textDecoration: "none", color: "black" }}
-          className="meal-link"
+  const mealItems = (meals) =>
+  meals.map((meal, index) => (
+    <div className="meal-item" key={index}>
+      <Link
+        to={`/recipe/${meal.idMeal}`}
+        style={{ textDecoration: "none", color: "black" }}
+        className="meal-link"
+      >
+        <p className="mt-1">{meal.strMeal}</p>
+      </Link>
+
+      <div className="meal-item-buttons">
+        <Button
+          variant="danger"
+          onClick={() => handleRemoveMeal(meal.idMeal)}
         >
-          <p className="mt-1">{meal.strMeal}</p>
-        </Link>
-
-        <div className="meal-item-buttons">
-          <Button
-            variant="danger"
-            onClick={() => handleRemoveMeal(meal.idMeal)}
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </Button>
-          {/* <Button variant="primary" onClick={() => handleMoveToDay(meal.idMeal, weekday)}>
-          <FontAwesomeIcon icon={faArrowRight} />
-        </Button> */}
-        </div>
-      </div>
-    ));
-
-  const columns = weekdays.map((weekday, index) => (
-    <div className="column" key={index}>
-      <div className="column-header">{weekday}</div>
-      <div className="card-content">
-        {mealItems(week[weekday] || [], weekday)}
+          <FontAwesomeIcon icon={faTimes} />
+        </Button>
       </div>
     </div>
   ));
+
+
+  const columns = weekdays.map((weekday, index) => {
+    const mealsByDay = savedWeekPlan.filter((meal) => meal.day === weekday).flatMap((meal) => meal.recipeData);
+    return (
+      <div className="column" key={index}>
+        <div className="column-header">{weekday}</div>
+        <div className="card-content">
+          {mealsByDay.length > 0 && mealItems(mealsByDay)}
+        </div>
+      </div>
+    );
+  });
 
   return (
     <Container fluid>
@@ -80,4 +67,4 @@ const HorizontalScrollableWindow = () => {
   );
 };
 
-export default HorizontalScrollableWindow;
+export default WeekPlan;
