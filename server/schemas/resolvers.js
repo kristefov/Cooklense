@@ -101,6 +101,19 @@ const resolvers = {
 
       return updatedUser;
     },
+    addToShoppingList: async (_, { ingredients }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError("You must be logged in");
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        { _id: user._id },
+        { $addToSet: { shoppingList: { $each: ingredients } } },
+        { new: true }
+      );
+
+      return updatedUser;
+    },
   },
 };
 

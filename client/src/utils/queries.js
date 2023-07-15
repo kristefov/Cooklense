@@ -14,6 +14,7 @@ export const GET_ME = gql`
         strMeal
         strMealThumb
       }
+      shoppingList
       weekPlan {
         day
         recipeData {

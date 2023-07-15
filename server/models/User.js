@@ -31,6 +31,10 @@ const userSchema = new Schema({
     type: String,
   },
   savedRecipes: [recipeSchema],
+  shoppingList: {
+    type: [String],
+    default: [],
+  },
   weekPlan: [
     {
       day: {

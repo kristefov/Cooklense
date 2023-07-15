@@ -15,6 +15,7 @@ const typeDefs = gql`
     avatar: String
     savedRecipes: [Recipe]
     weekPlan: [WeekPlanDay]
+    shoppingList: [String]
   }
 
   type WeekPlanDay {
@@ -55,6 +56,7 @@ const typeDefs = gql`
     updateUser(userData: UserInput!): User
     addToWeekPlan(day: String!, recipeData: RecipeInput!): User
     removeMealFromWeekPlan(idMeal: String): User
+    addToShoppingList(ingredients: [String!]!): User
   }
 `;
 module.exports = typeDefs;

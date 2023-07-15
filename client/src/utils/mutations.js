@@ -98,3 +98,13 @@ export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
     }
   }
 `;
+
+export const ADD_TO_SHOPPING_LIST = gql`
+  mutation addToShoppingList($ingredients: [String!]!) {
+    addToShoppingList(ingredients: $ingredients) {
+      _id
+      username
+      shoppingList
+    }
+  }
+`;
