@@ -20,18 +20,19 @@ const WeekPlan = () => {
     }
   }, [loading, data]);
 
-  const handleRemoveMeal = async (idMeal) => {
+  const handleRemoveMeal = async (id) => {
     try {
-      await removeMealFromWeekPlan({
+      const res = await removeMealFromWeekPlan({
         variables: {
-          idMeal: idMeal,
+          _id: id,
         },
       });
-
-      const updatedWeekPlan = savedWeekPlan.filter(
-        (meal) => meal.idMeal !== idMeal
-      );
-      setSavedWeekPlan(updatedWeekPlan);
+      console.log(res.data.removeMealFromWeekPlan.weekPlan);
+      // const updatedWeekPlan = savedWeekPlan.filter(
+      //   (meal) => meal.idMeal !== idMeal
+      // );
+      // console.log(updatedWeekPlan);
+      setSavedWeekPlan(res.data.removeMealFromWeekPlan.weekPlan);
     } catch (error) {
       console.log("Error removing meal:", error);
     }
@@ -51,10 +52,7 @@ const WeekPlan = () => {
         </Link>
 
         <div className="meal-item-buttons">
-          <Button
-            variant="danger"
-            onClick={() => handleRemoveMeal(meal.idMeal)}
-          >
+          <Button variant="danger" onClick={() => handleRemoveMeal(meal._id)}>
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </div>

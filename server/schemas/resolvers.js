@@ -88,18 +88,26 @@ const resolvers = {
       return updatedUser;
     },
 
-    removeMealFromWeekPlan: async (_, { idMeal }, context) => {
-      if (!context.user) {
+    removeMealFromWeekPlan: async (parent, { _id }, { user }) => {
+      if (!user) {
         throw new AuthenticationError("You must be logged in");
       }
 
-      const updatedUser = await User.findOneAndRemove(
-        { _id: user._id },
-        { $pull: { weekPlan: { recipeData: { idMeal: idMeal } } } },
-        { new: true }
-      );
+      console.log("_id", _id);
+      const userToUpdate = await User.findById(user._id);
 
-      return updatedUser;
+      if (userToUpdate.weekPlan) {
+        for (const weekPlanDay of userToUpdate.weekPlan) {
+          weekPlanDay.recipeData = weekPlanDay.recipeData.filter(
+            (recipe) => recipe._id != _id
+          );
+        }
+        await userToUpdate.save();
+      }
+
+      console.log(userToUpdate);
+
+      return userToUpdate;
     },
 
     addToShoppingList: async (_, { ingredients }, { user }) => {
