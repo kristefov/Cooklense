@@ -21,8 +21,10 @@ import Home from "./pages/Home";
 import SingleRecipe from "./pages/SingleRecipe";
 import SearchResults from "./pages/SearchResults";
 import Collections from "./pages/Collections";
-import BreadCrumbsiteComponent from "./components/BreadCrumbs";
+
+import Week from "./pages/Week";
 import Profile from "./pages/Profile/Profile";
+import ShoppingList from './pages/ShoppingList';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -62,7 +64,7 @@ function App() {
     <ApolloProvider client={client}>
       <>
         <Navbar />
-        <BreadCrumbsiteComponent />
+
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
@@ -72,6 +74,8 @@ function App() {
             Component={SearchResults}
           />
           <Route path="/collections" Component={Collections} />
+          <Route path='/week' Component={Week} />
+          <Route path='/list' Component={ShoppingList} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
       </>

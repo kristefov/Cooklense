@@ -12,6 +12,7 @@ import {
   FormControl,
   Alert,
 } from "react-bootstrap";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 const mainSearchOptions = [
   { value: "name", label: "Search by Name" },
@@ -64,24 +65,32 @@ const Home = () => {
 
   return (
     <>
-      <Container style={{ marginTop: "10vh" }}>
-        <h1>Search for recipes!</h1>
+      <h1 className="text-center"> Search for recipes!</h1>
+      <Container
+        className="justify-content-center align-items-center h-100"
+        style={{ marginTop: "10vh", height: "50vh" }}
+      >
         <Form>
           <Row>
-            <Col xs={12} md={8}>
+            <Row xs={12} md={8}>
               <InputGroup>
                 <FormControl
                   name="searchInput"
                   type="text"
-                  style={{ width: "50%" }}
+                  style={{ width: "60%" }}
                   size="lg"
                   placeholder="Search for a recipe"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
-
-                <Form.Control
-                  as="select"
+                <Link to={`/search/${dropdownValue}/${searchInput}`}>
+                  <Button type="submit" size="lg">
+                    Search
+                  </Button>
+                </Link>
+              </InputGroup>
+              <InputGroup>
+                <Form.Select
                   size="lg"
                   style={{ color: "gray" }}
                   value={dropdownValue}
@@ -92,16 +101,34 @@ const Home = () => {
                       {option.label}
                     </option>
                   ))}
-                </Form.Control>
+                </Form.Select>
+                <Form.Select
+                  aria-label="Floating label select example"
+                  value={selectedCountry}
+                  onChange={handleCountryChange}
+                >
+                  <option value="">Select a cuisine</option>
+                  {allCountries.map((country, index) => (
+                    <option key={index} value={country.strArea}>
+                      {country.strArea}
+                    </option>
+                  ))}
+                </Form.Select>
+
+                <Form.Select
+                  aria-label="Floating label select example"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">Select a category</option>
+                  {allCategories.map((category, index) => (
+                    <option key={index} value={category.strCategory}>
+                      {category.strCategory}
+                    </option>
+                  ))}
+                </Form.Select>
               </InputGroup>
-            </Col>
-            <Col xs={12} md={4}>
-              <Link to={`/search/${dropdownValue}/${searchInput}`}>
-                <Button type="submit" size="lg">
-                  Search
-                </Button>
-              </Link>
-            </Col>
+            </Row>
           </Row>
           {showAlert && (
             <Alert
@@ -114,29 +141,6 @@ const Home = () => {
             </Alert>
           )}
         </Form>
-        <Row>
-          <Col xs={12} md={8}>
-            <div>
-              <select value={selectedCountry} onChange={handleCountryChange}>
-                <option value="">Select a cuisine</option>
-                {allCountries.map((country, index) => (
-                  <option key={index} value={country.strArea}>
-                    {country.strArea}
-                  </option>
-                ))}
-              </select>
-
-              <select value={selectedCategory} onChange={handleCategoryChange}>
-                <option value="">Select a category</option>
-                {allCategories.map((category, index) => (
-                  <option key={index} value={category.strCategory}>
-                    {category.strCategory}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </Col>
-        </Row>
       </Container>
     </>
   );

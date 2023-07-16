@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Container, Row, Col, Card, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchFilter from "../../components/SearchFilter";
@@ -12,6 +12,8 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
+  const { pathname } = useLocation();
+  const showFilters = pathname.includes("name") ? true : false;
   // const auth = useSelector(state => state.auth)
 
   useEffect(() => {
@@ -56,11 +58,13 @@ const SearchResults = () => {
 
   return (
     <Container>
-      <Row>
-        <Col sm={3}>
-          <h2 className="pt-3">Options:</h2>
-          <SearchFilter onClick={handleFilterClick} />
-        </Col>
+      <Row className="justify-content-center">
+        {showFilters ? (
+          <Col sm={3}>
+            <h2 className="pt-3">Options:</h2>
+            <SearchFilter onClick={handleFilterClick} />
+          </Col>
+        ) : null}
         <Col sm={9}>
           {filteredResults.length ? (
             <Container>

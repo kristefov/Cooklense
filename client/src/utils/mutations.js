@@ -39,13 +39,13 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($recipeData: RecipeInput!) {
     saveRecipe(recipeData: $recipeData) {
-      _id
       username
+      _id
       savedRecipes {
-        _id
         idMeal
         strMeal
         strMealThumb
@@ -54,16 +54,67 @@ export const SAVE_RECIPE = gql`
   }
 `;
 export const REMOVE_RECIPE = gql`
-  mutation removeRecipe($recipeId: String!) {
-    removeRecipe(recipeId: $recipeId) {
+  mutation removeRecipe($idMeal: String!) {
+    removeRecipe(idMeal: $idMeal) {
       username
-      recipeCount
+      _id
       savedRecipes {
-        _id
         idMeal
         strMeal
         strMealThumb
       }
+    }
+  }
+`;
+
+export const ADD_TO_WEEKPLAN = gql`
+  mutation AddToWeekPlan($day: String!, $recipeData: RecipeInput!) {
+    addToWeekPlan(day: $day, recipeData: $recipeData) {
+      username
+      weekPlan {
+        day
+        recipeData {
+          idMeal
+          strMeal
+          strMealThumb
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
+  mutation removeMealFromWeekPlan($_id: ID) {
+    removeMealFromWeekPlan(_id: $_id) {
+      username
+      weekPlan {
+        day
+        recipeData {
+          _id
+          idMeal
+          strMeal
+          strMealThumb
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_TO_SHOPPING_LIST = gql`
+  mutation addToShoppingList($ingredients: [String!]!) {
+    addToShoppingList(ingredients: $ingredients) {
+      _id
+      username
+      shoppingList
+    }
+  }
+`;
+
+export const REMOVE_INGREDIENT_FROM_SHOPPING_LIST = gql`
+  mutation removeIngredientFromShoppingList($ingredient: String!) {
+    removeIngredientFromShoppingList(ingredient: $ingredient) {
+      _id
+      shoppingList
     }
   }
 `;

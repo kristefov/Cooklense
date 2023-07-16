@@ -6,10 +6,23 @@ import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { recipeSearch } from "../../utils/API";
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVE_RECIPE } from "../../utils/mutations";
+import {
+  ADD_TO_WEEKPLAN,
+  SAVE_RECIPE,
+  ADD_TO_SHOPPING_LIST,
+} from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
 import { appendIngredients } from "../../utils/appendIngredients";
 
+const weekDays = [
+  { value: "MON", label: "Monday" },
+  { value: "TUE", label: "Tuesday" },
+  { value: "WED", label: "Wednesday" },
+  { value: "THU", label: "Thursday" },
+  { value: "FRI", label: "Friday" },
+  { value: "SAT", label: "Saturday" },
+  { value: "SUN", label: "Sunday" },
+];
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -17,6 +30,8 @@ const SingleRecipe = () => {
   const [ingredients, setIngredients] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [saveRecipe] = useMutation(SAVE_RECIPE);
+  const [addToDay] = useMutation(ADD_TO_WEEKPLAN);
+  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST);
   const { data } = useQuery(GET_ME);
   const [youTubeLink, setYouTubeLink] = useState();
 
@@ -38,7 +53,6 @@ const SingleRecipe = () => {
             ingredients.push({ ingredient, measure });
           }
         }
-
         const recipeWithIngredients = appendIngredients([recipe])[0];
 
         setSelectedRecipe(recipeWithIngredients);
@@ -69,15 +83,46 @@ const SingleRecipe = () => {
         variables: { recipeData: { idMeal, strMeal, strMealThumb } },
       });
     } catch (error) {
-      throw new error();
+      throw new Error(error);
+    }
+  };
+
+  const handleAddToDay = async (e) => {
+    const choosenDay = e.target.value;
+    const { idMeal, strMeal, strMealThumb } = selectedRecipe;
+
+    console.log(idMeal, "\n", strMeal, "\n", strMealThumb);
+    try {
+      await addToDay({
+        variables: {
+          day: choosenDay,
+          recipeData: { idMeal, strMeal, strMealThumb },
+        },
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+    return;
+  };
+
+  const handleAddToShoppingList = async () => {
+    const updatedIngredientList = ingredients.map(({ measure, ingredient }) => `${measure} ${ingredient}`);
+    console.log(updatedIngredientList)
+    try {
+      await addToShoppingList({
+        variables: {
+          ingredients: [...updatedIngredientList],
+        },
+      });
+      console.log("Item added to shopping list");
+    } catch (error) {
+      console.error("Error adding item to shopping list:", error);
     }
   };
 
   return (
-
     <Container className="my-4">
       {selectedRecipe && (
-   
         <Card>
           <Row>
             <Col md={4}>
@@ -92,7 +137,7 @@ const SingleRecipe = () => {
                 <Card.Title>{selectedRecipe.strMeal}</Card.Title>
                 {isLoggedIn && (
                   <>
-                    <Button>
+                    <Button onClick={handleAddToShoppingList}>
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
                     {isRecipeSaved ? (
@@ -104,6 +149,16 @@ const SingleRecipe = () => {
                         <FontAwesomeIcon icon={faPlus} /> Add to collection
                       </Button>
                     )}
+                    <div>
+                      <select onChange={handleAddToDay}>
+                        <option value="">Add to week plan</option>
+                        {weekDays.map(({ value, label }) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </>
                 )}
                 <Table striped bordered>
@@ -144,11 +199,7 @@ const SingleRecipe = () => {
             </Row>
           </Container>
         </Card>
-
-    
-      ) 
-      }
-
+      )}
     </Container>
   );
 };
