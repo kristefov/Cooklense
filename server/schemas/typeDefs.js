@@ -45,8 +45,29 @@ const typeDefs = gql`
     avatar: String
   }
 
+  type Review {
+    _id: ID
+    idMeal: String
+    username: String
+    rating: Int
+    title: String
+    comment: String
+  }
+
+  input ReviewInput {
+    idMeal: String
+    username: String
+    rating: Int
+    title: String
+    comment: String
+  }
+
   type Query {
     me: User!
+  }
+
+  type Query {
+    getReview(idMeal: String!): Review
   }
 
   type Mutation {
@@ -59,6 +80,7 @@ const typeDefs = gql`
     removeMealFromWeekPlan(_id: ID): User
     addToShoppingList(ingredients: [String!]!): User
     removeIngredientFromShoppingList(ingredient: String!): User
+    createReview(reviewData: ReviewInput!): Review
   }
 `;
 module.exports = typeDefs;
