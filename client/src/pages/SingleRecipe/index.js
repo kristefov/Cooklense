@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { Container, Row, Col, Card, Table, Button, Tab, Tabs } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
-import { recipeSearch } from "../../utils/API";
+
 import { useMutation, useQuery } from "@apollo/client";
 import {
   ADD_TO_WEEKPLAN,
@@ -12,7 +13,10 @@ import {
   ADD_TO_SHOPPING_LIST,
 } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
+
 import { appendIngredients } from "../../utils/appendIngredients";
+import { recipeSearch } from "../../utils/API";
+import ReviewTab from "../../components/ReviewTab";
 
 const weekDays = [
   { value: "MON", label: "Monday" },
@@ -198,7 +202,7 @@ const SingleRecipe = () => {
                     </Card>
                   </Tab>
                   <Tab eventKey="reviews" title="Reviews">
-                    <p>Reviews content goes here</p>
+                    <ReviewTab />
                   </Tab>
                 </Tabs>
               </Card.Body>
