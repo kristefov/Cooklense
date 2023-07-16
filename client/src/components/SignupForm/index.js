@@ -86,7 +86,7 @@ const SignupForm = ({ handleModalClose }) => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate autoComplete="off" validated={validated} onSubmit={handleFormSubmit} className="d-flex flex-row flex-wrap">
         {/* show alert if server response is bad */}
         <Alert
           dismissible
@@ -96,36 +96,44 @@ const SignupForm = ({ handleModalClose }) => {
         >
           Something went wrong with your signup!
         </Alert>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="firstName">First Name</Form.Label>
+        <Form.Group className="mb-1 w-50 p-2" >
+        <FloatingLabel
+            htmlFor="firstname"
+            label="Your Firstname"
+            className="mb-3"
+          >
           <Form.Control
             type="text"
             placeholder="Your First Name"
             name="firstName"
             onChange={handleInputChange}
-            value={userFormData.firstName}
             required
           />
+          </FloatingLabel>
           <Form.Control.Feedback type="invalid">
             First Name is required!
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="lastName">Last Name</Form.Label>
+        <Form.Group className="mb-1 w-50 p-2">
+        <FloatingLabel
+            htmlFor="lastname"
+            label="Your Lastname"
+            className="mb-3"
+          >
           <Form.Control
             type="text"
             placeholder="Your Last Name"
             name="lastName"
             onChange={handleInputChange}
-            value={userFormData.lastName}
             required
           />
+        </FloatingLabel>
           <Form.Control.Feedback type="invalid">
             Last Name is required!
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-1 w-50 p-2">
           <FloatingLabel
             htmlFor="username"
             label="Your Username"
@@ -136,8 +144,7 @@ const SignupForm = ({ handleModalClose }) => {
               placeholder="Your username"
               name="username"
               onChange={handleInputChange}
-              value={userFormData.username}
-              required
+               required
             />
           </FloatingLabel>
           <Form.Control.Feedback type="invalid">
@@ -145,15 +152,14 @@ const SignupForm = ({ handleModalClose }) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <FloatingLabel htmlFor="email" label="Email address" className="mb-3">
+        <Form.Group className="mb-1 w-50 p-2">
+          <FloatingLabel htmlFor="email" label="Email address" className="mb-1">
             <Form.Control
               name="email"
               type="email"
               placeholder="name@example.com"
               onChange={handleInputChange}
-              value={userFormData.email}
-              required
+                      required
             />
           </FloatingLabel>
           <Form.Control.Feedback type="invalid">
@@ -161,35 +167,68 @@ const SignupForm = ({ handleModalClose }) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Floating>
+        <Form.Group className="mb-1 p-2 w-50">
+
+        <FloatingLabel
+            htmlFor="password"
+            label="Password"
+            className="mb-3"
+          >
             <Form.Control
               name="password"
               type="password"
               placeholder="Password"
               onChange={handleInputChange}
-              value={userFormData.password}
-              required
+                          required
             />
-          </Form.Floating>
+      </FloatingLabel>
           <Form.Control.Feedback type="invalid">
             Password is required!
           </Form.Control.Feedback>
         </Form.Group>
+        <Form.Group className="mb-1 p-2 w-50">
 
-        <Form.Group className="mb-3">
+        <FloatingLabel
+            htmlFor="password"
+            label="Password"
+            className="mb-3"
+          >
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+                          required
+            />
+      </FloatingLabel>
+          <Form.Control.Feedback type="invalid">
+            Password is required!
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-1 p-2 w-50">
           <Form.Label htmlFor="avatar">Avatar</Form.Label>
           <Form.Control
+     
             type="text"
             placeholder="Avatar"
             name="avatar"
             onChange={handleInputChange}
-            value={userFormData.avatar}
-            required
+                  required
           />
         </Form.Group>
-
-        <Button
+        <Form.Group className="mb-1 p-2 w-50">
+          <Form.Label htmlFor="avatar">File for Avatar</Form.Label>
+          <Form.Control
+     
+            type="file"
+            placeholder="Avatar"
+            name="avatar"
+            onChange={handleInputChange}
+                  
+          />
+        </Form.Group>
+        <Form.Group className="mb-1 p-2 col-12">
+        <Button className="w-100"
           disabled={
             !(
               userFormData.firstName &&
@@ -200,10 +239,11 @@ const SignupForm = ({ handleModalClose }) => {
             )
           }
           type="submit"
-          variant="success"
+          variant="primary"
         >
           Submit
         </Button>
+      </Form.Group>
       </Form>
     </>
   );

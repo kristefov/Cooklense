@@ -54,7 +54,7 @@ function Profile() {
 
   return (
     <>
-      <Container>
+      <Container as="main" className="h-100 mt-5 mb-5 px-5">
         <Row>
           <h1>Profile</h1>
         </Row>
