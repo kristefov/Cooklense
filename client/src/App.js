@@ -14,7 +14,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-
+import { Container, Row, Col } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -25,7 +25,6 @@ import Collections from "./pages/Collections";
 import Week from "./pages/Week";
 import Profile from "./pages/Profile/Profile";
 import ShoppingList from './pages/ShoppingList';
-
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -63,8 +62,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <>
+      <Container as="main" className="header">
         <Navbar />
-
+        <Container as="body" className="d-flex bodsyy mt-5 mb-5 py-0 align-items-center" style={{ minHeight: "768px" }}>
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/recipe/:id" Component={SingleRecipe} />
@@ -78,6 +78,9 @@ function App() {
           <Route path='/list' Component={ShoppingList} />
           <Route element={<h1 className="display-2">Wrong page!</h1>} />
         </Routes>
+
+        </Container>
+        </Container>
       </>
 
       <Footer />

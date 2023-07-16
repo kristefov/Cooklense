@@ -65,6 +65,7 @@ const Home = () => {
 
   return (
     <>
+    <Container as="main" className="h-100 mt-5 mb-5 px-5">
       <h1 className="text-center"> Search for recipes!</h1>
       <Container
         className="justify-content-center align-items-center h-100"
@@ -141,6 +142,7 @@ const Home = () => {
             </Alert>
           )}
         </Form>
+      </Container>
       </Container>
     </>
   );

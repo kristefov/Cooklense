@@ -131,7 +131,7 @@ const SingleRecipe = () => {
   };
 
   return (
-    <Container className="my-4">
+    <Container as="main" className="h-100 mt-5 mb-5 px-5">
       {selectedRecipe && (
         <Card>
           <Row>

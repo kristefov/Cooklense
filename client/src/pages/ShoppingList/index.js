@@ -34,7 +34,7 @@ const ShoppingList = () => {
   }
 
   return (
-    <Container className="d-flex justify-content-center">
+    <Container className="d-flex justify-content-center  mt-5 mb-5 px-5 "> 
       <div className="w-50">
         <h3 className="text-center">Saved Recipes</h3>
         {savedIngredients.length === 0 ? (
