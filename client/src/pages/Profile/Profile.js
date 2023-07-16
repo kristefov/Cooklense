@@ -85,7 +85,6 @@ function Profile() {
                                       src={userDataState.avatar}
                                       alt="Generic placeholder image"
                                       className="img-fluid"
-                                      roundedCircle
                                     />
                                   </Row>
                                   <Col className="flex-grow-1 ms-3">
@@ -224,8 +223,8 @@ function Profile() {
             </Col>
           </Row>
           <Row>
-            {userDataState?.savedRecipes?.map((meal) => (
-              <RecipeCard meal={meal} key={meal.id} />
+            {userDataState?.savedRecipes?.map((meal, i) => (
+              <RecipeCard meal={meal} key={i} />
             ))}
           </Row>
         </Container>
