@@ -16,7 +16,6 @@ const RecipeCard = ({ meal }) => {
   const location = useLocation();
   const path =
     location.pathname === "/profile" || location.pathname === "/collections";
-  console.log(recipeSaved);
 
   useEffect(() => {
     setUserRecipes(data?.me?.savedRecipes);
