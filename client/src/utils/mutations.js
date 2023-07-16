@@ -84,12 +84,13 @@ export const ADD_TO_WEEKPLAN = gql`
 `;
 
 export const REMOVE_MEAL_FROM_WEEKPLAN = gql`
-  mutation removeMealFromWeekPlan($idMeal: String) {
-    removeMealFromWeekPlan(idMeal: $idMeal) {
+  mutation removeMealFromWeekPlan($_id: ID) {
+    removeMealFromWeekPlan(_id: $_id) {
       username
       weekPlan {
         day
         recipeData {
+          _id
           idMeal
           strMeal
           strMealThumb

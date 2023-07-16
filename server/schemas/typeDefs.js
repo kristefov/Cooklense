@@ -20,10 +20,11 @@ const typeDefs = gql`
 
   type WeekPlanDay {
     day: String!
-    recipeData: [Recipe!]!
+    recipeData: [Recipe]
   }
 
   type Recipe {
+    _id: ID!
     idMeal: String
     strMeal: String
     strMealThumb: String
@@ -55,7 +56,7 @@ const typeDefs = gql`
     removeRecipe(idMeal: String!): User
     updateUser(userData: UserInput!): User
     addToWeekPlan(day: String!, recipeData: RecipeInput!): User
-    removeMealFromWeekPlan(idMeal: String): User
+    removeMealFromWeekPlan(_id: ID): User
     addToShoppingList(ingredients: [String!]!): User
     removeIngredientFromShoppingList(ingredient: String!): User
   }
