@@ -118,3 +118,15 @@ export const REMOVE_INGREDIENT_FROM_SHOPPING_LIST = gql`
     }
   }
 `;
+
+export const CREATE_REVIEW = gql`
+mutation createReview($reviewData: ReviewInput!) {
+  createReview(reviewData: $reviewData) {
+    idMeal
+    username
+    rating
+    title
+    comment
+  }
+}
+`;
