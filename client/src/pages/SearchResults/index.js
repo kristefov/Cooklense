@@ -13,10 +13,7 @@ const SearchResults = () => {
   const [loading, setLoading] = useState(true);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const { pathname } = useLocation();
-  const showFilters =
-    pathname.includes("category") || pathname.includes("cuisine")
-      ? false
-      : true;
+  const showFilters = pathname.includes("name") ? true : false;
   // const auth = useSelector(state => state.auth)
 
   useEffect(() => {
