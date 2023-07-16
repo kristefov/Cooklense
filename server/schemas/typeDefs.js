@@ -64,10 +64,7 @@ const typeDefs = gql`
 
   type Query {
     me: User!
-  }
-
-  type Query {
-    getReview(idMeal: String!): Review
+    getReviews(idMeal: String!): [Review]
   }
 
   type Mutation {
