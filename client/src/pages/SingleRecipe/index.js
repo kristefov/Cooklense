@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Table, Button, Tab, Tabs } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -34,6 +34,7 @@ const SingleRecipe = () => {
   const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST);
   const { data } = useQuery(GET_ME);
   const [youTubeLink, setYouTubeLink] = useState();
+  const [activeTab, setActiveTab] = useState("recipe");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,14 +89,14 @@ const SingleRecipe = () => {
   };
 
   const handleAddToDay = async (e) => {
-    const choosenDay = e.target.value;
+    const chosenDay = e.target.value;
     const { idMeal, strMeal, strMealThumb } = selectedRecipe;
 
     console.log(idMeal, "\n", strMeal, "\n", strMealThumb);
     try {
       await addToDay({
         variables: {
-          day: choosenDay,
+          day: chosenDay,
           recipeData: { idMeal, strMeal, strMealThumb },
         },
       });
@@ -106,8 +107,9 @@ const SingleRecipe = () => {
   };
 
   const handleAddToShoppingList = async () => {
-    const updatedIngredientList = ingredients.map(({ measure, ingredient }) => `${measure} ${ingredient}`);
-    console.log(updatedIngredientList)
+    const updatedIngredientList = ingredients.map(
+      ({ measure, ingredient }) => `${measure} ${ingredient}`
+    );
     try {
       await addToShoppingList({
         variables: {
@@ -118,6 +120,10 @@ const SingleRecipe = () => {
     } catch (error) {
       console.error("Error adding item to shopping list:", error);
     }
+  };
+
+  const handleTabSelect = (tab) => {
+    setActiveTab(tab);
   };
 
   return (
@@ -161,43 +167,50 @@ const SingleRecipe = () => {
                     </div>
                   </>
                 )}
-                <Table striped bordered>
-                  <thead>
-                    <tr>
-                      <th>Ingredients</th>
-                      <th>Measure</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ingredients.map((ingredient, index) => (
-                      <tr key={index}>
-                        <td>{ingredient.ingredient}</td>
-                        <td>{ingredient.measure}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                <Tabs activeKey={activeTab} onSelect={handleTabSelect} id="recipe-tabs">
+                  <Tab eventKey="recipe" title="Recipe">
+                    <Table striped bordered>
+                      <thead>
+                        <tr>
+                          <th>Ingredients</th>
+                          <th>Measure</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {ingredients.map((ingredient, index) => (
+                          <tr key={index}>
+                            <td>{ingredient.ingredient}</td>
+                            <td>{ingredient.measure}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Tab>
+                  <Tab eventKey="video" title="Video">
+                      <Card className="border border-true">
+                      <div className="ratio ratio-16x9">
+                        <iframe
+                          src={`${youTubeLink}?autoplay=1&mute=1&loop=1&modestbranding=1`}
+                          title="YouTube video"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </Card>
+                  </Tab>
+                  <Tab eventKey="reviews" title="Reviews">
+                    <p>Reviews content goes here</p>
+                  </Tab>
+                </Tabs>
               </Card.Body>
+              {activeTab === "recipe" && (
+                <Card.Footer>
+                  <small className="text-muted">
+                    {selectedRecipe.strInstructions}
+                  </small>
+                </Card.Footer>
+              )}
             </Col>
           </Row>
-          <Card.Footer>
-            <small className="text-muted">
-              {selectedRecipe.strInstructions}
-            </small>
-          </Card.Footer>
-          <Container>
-            <Row>
-              <Card className="border border-true">
-                <div className="ratio ratio-16x9">
-                  <iframe
-                    src={`${youTubeLink}?autoplay=1&mute=1&loop=1&modestbranding=1`}
-                    title="YouTube video"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </Card>
-            </Row>
-          </Container>
         </Card>
       )}
     </Container>
