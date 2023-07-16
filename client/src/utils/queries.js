@@ -27,3 +27,17 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_REVIEWS = gql`
+  query GetReviews($idMeal: String!) {
+    getReviews(idMeal: $idMeal) {
+      _id
+      idMeal
+      username
+      rating
+      title
+      comment
+    }
+  }
+`;
+

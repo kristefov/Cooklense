@@ -13,6 +13,12 @@ const resolvers = {
 
       return user;
     },
+
+    getReviews: async (_, { idMeal }, ___) => {
+      const response = await Reviews.find({ idMeal });
+
+      return response;
+    }
   },
 
   Mutation: {
@@ -142,9 +148,8 @@ const resolvers = {
         throw new AuthenticationError("You must be logged in");
       }
 
-      console.log(reviewData);
       const newReview = await Reviews.create(reviewData);
-
+      console.log(newReview)
       return newReview;
     },
   },

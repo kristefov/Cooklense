@@ -202,7 +202,7 @@ const SingleRecipe = () => {
                     </Card>
                   </Tab>
                   <Tab eventKey="reviews" title="Reviews">
-                    <ReviewTab />
+                    <ReviewTab idMeal={selectedRecipe.idMeal} />
                   </Tab>
                 </Tabs>
               </Card.Body>
