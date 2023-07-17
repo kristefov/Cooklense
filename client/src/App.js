@@ -14,13 +14,18 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
+import { Container, Row, Col } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import SingleRecipe from "./pages/SingleRecipe";
-import SearchResults from './pages/SearchResults';
-import BreadCrumbsiteComponent from "./components/BreadCrumbs";
+import SearchResults from "./pages/SearchResults";
+import Collections from "./pages/Collections";
 
+import Week from "./pages/Week";
+import Profile from "./pages/Profile/Profile";
+import ShoppingList from "./pages/ShoppingList";
+import ProtectedRoute from "./components/ProtectedRoute";
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -46,26 +51,59 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const auth = useSelector((state) => state.auth);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!auth.isLoggedIn) {
-      navigate("/");
-    }
-  },[]);
-
   return (
     <ApolloProvider client={client}>
       <>
-        <Navbar />
-        <BreadCrumbsiteComponent />
-        <Routes>
-          <Route path="/" Component={Home} />
-          <Route path="/recipe/:id" Component={SingleRecipe} />
-          <Route path='/search/:searchType/:searchValue' Component={SearchResults} />
-          <Route element={<h1 className="display-2">Wrong page!</h1>} />
-        </Routes>
+        <Container as="main" className="header">
+          <Navbar />
+          <Container
+            as="body"
+            className="d-flex bodsyy mt-5 mb-5 py-0 align-items-center"
+            style={{ minHeight: "768px" }}
+          >
+            <Routes>
+              <Route path="/" Component={Home} />
+              <Route path="/recipe/:id" Component={SingleRecipe} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/search/:searchType/:searchValue"
+                Component={SearchResults}
+              />
+              <Route
+                path="/collections"
+                element={
+                  <ProtectedRoute>
+                    <Collections />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/week"
+                element={
+                  <ProtectedRoute>
+                    <Week />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/list"
+                element={
+                  <ProtectedRoute>
+                    <ShoppingList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route element={<h1 className="display-2">Wrong page!</h1>} />
+            </Routes>
+          </Container>
+        </Container>
       </>
 
       <Footer />

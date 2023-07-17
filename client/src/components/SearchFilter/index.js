@@ -17,6 +17,7 @@ const options = {
     cheddar: "Cheddar",
   },
   meatFish: {
+    beef: "Beef",
     pork: "Pork",
     chicken: "Chicken",
     prawn: "Prawn",
@@ -37,7 +38,6 @@ const options = {
 };
 
 const SearchFilter = ({ onClick }) => {
-    
   return (
     <Container>
       <Form>
