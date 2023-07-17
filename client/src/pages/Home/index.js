@@ -84,10 +84,10 @@ const Home = () => {
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
-                <Link to={`/search/${dropdownValue}/${searchInput}`}>
-                  <Button type="submit" size="lg">
+                <Link type="submit" size="lg" className="btn btn-warning text-dark btn-lg rounded-0" to={`/search/${dropdownValue}/${searchInput}`}>
+              
                     Search
-                  </Button>
+              
                 </Link>
               </InputGroup>
               <InputGroup>

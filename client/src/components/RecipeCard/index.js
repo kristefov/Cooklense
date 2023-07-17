@@ -65,7 +65,7 @@ const RecipeCard = ({ meal }) => {
             style={{ textDecoration: "none", color: "inherit" }}
             onClick={handleClick}
           >
-            <Card key={meal.idMeal} border="dark">
+            <Card key={meal.idMeal} border="dark"  className="d-flex flex-column-reverse">
               {meal.strMealThumb ? (
                 <Card.Img
                   src={`${meal.strMealThumb}/preview`}
@@ -74,7 +74,7 @@ const RecipeCard = ({ meal }) => {
                 />
               ) : null}
               <Card.Body>
-                <Card.Title>{meal.strMeal}</Card.Title>
+                <Card.Title className="text-center m-0 hover-link">{meal.strMeal}</Card.Title>
               </Card.Body>
             </Card>
           </Link>
