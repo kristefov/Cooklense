@@ -62,7 +62,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/80605132?s=64&v=4"
                   ></Image>{" "}
-                  Yvonne
+                 SalmY001
                 </a>
               </Col>
               <Col className="col-2 text-center">
@@ -75,7 +75,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/123417090?s=64&v=4"
                   ></Image>{" "}
-                  Hodan Ibrahim
+                 Ze7Hu
                 </a>
               </Col>
               <Col className="col-2 text-center">
@@ -88,7 +88,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/123333022?s=64&v=4"
                   ></Image>{" "}
-                  Adina Hidan
+                  Adina
                 </a>
               </Col>
             </Row>
