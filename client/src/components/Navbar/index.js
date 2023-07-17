@@ -141,10 +141,13 @@ const AppNavbar = () => {
             show={showModal}
             onHide={() => setShowModal(false)}
             aria-label="signup-modal"
+            centered
           >
             <Tab.Container defaultActiveKey="login">
-              <Modal.Header closeButton>
-                <Modal.Title id="signup-modal">
+              <Modal.Header className="d-flex flex-column justify-content-between  border-0 pb-0" closeButton>
+                             </Modal.Header>
+              <Modal.Header className="d-flex flex-row flex-wrap align-content-center justify-content-center pt-0 border-0">
+              <Modal.Title id="signup-modal">
                   <Nav variant="pills">
                     <Nav.Item>
                       <Nav.Link eventKey="login">Login</Nav.Link>
@@ -154,7 +157,7 @@ const AppNavbar = () => {
                     </Nav.Item>
                   </Nav>
                 </Modal.Title>
-              </Modal.Header>
+                </Modal.Header>
               <Modal.Body>
                 <Tab.Content>
                   <Tab.Pane eventKey="login">

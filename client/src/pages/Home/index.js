@@ -77,8 +77,26 @@ const Home = () => {
             <Row xs={12} md={8}>
             <FloatingLabel 
     controlId="searchInput"
+    label="Select a filter"
+    className="mb-3 d-flex secrettodo col-3 p-0">
+                <Form.Select
+                  size="lg"
+                  className="form-select form-select-lg text-black"
+                  style={{ color: "black", height:"100%" }}
+                  value={dropdownValue}
+                  onChange={(e) => setDropdownValue(e.target.value)}
+                >
+                  {mainSearchOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Form.Select>
+                </FloatingLabel>
+            <FloatingLabel 
+    controlId="searchInput"
     label="Search for a recipe"
-    className="mb-3 d-flex">
+    className="mb-3 d-flex secrettodo col-9 p-0">
 
                 <FormControl
                   name="searchInput"
@@ -95,20 +113,10 @@ const Home = () => {
               
                 </Link>
               </FloatingLabel>
-   
-              <InputGroup>
-                <Form.Select
-                  size="lg"
-                  style={{ color: "black" }}
-                  value={dropdownValue}
-                  onChange={(e) => setDropdownValue(e.target.value)}
-                >
-                  {mainSearchOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </Form.Select>
+
+ 
+
+                <InputGroup className="p-0">
                 <Form.Select
                   aria-label="Floating label select example"
                   value={selectedCountry}

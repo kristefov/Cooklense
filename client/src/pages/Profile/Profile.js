@@ -51,32 +51,41 @@ function Profile() {
   }
 
   console.log(count);
+  let sukkkkk = "";
+  if(userDataState.avatar.length > 5){
+ let sukkkkk = userDataState.avatar;
+  }else{
+   let sukkkkk = `https://ui-avatars.com/api/?name=${userDataState.firstName}+${userDataState.lastName}&background=0D8ABC&color=fff`
+  }
 
   return (
     <>
       <Container as="main" className="h-100 mt-5 mb-5 px-5">
-        <Row>
-          <h1>Profile</h1>
-        </Row>
+
         <Container>
           <Row>
             <Col>
               <Col>
                 <Row>
                   <Container className="section">
-                    <Container className="container py-5 h-100">
-                      <Row className="row d-flex justify-content-center align-items-center h-100">
+                    <Container className="container py-5 ">
+                      
+                      <Row className="row d-flex justify-content-start align-items-start ">
+                      <Row>
+          <h1>Profile</h1>
+        </Row>
                         <Col className="col col-md-4 col-lg-4 col-xl-4">
+
                           <Card className="card">
                             <Card.Body className="card-body p-0">
-                              <Row className="d-flex flex-column text-black">
+                              <Row className="d-flex flex-column">
                                 <Col>
                                   <Row
                                     className="mb-3"
                                     style={{
                                       background: {
                                         backgroundSize: "cover",
-                                        backgroundImage: `url(${userDataState.avatar} }}`,
+                                        backgroundImage: `url(${sukkkkk}}`,
                                       },
                                     }}
                                   >

@@ -66,6 +66,14 @@ a.dropdown-item.text-dark.nav-link:hover {
   color: black !important;
 
 }
+
+.secrettodo #searchInput .form-floating>.form-control:focus~label::after,.secrettodo #searchInput .form-floating>.form-control:not(:placeholder-shown)~label::after
+{
+  top:15px!important;
+  padding: 10px 25px!important;
+  line-height: 1em!important;
+  
+}
 #searchInput .form-floating>.form-control:focus~label,#searchInput .form-floating>.form-control:not(:placeholder-shown)~label,
 #searchInput .form-floating>label:focus {
   position: absolute;
@@ -86,4 +94,19 @@ a.dropdown-item.text-dark.nav-link:hover {
   transition: opacity .1s ease-in-out,transform .1s ease-in-out;
   padding: 10px 25px!important;
   line-height: 1em!important;
+}
+
+
+select option {
+  margin: 40px;
+  background: #f0ad4e!important;
+  line-height: 1.4em!important;
+  text-transform: uppercase!important;
+  
+  color: #000;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tab-content input.form-control {
+  color: black!importaNT;
 }
