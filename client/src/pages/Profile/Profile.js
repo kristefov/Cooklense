@@ -1,18 +1,17 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState, useEffect, useMemo } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { UPDATE_USER } from "../../utils/mutations";
 import { GET_ME } from "../../utils/queries";
-import RecipeCard from "../../components/RecipeCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import RecipeCard from "../../components/RecipeCard";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Profile() {
   const { data, loading } = useQuery(GET_ME);
   const [updateUser] = useMutation(UPDATE_USER);
   const userDataState = data?.me;
 
-  console.log(userDataState);
 
   const count = useMemo(() => {
     if (!userDataState?.savedRecipes) {
@@ -50,7 +49,6 @@ function Profile() {
     return <h2>loading</h2>;
   }
 
-  console.log(count);
 
   return (
     <>
@@ -222,11 +220,11 @@ function Profile() {
               </Col>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             {userDataState?.savedRecipes?.map((meal, i) => (
               <RecipeCard meal={meal} key={i} />
             ))}
-          </Row>
+          </Row> */}
         </Container>
       </Container>
     </>
