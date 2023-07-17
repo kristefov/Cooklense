@@ -78,7 +78,7 @@ const Home = () => {
             <FloatingLabel 
     controlId="searchInput"
     label="Search for a recipe"
-    className="mb-3">
+    className="mb-3 d-flex">
 
                 <FormControl
                   name="searchInput"
@@ -113,6 +113,7 @@ const Home = () => {
                   aria-label="Floating label select example"
                   value={selectedCountry}
                   onChange={handleCountryChange}
+                  className="form-select form-select-lg text-black"
                 >
                   <option value="">Select a cuisine</option>
                   {allCountries.map((country, index) => (
@@ -126,6 +127,7 @@ const Home = () => {
                   aria-label="Floating label select example"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
+                  className="form-select form-select-lg text-black"
                 >
                   <option value="">Select a category</option>
                   {allCategories.map((category, index) => (
