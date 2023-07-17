@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_REVIEW } from "../../utils/mutations";
 import { GET_REVIEWS } from "../../utils/queries";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import StarRating from '../../components/StarRating';
 
 const ReviewTab = ({ idMeal }) => {
   const [rating, setRating] = useState(5);
@@ -129,7 +130,7 @@ const ReviewTab = ({ idMeal }) => {
             <Card.Body>
               <Card.Title>{review.title}</Card.Title>
               <Card.Text>{review.comment}</Card.Text>
-              <Card.Text>Rating: {review.rating}</Card.Text>
+              <Card.Text>Rating: <StarRating numStars={review.rating} /></Card.Text>
               <Card.Text>Username: {review.username}</Card.Text>
             </Card.Body>
           </Card>
