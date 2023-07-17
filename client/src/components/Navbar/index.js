@@ -101,9 +101,9 @@ const AppNavbar = () => {
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
       </symbol>
     </svg>
-<Container className="dropdown bottom-0 end-0 mb-0 me-0 bd-mode-toggle">
+<Container className="secreted dropdown bottom-0 end-0 mb-0 me-0 bd-mode-toggle">
       <button className="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-        <svg className="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <svg className="bi my-1 theme-icon-active text-dark" width="1em" height="1em"><use href="#circle-half"></use></svg>
         <span className="visually-hidden" id="bd-theme-text">Toggle theme</span>
       </button>
       <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
@@ -141,10 +141,13 @@ const AppNavbar = () => {
             show={showModal}
             onHide={() => setShowModal(false)}
             aria-label="signup-modal"
+            centered
           >
             <Tab.Container defaultActiveKey="login">
-              <Modal.Header closeButton>
-                <Modal.Title id="signup-modal">
+              <Modal.Header className="d-flex flex-column justify-content-between  border-0 pb-0" closeButton>
+                             </Modal.Header>
+              <Modal.Header className="d-flex flex-row flex-wrap align-content-center justify-content-center pt-0 border-0">
+              <Modal.Title id="signup-modal">
                   <Nav variant="pills">
                     <Nav.Item>
                       <Nav.Link eventKey="login">Login</Nav.Link>
@@ -154,7 +157,7 @@ const AppNavbar = () => {
                     </Nav.Item>
                   </Nav>
                 </Modal.Title>
-              </Modal.Header>
+                </Modal.Header>
               <Modal.Body>
                 <Tab.Content>
                   <Tab.Pane eventKey="login">

@@ -10,6 +10,7 @@ import {
   Button,
   InputGroup,
   FormControl,
+  FloatingLabel,
   Alert,
 } from "react-bootstrap";
 import { text } from "@fortawesome/fontawesome-svg-core";
@@ -74,26 +75,14 @@ const Home = () => {
         <Form>
           <Row>
             <Row xs={12} md={8}>
-              <InputGroup>
-                <FormControl
-                  name="searchInput"
-                  type="text"
-                  style={{ width: "60%" }}
-                  size="lg"
-                  placeholder="Search for a recipe"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
-                <Link type="submit" size="lg" className="btn btn-warning text-dark btn-lg rounded-0" to={`/search/${dropdownValue}/${searchInput}`}>
-              
-                    Search
-              
-                </Link>
-              </InputGroup>
-              <InputGroup>
+            <FloatingLabel 
+    controlId="searchInput"
+    label="Select a filter"
+    className="mb-3 d-flex secrettodo col-3 p-0">
                 <Form.Select
                   size="lg"
-                  style={{ color: "gray" }}
+                  className="form-select form-select-lg text-black"
+                  style={{ color: "black", height:"100%" }}
                   value={dropdownValue}
                   onChange={(e) => setDropdownValue(e.target.value)}
                 >
@@ -103,10 +92,36 @@ const Home = () => {
                     </option>
                   ))}
                 </Form.Select>
+                </FloatingLabel>
+            <FloatingLabel 
+    controlId="searchInput"
+    label="Search for a recipe"
+    className="mb-3 d-flex secrettodo col-9 p-0">
+
+                <FormControl
+                  name="searchInput"
+                  type="text"
+                  style={{ width: "80%", height:"100%" }}
+                  size="lg"
+                  placeholder="Search for a recipe"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                <Link   style={{ width: "20%", height:"100%" }} type="submit" size="lg" className="btn btn-warning text-dark btn-lg rounded-0" to={`/search/${dropdownValue}/${searchInput}`}>
+              
+                    Search
+              
+                </Link>
+              </FloatingLabel>
+
+ 
+
+                <InputGroup className="p-0">
                 <Form.Select
                   aria-label="Floating label select example"
                   value={selectedCountry}
                   onChange={handleCountryChange}
+                  className="form-select form-select-lg text-black"
                 >
                   <option value="">Select a cuisine</option>
                   {allCountries.map((country, index) => (
@@ -120,6 +135,7 @@ const Home = () => {
                   aria-label="Floating label select example"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
+                  className="form-select form-select-lg text-black"
                 >
                   <option value="">Select a category</option>
                   {allCategories.map((category, index) => (

@@ -60,7 +60,7 @@ const LoginForm = ({ handleModalClose }) => {
   };
   return (
     <>
-      <Form className="d-flex flex-wrap" autoComplete="off" noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form className="d-flex flex-wrap " autoComplete="off" noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -69,7 +69,7 @@ const LoginForm = ({ handleModalClose }) => {
         >
           Something went wrong with your login credentials!
         </Alert>
-        <Form.Group className="mb-3 p-2 w-50">
+        <Form.Group className="mb-3 p-2 w-50 ">
           <FloatingLabel htmlFor="email" label="Email address" className="mb-3">
             <Form.Control
               name="email"
@@ -99,7 +99,7 @@ const LoginForm = ({ handleModalClose }) => {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-1 p-2 col-12">
-        <Button className="w-100"
+        <Button className="w-100 form-control-lg"
           disabled={!(userFormData.email && userFormData.password)}
           type="submit"
           variant="primary"
