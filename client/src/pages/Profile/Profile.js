@@ -76,7 +76,7 @@ function Profile() {
                                     style={{
                                       background: {
                                         backgroundSize: "cover",
-                                        backgroundImage: `url(${sukkkkk}}`,
+                                        backgroundImage: `url(${userDataState.avatar})`,
                                       },
                                     }}
                                   >
