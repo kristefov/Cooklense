@@ -35,3 +35,18 @@ body {
 		background-position: 0% 50%;
 	}
 }
+a.dropdown-item.text-dark.nav-link {
+  background: unset;
+  text-decoration: none;
+  text-underline-offset: 0px;
+  text-decoration-thickness: 0px;
+  transition: all 180ms linear;
+}
+
+a.dropdown-item.text-dark.nav-link:hover {
+  background: unset;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 3px;
+  /* text-transform: uppercase; */
+}

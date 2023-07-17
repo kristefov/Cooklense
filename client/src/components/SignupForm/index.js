@@ -214,6 +214,9 @@ const SignupForm = ({ handleModalClose }) => {
             name="avatar"
             onChange={handleInputChange}
                   required
+                  valule= "https://ui-avatars.com/api/?name=G&Background=0D8ABC&color=fff"
+            
+               
           />
         </Form.Group>
         <Form.Group className="mb-1 p-2 w-50">

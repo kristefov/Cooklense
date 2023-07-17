@@ -1,6 +1,7 @@
 // NAVBAR
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   Navbar,
   Nav,
@@ -19,13 +20,22 @@ import LoginForm from "../LoginForm";
 import { logout } from "../../reducers/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
+import { GET_ME } from "../../utils/queries";
+
 
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const { data, loading } = useQuery(GET_ME);
+  const userDataState = data?.me;
+  let userDataAvatar = userDataState?.avatar;
+
  
+  console.log(userDataState);
+
+
   return (
     <>
 
@@ -51,25 +61,25 @@ const AppNavbar = () => {
                     <>
                     <Col>
 <Col className="dropdown text-end">
-          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <Image src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"></Image>
+          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+            <Image src={ userDataState.avatar } alt="mdo" width="32" height="32" className="rounded-circle"></Image>
           </a>
-          <ul className="dropdown-menu text-small">
-            <li>                      <Nav.Link className="dropdown-item" as={Link} to="/profile">
+          <ul className="dropdown-menu text-small  bg-light">
+            <li>                      <Nav.Link className="dropdown-item text-dark" as={Link} to="/profile">
                         Profile
                       </Nav.Link></li>
-            <li>             <Nav.Link className="dropdown-item" as={Link} to="/week">
+            <li>             <Nav.Link className="dropdown-item text-dark" as={Link} to="/week">
                         Week Plan
                       </Nav.Link></li>
-            <li>                      <Nav.Link className="dropdown-item" as={Link} to="/list">
+            <li>                      <Nav.Link className="dropdown-item text-dark" as={Link} to="/list">
                         Shopping List
                       </Nav.Link></li>
-                   <li>  <Nav.Link className="dropdown-item" as={Link} to="/collections">
+                   <li>  <Nav.Link className="dropdown-item text-dark" as={Link} to="/collections">
                         Collections
                       </Nav.Link></li> 
             <li><hr className="dropdown-divider" /></li>
             <li>   
-                      <Nav.Link className="dropdown-item" onClick={() => dispatch(logout())}>
+                      <Nav.Link className="dropdown-item text-dark" onClick={() => dispatch(logout())}>
                         Logout
                       </Nav.Link></li>
           </ul>
