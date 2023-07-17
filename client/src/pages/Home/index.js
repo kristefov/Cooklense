@@ -10,6 +10,7 @@ import {
   Button,
   InputGroup,
   FormControl,
+  FloatingLabel,
   Alert,
 } from "react-bootstrap";
 import { text } from "@fortawesome/fontawesome-svg-core";
@@ -74,26 +75,31 @@ const Home = () => {
         <Form>
           <Row>
             <Row xs={12} md={8}>
-              <InputGroup>
+            <FloatingLabel 
+    controlId="searchInput"
+    label="Search for a recipe"
+    className="mb-3">
+
                 <FormControl
                   name="searchInput"
                   type="text"
-                  style={{ width: "60%" }}
+                  style={{ width: "80%", height:"100%" }}
                   size="lg"
                   placeholder="Search for a recipe"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
-                <Link type="submit" size="lg" className="btn btn-warning text-dark btn-lg rounded-0" to={`/search/${dropdownValue}/${searchInput}`}>
+                <Link   style={{ width: "20%", height:"100%" }} type="submit" size="lg" className="btn btn-warning text-dark btn-lg rounded-0" to={`/search/${dropdownValue}/${searchInput}`}>
               
                     Search
               
                 </Link>
-              </InputGroup>
+              </FloatingLabel>
+   
               <InputGroup>
                 <Form.Select
                   size="lg"
-                  style={{ color: "gray" }}
+                  style={{ color: "black" }}
                   value={dropdownValue}
                   onChange={(e) => setDropdownValue(e.target.value)}
                 >
