@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Container, Row, Col, Card, Table, Button, Tab, Tabs } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Table,
+  Button,
+  Tab,
+  Tabs,
+  Dropdown,
+  Alert,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -39,6 +50,8 @@ const SingleRecipe = () => {
   const { data } = useQuery(GET_ME);
   const [youTubeLink, setYouTubeLink] = useState();
   const [activeTab, setActiveTab] = useState("recipe");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,17 +106,16 @@ const SingleRecipe = () => {
   };
 
   const handleAddToDay = async (e) => {
-    const chosenDay = e.target.value;
     const { idMeal, strMeal, strMealThumb } = selectedRecipe;
-
-    console.log(idMeal, "\n", strMeal, "\n", strMealThumb);
     try {
       await addToDay({
         variables: {
-          day: chosenDay,
+          day: e,
           recipeData: { idMeal, strMeal, strMealThumb },
         },
       });
+      setShowAlert(true);
+      setAlertMessage("Recipe added to week plan!");
     } catch (error) {
       throw new Error(error);
     }
@@ -120,7 +132,8 @@ const SingleRecipe = () => {
           ingredients: [...updatedIngredientList],
         },
       });
-      console.log("Item added to shopping list");
+      setShowAlert(true);
+      setAlertMessage("Ingredients added to shopping list!");
     } catch (error) {
       console.error("Error adding item to shopping list:", error);
     }
@@ -145,33 +158,53 @@ const SingleRecipe = () => {
             <Col md={8}>
               <Card.Body>
                 <Card.Title>{selectedRecipe.strMeal}</Card.Title>
+                {showAlert && (
+                  <Alert
+                    variant="success"
+                    onClose={() => setShowAlert(false)}
+                    dismissible
+                  >
+                    {alertMessage}
+                  </Alert>
+                )}
                 {isLoggedIn && (
-                  <>
-                    <Button onClick={handleAddToShoppingList}>
+                  <div className="d-flex">
+                    <Dropdown onSelect={handleAddToDay} className="me-2">
+                      <Dropdown.Toggle
+                        variant="primary"
+                        id="week-plan-dropdown"
+                      >
+                        Add to week plan
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        {weekDays.map(({ value, label }) => (
+                          <Dropdown.Item key={value} eventKey={value}>
+                            {label}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+
+                    <Button onClick={handleAddToShoppingList} className="me-2">
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
+
                     {isRecipeSaved ? (
                       <Button disabled variant="success">
                         <FontAwesomeIcon icon={faCheck} /> Recipe saved
                       </Button>
                     ) : (
-                      <Button onClick={() => handleSaveRecipe()}>
+                      <Button onClick={handleSaveRecipe} className="me-2">
                         <FontAwesomeIcon icon={faPlus} /> Add to collection
                       </Button>
                     )}
-                    <div>
-                      <select onChange={handleAddToDay}>
-                        <option value="">Add to week plan</option>
-                        {weekDays.map(({ value, label }) => (
-                          <option key={value} value={value}>
-                            {label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </>
+                  </div>
                 )}
-                <Tabs activeKey={activeTab} onSelect={handleTabSelect} id="recipe-tabs">
+                <Tabs
+                  activeKey={activeTab}
+                  onSelect={handleTabSelect}
+                  id="recipe-tabs"
+                >
                   <Tab eventKey="recipe" title="Recipe">
                     <Table striped bordered>
                       <thead>
@@ -191,7 +224,7 @@ const SingleRecipe = () => {
                     </Table>
                   </Tab>
                   <Tab eventKey="video" title="Video">
-                      <Card className="border border-true">
+                    <Card className="border border-true">
                       <div className="ratio ratio-16x9">
                         <iframe
                           src={`${youTubeLink}?autoplay=1&mute=1&loop=1&modestbranding=1`}
