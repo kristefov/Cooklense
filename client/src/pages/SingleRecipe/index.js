@@ -27,6 +27,11 @@ import { GET_ME } from "../../utils/queries";
 
 import { appendIngredients } from "../../utils/appendIngredients";
 import { recipeSearch } from "../../utils/API";
+
+import { useMutation } from "@apollo/client";
+import { SAVE_RECIPE } from "../../utils/mutations";
+import {ShoppingList} from '../../components/ShoppingList';
+/*
 import ReviewTab from "../../components/ReviewTab";
 
 const weekDays = [
@@ -38,6 +43,7 @@ const weekDays = [
   { value: "SAT", label: "Saturday" },
   { value: "SUN", label: "Sunday" },
 ];
+*/
 
 const SingleRecipe = () => {
   const { id } = useParams();
@@ -249,6 +255,13 @@ const SingleRecipe = () => {
             </Col>
           </Row>
         </Card>
+      )}
+      
+      {isLoggedIn && (
+        <ShoppingList
+          shoppingList={ingredients.map((ingredient) => ingredient.ingredient)}
+          setShoppingList={setIngredients}
+        />
       )}
     </Container>
   );
