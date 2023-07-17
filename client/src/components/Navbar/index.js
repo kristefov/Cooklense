@@ -54,22 +54,22 @@ const AppNavbar = () => {
           <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <Image src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"></Image>
           </a>
-          <ul className="dropdown-menu text-small">
-            <li>                      <Nav.Link className="dropdown-item" as={Link} to="/profile">
+          <ul className="dropdown-menu text-small bg-light text-dark">
+            <li>                      <Nav.Link className="dropdown-item  bg-light text-dark" as={Link} to="/profile">
                         Profile
                       </Nav.Link></li>
-            <li>             <Nav.Link className="dropdown-item" as={Link} to="/week">
+            <li>             <Nav.Link className="dropdown-item  bg-light text-dark" as={Link} to="/week">
                         Week Plan
                       </Nav.Link></li>
-            <li>                      <Nav.Link className="dropdown-item" as={Link} to="/list">
+            <li>                      <Nav.Link className="dropdown-item  bg-light text-dark" as={Link} to="/list">
                         Shopping List
                       </Nav.Link></li>
-                   <li>  <Nav.Link className="dropdown-item" as={Link} to="/collections">
+                   <li>  <Nav.Link className="dropdown-item  bg-light text-dark" as={Link} to="/collections">
                         Collections
                       </Nav.Link></li> 
-            <li><hr className="dropdown-divider" /></li>
+            <li><hr className="dropdown-divider  bg-light text-dark" /></li>
             <li>   
-                      <Nav.Link className="dropdown-item" onClick={() => dispatch(logout())}>
+                      <Nav.Link className="dropdown-item  bg-light text-dark" onClick={() => dispatch(logout())}>
                         Logout
                       </Nav.Link></li>
           </ul>
