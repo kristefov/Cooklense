@@ -69,6 +69,7 @@ const Footer = () => {
                 <a
                   className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"
                   href="https://github.com/Ze7Hu"
+
                 >
                   <Image
                     width="32"

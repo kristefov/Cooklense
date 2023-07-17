@@ -27,14 +27,14 @@ const Collections = () => {
   return (
     <Container as="main" className="h-100 mt-5 mb-5 px-5">
       <Row>
-        <Col sm={2} className="text-center">
+        {/* <Col sm={2} className="text-center">
           {userData.avatar ? (
             <Image src={userData.avatar} rounded className="img-fluid" />
           ) : (
             <Image src="avatar.png" rounded className="img-fluid" />
           )}
           <p className="mt-3">{userData.me.username}</p>
-        </Col>
+        </Col> */}
         <Col>
           <Row>
             {userData.me.savedRecipes.map((meal) => (
