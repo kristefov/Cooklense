@@ -68,6 +68,19 @@ const Footer = () => {
               <Col className="col-2 text-center">
                 <a
                   className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"
+                  href="https://github.com/Ze7Hu"
+                >
+                  <Image
+                    width="32"
+                    className="rounded-circle"
+                    src="https://avatars.githubusercontent.com/u/87772337?s=64&v=4"
+                  ></Image>{" "}
+                  Hodan
+                </a>
+              </Col>
+              <Col className="col-2 text-center">
+                <a
+                  className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"
                   href="https://github.com/Abstynent"
                 >
                   <Image
