@@ -1,4 +1,4 @@
-## Project 3 -
+## Project 3 -e
 
 Meal planning application that allows users to choose a cuisine then search for recipes using given criteria (ingredients, keywords). Following that, a list of recipes based on the chosen criteria will be shown to the user. Users have the option to save recipes and subsequently access their saved list.
 
