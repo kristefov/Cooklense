@@ -10,9 +10,9 @@ const Footer = () => {
     <>
       <footer className="bg-body-tetriary text-tetriary mt-5">
         <Container className="p-3 container-fluid d-flex flex-column align-center">
-          <Row className="align-center justify-content-center flex-row">
-            <h5 className="text-center mt-2 mb-4 text-tetriary">Created by:</h5>
-            <Row className="row  col-8 p-3 container-fluid justify-content-center align-items-center d-flex flex-row align-center">
+          <Row className="d-flex align-center justify-content-center flex-column flex-wrap row align-content-center">
+            <h5 className="align-self-center col-3 text-center mt-2 mb-4 text-warning bg-primary rounded-5 p-3">Created by:</h5>
+            <Row className="row  col-8 p-3 container-fluid justify-content-center align-items-center d-flex flex-row align-center row">
               <Col className="col-2 text-center ">
                 <a
                   className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"

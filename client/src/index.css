@@ -50,3 +50,7 @@ a.dropdown-item.text-dark.nav-link:hover {
   text-decoration-thickness: 3px;
   /* text-transform: uppercase; */
 }
+
+.secreted button:after {
+  color:black!important;
+}
