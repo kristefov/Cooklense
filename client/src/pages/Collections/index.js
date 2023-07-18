@@ -25,24 +25,21 @@ const Collections = () => {
   }
 
   return (
-    <Container as="main" className="h-100 mt-5 mb-5 px-5">
-      <Row>
-        {/* <Col sm={2} className="text-center">
-          {userData.avatar ? (
-            <Image src={userData.avatar} rounded className="img-fluid" />
-          ) : (
-            <Image src="avatar.png" rounded className="img-fluid" />
-          )}
-          <p className="mt-3">{userData.me.username}</p>
-        </Col> */}
-        <Col>
-          <Row>
-            {userData.me.savedRecipes.map((meal) => (
-              <RecipeCard meal={meal} key={meal.id} />
-            ))}
-          </Row>
-        </Col>
-      </Row>
+    <Container as="main" className="h-19 mb-5 px-5">
+      <h3 className="text-center">Collections</h3>
+      {userData.me.savedRecipes.length === 0 ? (
+        <p className="text-center">Your don't have any saved recipes</p>
+      ) : (
+        <Row>
+          <Col>
+            <Row>
+              {userData.me.savedRecipes.map((meal, i) => (
+                <RecipeCard meal={meal} key={i} />
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

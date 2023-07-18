@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button, Card } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Container, Button, Card, Image, Col } from "react-bootstrap";
 import "./style.css";
 import { GET_ME } from "../../utils/queries";
 import { REMOVE_MEAL_FROM_WEEKPLAN } from "../../utils/mutations";
@@ -28,10 +26,7 @@ const WeekPlan = () => {
         },
       });
       console.log(res.data.removeMealFromWeekPlan.weekPlan);
-      // const updatedWeekPlan = savedWeekPlan.filter(
-      //   (meal) => meal.idMeal !== idMeal
-      // );
-      // console.log(updatedWeekPlan);
+
       setSavedWeekPlan(res.data.removeMealFromWeekPlan.weekPlan);
     } catch (error) {
       console.log("Error removing meal:", error);
@@ -40,23 +35,34 @@ const WeekPlan = () => {
 
   const mealItems = (meals) =>
     meals.map((meal, index) => (
-      <div className="meal-item" key={index}>
-        <Link
-          to={`/recipe/${meal.idMeal}`}
-          style={{ textDecoration: "none", color: "black" }}
-          className="meal-link"
-        >
-          <div>
-            <p className="mt-1">{meal.strMeal}</p>
+      <Col style={{ backgroundColor: "rgb(240,173,78)" }}>
+        <Card className="m-1 border border-warning" key={index}>
+          <Link
+            to={`/recipe/${meal.idMeal}`}
+            style={{ textDecoration: "none", color: "black" }}
+            className="meal-link"
+          >
+            <Image
+              className="rounded-circle p-1  border border-warning"
+              style={{ maxWidth: "170px" }}
+              src={meal.strMealThumb}
+            />
+          </Link>{" "}
+          <div className="d-flex  justify-content-center align-self-center align-items-center align-items-baseline">
+            <p style={{ textAlign: "center", margin: "1px" }}>
+              {meal.strMeal}{" "}
+            </p>
+            <Button
+              className="align-self-center"
+              style={{ width: "40px", padding: "10px" }}
+              variant="danger"
+              onClick={() => handleRemoveMeal(meal._id)}
+            >
+              x
+            </Button>
           </div>
-        </Link>
-
-        <div className="meal-item-buttons">
-          <Button variant="danger" onClick={() => handleRemoveMeal(meal._id)}>
-            <FontAwesomeIcon icon={faTimes} />
-          </Button>
-        </div>
-      </div>
+        </Card>
+      </Col>
     ));
 
   const columns = weekdays.map((weekday, index) => {
@@ -64,7 +70,7 @@ const WeekPlan = () => {
       .filter((meal) => meal.day === weekday)
       .flatMap((meal) => meal.recipeData);
     return (
-      <div className="column" key={index}>
+      <div className="column mt-5" key={index}>
         <div className="column-header">{weekday}</div>
         <div className="card-content">
           {mealsByDay.length > 0 && mealItems(mealsByDay)}

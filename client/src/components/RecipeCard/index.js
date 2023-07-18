@@ -58,14 +58,14 @@ const RecipeCard = ({ meal }) => {
 
   return (
     <>
-      <Col md="4" key={meal.idMeal} className="mb-4">
+      <Col md="3" key={meal.idMeal} className="mb-4">
         <Card>
           <Link
             to={`/recipe/${meal.idMeal}`}
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{ textDecoration: "none" }}
             onClick={handleClick}
           >
-            <Card key={meal.idMeal} border="dark"  className="d-flex flex-column-reverse">
+            <Card key={meal.idMeal} className="d-flex flex-column-reverse">
               {meal.strMealThumb ? (
                 <Card.Img
                   src={`${meal.strMealThumb}/preview`}
@@ -73,21 +73,22 @@ const RecipeCard = ({ meal }) => {
                   variant="top"
                 />
               ) : null}
-              <Card.Body>
-                <Card.Title className="text-center m-0 hover-link">{meal.strMeal}</Card.Title>
-              </Card.Body>
+              <Card.Title>
+                <Card.Footer className="text-center m-0 hover-link">
+                  {meal.strMeal}
+                </Card.Footer>
+              </Card.Title>
             </Card>
           </Link>
-          <Card>
-            {path ? (
-              <Button
-                className="btn-block btn-danger"
-                onClick={() => deleteRecipe(meal.idMeal)}
-              >
-                X
-              </Button>
-            ) : null}
-          </Card>
+
+          {path ? (
+            <Button
+              className="btn-block btn-danger"
+              onClick={() => deleteRecipe(meal.idMeal)}
+            >
+              X
+            </Button>
+          ) : null}
         </Card>
       </Col>
 

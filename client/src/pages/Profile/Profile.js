@@ -12,7 +12,6 @@ function Profile() {
   const [updateUser] = useMutation(UPDATE_USER);
   const userDataState = data?.me;
 
-
   const count = useMemo(() => {
     if (!userDataState?.savedRecipes) {
       return 0;
@@ -52,7 +51,6 @@ function Profile() {
   return (
     <>
       <Container as="main" className="h-100 mt-5 mb-5 px-5">
-
         <Container>
           <Row>
             <Col>
@@ -60,13 +58,11 @@ function Profile() {
                 <Row>
                   <Container className="section">
                     <Container className="container py-5 ">
-                      
                       <Row className="row d-flex justify-content-start align-items-start ">
-                      <Row>
-          <h1>Profile</h1>
-        </Row>
+                        <Row>
+                          <h1>Profile</h1>
+                        </Row>
                         <Col className="col col-md-4 col-lg-4 col-xl-4">
-
                           <Card className="card">
                             <Card.Body className="card-body p-0">
                               <Row className="d-flex flex-column">
@@ -80,12 +76,21 @@ function Profile() {
                                       },
                                     }}
                                   >
-                                    <Card.Img
-                                      xs={2}
-                                      src={userDataState.avatar}
-                                      alt="Generic placeholder image"
-                                      className="img-fluid"
-                                    />
+                                    {!userDataState.avatar ? (
+                                      <Card.Img
+                                        xs={2}
+                                        src="https://cdna.artstation.com/p/assets/covers/images/010/365/800/large/francesco-delrio-gray-fox-colored-wip-avatar.jpg?1524043972"
+                                        alt="Generic placeholder image"
+                                        className="img-fluid"
+                                      />
+                                    ) : (
+                                      <Card.Img
+                                        xs={2}
+                                        src={userDataState.avatar}
+                                        alt="Generic placeholder image"
+                                        className="img-fluid"
+                                      />
+                                    )}
                                   </Row>
                                   <Col className="flex-grow-1 ms-3">
                                     <h5 className="mb-1">

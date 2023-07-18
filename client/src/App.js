@@ -6,15 +6,13 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -54,12 +52,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <>
-        <Container as="main" className="header">
+        <Container className="header">
           <Navbar />
           <Container
-            as="body"
-            className="d-flex bodsyy mt-5 mb-5 py-0 align-items-center"
-            style={{ minHeight: "768px" }}
+            className="d-flex py-0 align-items-center"
+            style={{ minHeight: "760px" }}
           >
             <Routes>
               <Route path="/" Component={Home} />

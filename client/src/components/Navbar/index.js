@@ -1,6 +1,7 @@
 // NAVBAR
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import icon from "../../assets/images/1147873.png";
 import {
   Navbar,
   Nav,
@@ -28,7 +29,7 @@ const AppNavbar = () => {
   const auth = useSelector((state) => state.auth);
   const { data, loading } = useQuery(GET_ME);
   const userDataState = data?.me?.avatar;
-  console.log("userotsdsds" + userDataState);
+
   if (loading) {
     return <h2>loading</h2>;
   }
@@ -39,19 +40,20 @@ const AppNavbar = () => {
         minBreakpoint="xxs"
       >
         <Navbar
-          style={{ zIndex: 1000 }}
-          className="navbar navbar-expand-lg fixed-top text-bg-warning"
+          style={{ zIndex: 1000, maxHeight: "70px" }}
+          className=" navbar navbar-expand-lg fixed-top text-bg-warning"
         >
           <Container>
             <Navbar.Brand as={Link} to="/">
               Cooklense
             </Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">
+              <Image style={{ maxWidth: "45px" }} src={icon} />
+            </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="navbar" />
             <Navbar.Collapse className="flex-row-reverse">
-              <Nav className="ml-auto d-flex">
-                <Nav.Link as={Link} to="/">
-                  Search For Recipes
-                </Nav.Link>
+              <Nav className="ml-auto d-flex align-items-center">
                 {/* if user is logged in show saved books and logout */}
                 {auth.isLoggedIn ? (
                   <>

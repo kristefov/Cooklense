@@ -144,12 +144,13 @@ const SingleRecipe = () => {
   };
 
   return (
-    <Container as="main" className="h-100 mt-5 mb-5 px-5">
+    <Container as="main" className="h-100 mt-5 mb-5 p-5">
       {selectedRecipe && (
         <Card>
           <Row>
             <Col md={4}>
               <Card.Img
+                className="m-3 border border-warning rounded-circle"
                 variant="top"
                 src={selectedRecipe.strMealThumb}
                 alt={selectedRecipe.strMeal}
@@ -168,8 +169,8 @@ const SingleRecipe = () => {
                   </Alert>
                 )}
                 {isLoggedIn && (
-                  <div className="d-flex">
-                    <Dropdown onSelect={handleAddToDay} className="me-2">
+                  <div className="d-flex flex-wrap">
+                    <Dropdown onSelect={handleAddToDay} className="m-1">
                       <Dropdown.Toggle
                         variant="primary"
                         id="week-plan-dropdown"
@@ -185,7 +186,7 @@ const SingleRecipe = () => {
                       </Dropdown.Menu>
                     </Dropdown>
 
-                    <Button onClick={handleAddToShoppingList} className="me-2">
+                    <Button onClick={handleAddToShoppingList} className="m-1">
                       <FontAwesomeIcon icon={faList} /> Add to shopping list
                     </Button>
 
@@ -194,7 +195,7 @@ const SingleRecipe = () => {
                         <FontAwesomeIcon icon={faCheck} /> Recipe saved
                       </Button>
                     ) : (
-                      <Button onClick={handleSaveRecipe} className="me-2">
+                      <Button onClick={handleSaveRecipe} className="m-1">
                         <FontAwesomeIcon icon={faPlus} /> Add to collection
                       </Button>
                     )}
