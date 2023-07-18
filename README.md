@@ -26,7 +26,7 @@ This application allows users to look for meals based on different regions, givi
 
 ## Technologies-Used
 
-Node.js, Express, React, Redux, Stripe, Apollo Server,
+Node.js, Express, React, Redux, Apollo Server,
 Graphql, Mongodb, Mongoose, Heroku
 
 ## Screenshots
