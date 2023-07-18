@@ -1,99 +1,103 @@
-## Project 3 -
+[![Hex.pm](https://img.shields.io/badge/license%20-mit-blue?style=for-the-badge&logo=appveyor)](https://choosealicense.com/licenses/mit)
 
-Meal planning application that allows users to choose a cuisine then search for recipes using given criteria (ingredients, keywords). Following that, a list of recipes based on the chosen criteria will be shown to the user. Users have the option to save recipes and subsequently access their saved list.
+<img
+  src="./client/src/assets/images/Screenshot 2023-07-18 at 23.36.24Upsca-enhance-6x.jpeg"
+  alt="Alt text"
+  title="Cooklense"
+  style="display: inline-block; margin: 0 auto;">
 
-## Table of content
+#
 
-[Description](#Description)
+<img src="./client/src/assets/images/ezgif.com-crop.gif" width="100%">
 
-[Technologies-Used](#Technologies-Used)
+#
 
-[Screenshots](#Screenshots)
+## Table of Contents
 
-[Deployment](#Deployment)
+- [Description](#description)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Link](#link)
+- [How to Contribute](#how-to-contribute)
+- [Authors](#authors)
+- [License](#license)
 
-[Intsallation](#Installation)
+#
 
-[Usage](#Usage)
-
-[License](#License)
-
-[Authors](#Authors)
+#
 
 ## Description
 
-This application allows users to look for meals based on different regions, giving them the chance to experience the rich diversity of global cuisine. Users can look up recipes using keywords and ingredients. The software will provide users with a list of recipes as well as a list of required ingredients and preparation instructions. Users can set up multiple accounts and keep their favourite recipes there so they can access them later by reopening the app. Users can also create and delete accounts as needed. Users can also examine the calories in their planned meals and schedule meals for up to a week. Additionally, they can add or remove shopping to-do lists.
+This application allows users to look for meals based on different regions, giving them the chance to experience the rich diversity of global cuisine. Users can look up recipes using keywords and ingredients. The software will provide users with a list of recipes as well as a list of required ingredients and preparation instructions. Users can set up multiple accounts and keep their favorite recipes there so they can access them later by reopening the app. Users can also create and delete accounts as needed. Users can also examine the calories in their planned meals and schedule meals for up to a week. Additionally, they can add or remove shopping to-do lists.
 
-## Technologies-Used
+#
+
+## Technologies Used
 
 Node.js, Express, React, Redux, Apollo Server,
-Graphql, Mongodb, Mongoose, Heroku
-
-## Screenshots
-
-![Screenshot 2023-07-17 at 18 44 59](https://github.com/kristiyantefov/Cooklense/assets/123417090/46a6691d-1804-4e7a-9e3a-3e3de4d2af91)
-
-![Screenshot 2023-07-17 at 18 45 09](https://github.com/kristiyantefov/Cooklense/assets/123417090/c1199ee8-f45a-4b92-923f-a7dd48e6fbc2)
-
-
-
-
-## Deployment
-
-[Link to Heroku]()
+Graphql, Mongodb, Mongoose, Heroku, JWT, Stripe, ReactBootstrap
 
 ## Installation
 
-Clone the repository from GitHub.
+You can clone the git repository and run next command to use tha web application locally
 
-Install node.js
+Install all dependencies
 
-Run npm install to install dependencies.
+```
+  npm install
+```
 
-Run npm start to start the web server and connect
+```
+  npm run build
+```
+
+```
+  npm run develope
+```
+
+#
 
 ## Usage
 
-Use the following command to run the application on the development server:
+In order to use the program you will need to clone the repository from GitHub provided in the link below.
 
-npm run develop
+#
 
-## License
+## How to Contribute
 
-Licenced under:
-[MIT](https://choosealicense.com/licenses/MIT)
-![badge](https://img.shields.io/badge/license-MIT-green>)
+For and suggestions or contributions you can reach me at my email address or you can clone to code and edit it the way it will suite you the best.
+
+#
+
+## Link
+
+Link to repository:
+
+https://github.com/kristiyantefov/cooklense
+
+Link to website:
+
+https://cooklense-6466eecac055.herokuapp.com/
+
+#
 
 ## Authors
 
-This project was created by:
+- [Kristiyan](https://github.com/kristiyantefov)
 
-<a href="https://github.com/Abstynent">
-<img src="public/img/assets/github.png" alt="git" width="14" height="14">
-Lukasz Jurkiewicz
-</a>
+- [Rihards](https://github.com/dexit)
 
-<a href="https://github.com/dexit">
-<img src="public/img/assets/github.png" alt="git" width="14" height="14">
-Rihards Mantejs
-</a>
+- [Lukasz](https://github.com/Abstynent)
 
-<a href="https://github.com/kristiyantefov">
-<img src="public/img/assets/github.png" alt="git" width="14" height="14">
-Kristiyantefov
-</a>
+- [Yvonne](https://github.com/SalmY001)
 
-<a href="https://github.com/SalmY001">
-  <img src="public/img/assets/github.png" alt="git" width="14" height="14">
- Yvonne Salmon
-</a>
+- [Hodan](https://github.com/Ze7Hu)
 
-<a href="https://github.com/Ze7Hu">
-<img src="public/img/assets/github.png" alt="git" width="14" height="14">
-Hodan Ibrahim
-</a>
+- [Adina](https://github.com/Adinahidan)
 
-<a href="https://github.com/Adinahidan">
-  <img src="public/img/assets/github.png" alt="git" width="14" height="14">
- Adina Hidan
-</a>
+#
+
+## License
+
+- This application is covered under: [MIT License](https://choosealicense.com/licenses/mit)
