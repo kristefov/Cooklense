@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useEffect, useState } from "react";
 import { Col, Card, Modal, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
@@ -18,9 +19,11 @@ const RecipeCard = ({ meal }) => {
     location.pathname === "/profile" || location.pathname === "/collections";
 
   useEffect(() => {
-    setUserRecipes(data?.me?.savedRecipes);
+    setUserRecipes(data?.me?.savedRecipes);// Update the userRecipes state with the saved recipes from the query data
   }, [data]);
 
+  
+  // Function to delete a recipe
   const deleteRecipe = async (idMeal) => {
     console.log(idMeal);
     if (!isLoggedIn) {
@@ -30,7 +33,7 @@ const RecipeCard = ({ meal }) => {
       await removeRecipe({
         variables: { idMeal: idMeal },
       });
-      const updated = userRecipes.filter((recipe) => recipe.idMeal !== idMeal);
+      const updated = userRecipes.filter((recipe) => recipe.idMeal !== idMeal);// Remove the deleted recipe from the userRecipes state
       setUserRecipes(updated);
       console.log(updated);
     } catch (error) {

@@ -1,6 +1,8 @@
+//Import dependencies
 import React from "react";
 import { Container, Form } from "react-bootstrap";
 
+// Define the options for each category
 const options = {
   general: {
     sugar: "Sugar",

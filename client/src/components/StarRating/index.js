@@ -1,5 +1,6 @@
 import React from "react";
 
+// Component for rendering a star rating
 function StarRating({ numStars }) {
   const stars = Array(numStars).fill(null);
 
