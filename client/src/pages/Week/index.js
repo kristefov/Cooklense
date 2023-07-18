@@ -6,6 +6,7 @@ import { GET_ME } from "../../utils/queries";
 import { REMOVE_MEAL_FROM_WEEKPLAN } from "../../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 
+// Add seven day week plan for meals to be saved or removed
 const WeekPlan = () => {
   const weekdays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
   const [savedWeekPlan, setSavedWeekPlan] = useState([]);
@@ -33,6 +34,7 @@ const WeekPlan = () => {
     }
   };
 
+// Add chosen meals and images to week plan
   const mealItems = (meals) =>
     meals.map((meal, index) => (
       <Col style={{ backgroundColor: "rgb(240,173,78)" }}>

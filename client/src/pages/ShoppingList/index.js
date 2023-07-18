@@ -4,11 +4,12 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../../utils/queries";
 import { REMOVE_INGREDIENT_FROM_SHOPPING_LIST } from "../../utils/mutations";
 
+// Create shopping list with ingredients
 const ShoppingList = () => {
   const { loading, error, data, refetch } = useQuery(GET_ME);
   const user = data?.me;
   const savedIngredients = user?.shoppingList || [];
-
+// Remove ingredients
   const [removeIngredient] = useMutation(REMOVE_INGREDIENT_FROM_SHOPPING_LIST);
 
   const handleRemoveIngredient = async (ingredient) => {
@@ -32,7 +33,7 @@ const ShoppingList = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+// Display shopping list
   return (
     <Container className="d-flex justify-content-center  mt-5 mb-5 px-5 "> 
       <div className="w-50">
