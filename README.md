@@ -33,8 +33,9 @@ Graphql, Mongodb, Mongoose, Heroku
 
 ![Screenshot 2023-07-17 at 18 44 59](https://github.com/kristiyantefov/Cooklense/assets/123417090/46a6691d-1804-4e7a-9e3a-3e3de4d2af91)
 
+![Screenshot 2023-07-17 at 18 45 09](https://github.com/kristiyantefov/Cooklense/assets/123417090/c1199ee8-f45a-4b92-923f-a7dd48e6fbc2)
 
-![Uploading Screenshot 2023-07-17 at 18.45.09.png…]()
+
 
 
 ## Deployment
