@@ -1,4 +1,5 @@
 // NAVBAR
+// Import necessary dependencies and components
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import icon from "../../assets/images/1147873.png";

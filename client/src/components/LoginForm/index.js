@@ -14,13 +14,16 @@ const LoginForm = ({ handleModalClose }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser] = useMutation(LOGIN_USER);
   const dispatch = useDispatch();
+  // Function to handle input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
+   // Function to handle form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = userFormData;
+    // Check if email and password are provided
     if (!email || !password) {
       setShowAlert(true);
       showAlert("field missing or incomplete");
@@ -36,6 +39,8 @@ const LoginForm = ({ handleModalClose }) => {
       const { data } = await loginUser({
         variables: { ...userFormData },
       });
+      
+      // Dispatch login action with user data
       dispatch(
         login({
           token: data.loginUser.token,

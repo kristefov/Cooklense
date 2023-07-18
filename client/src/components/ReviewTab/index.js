@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useState, useEffect } from "react";
 import StarRatingComponent from "react-star-rating-component";
 import { Form, Button, Spinner, Container, Card } from "react-bootstrap";
@@ -8,12 +9,14 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import StarRating from '../../components/StarRating';
 
 const ReviewTab = ({ idMeal }) => {
+  // State for managing rating, title, comment, form error, reviews, and review loading
   const [rating, setRating] = useState(5);
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
   const [formError, setFormError] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [createReview] = useMutation(CREATE_REVIEW);
+  // Fetch reviews for the specified meal
   const { loading, error, data } = useQuery(GET_REVIEWS, {
     variables: { idMeal: idMeal },
   });
@@ -21,11 +24,14 @@ const ReviewTab = ({ idMeal }) => {
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   useEffect(() => {
+    // Update the reviews state when data is fetched successfully
     if (!loading && !error) {
       setReviews(data.getReviews);
       setReviewsLoaded(true);
     }
   }, [loading, data, error]);
+
+// Event handler for star rating and form input changes
 
   const onStarClick = (nextRating) => {
     setRating(nextRating);
@@ -48,6 +54,7 @@ const ReviewTab = ({ idMeal }) => {
       setFormError(true);
       return;
     }
+    // Create review data object
     const reviewData = {
       idMeal: idMeal,
       username: username,
@@ -69,6 +76,7 @@ const ReviewTab = ({ idMeal }) => {
     setRating(5);
   };
 
+ // Render spinner while loading reviews
   if (loading || !reviewsLoaded) {
     return <Spinner animation="border" />;
   }
