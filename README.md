@@ -40,7 +40,7 @@ Graphql, Mongodb, Mongoose, Heroku
 
 ## Deployment
 
-[Link to Heroku]()
+[Link to Heroku](cooklense-6466eecac055.herokuapp.com)
 
 ## Installation
 
