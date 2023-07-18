@@ -1,4 +1,8 @@
+// initial setup for Apollo Client for React
 import { gql } from "@apollo/client";
+
+
+// modify for refactored code
 export const ADD_USER = gql`
   mutation addUser($userData: UserInput!) {
     addUser(userData: $userData) {
@@ -13,6 +17,7 @@ export const ADD_USER = gql`
     }
   }
 `;
+
 export const UPDATE_USER = gql`
   mutation updateUser($userData: UserInput!) {
     updateUser(userData: $userData) {
@@ -25,6 +30,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
+// boilerplate for User login controls
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
@@ -40,6 +46,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
+// new code for refactor
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($recipeData: RecipeInput!) {
     saveRecipe(recipeData: $recipeData) {
@@ -53,6 +60,8 @@ export const SAVE_RECIPE = gql`
     }
   }
 `;
+
+// new code for refactor
 export const REMOVE_RECIPE = gql`
   mutation removeRecipe($idMeal: String!) {
     removeRecipe(idMeal: $idMeal) {
