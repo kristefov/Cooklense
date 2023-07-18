@@ -1,6 +1,4 @@
-// NAVBAR
-// Import necessary dependencies and components
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import icon from "../../assets/images/1147873.png";
 import {
@@ -11,38 +9,55 @@ import {
   Tab,
   ThemeProvider,
   Image,
-  Button,
-  ListGroup,
-  ListGroupItem,
   Col,
 } from "react-bootstrap";
 import SignUpForm from "../SignupForm";
 import LoginForm from "../LoginForm";
 import { logout } from "../../reducers/authReducer";
 import { useDispatch, useSelector } from "react-redux";
-import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../../utils/queries";
+
 const AppNavbar = () => {
-  // set modal display state
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { data, loading } = useQuery(GET_ME);
   const userDataState = data?.me?.avatar;
+  const [theme, setTheme] = useState("auto");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-bs-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   if (loading) {
-    return <h2>loading</h2>;
+    return <h2>Loading...</h2>;
   }
+
+  const handleThemeToggle = (selectedTheme) => {
+    localStorage.setItem("theme", selectedTheme);
+    setTheme(selectedTheme);
+  };
+
   return (
     <>
       <ThemeProvider
+        theme={theme === "dark" ? "dark" : "light"} // Use custom theme objects for "dark" and "light" themes
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
         minBreakpoint="xxs"
       >
         <Navbar
           style={{ zIndex: 1000, maxHeight: "70px" }}
-          className=" navbar navbar-expand-lg fixed-top text-bg-warning"
+          className="navbar navbar-expand-lg fixed-top text-bg-warning"
         >
           <Container>
             <Navbar.Brand as={Link} to="/">
@@ -55,7 +70,6 @@ const AppNavbar = () => {
             <Navbar.Toggle aria-controls="navbar" />
             <Navbar.Collapse className="flex-row-reverse">
               <Nav className="ml-auto d-flex align-items-center">
-                {/* if user is logged in show saved books and logout */}
                 {auth.isLoggedIn ? (
                   <>
                     <Col>
@@ -94,7 +108,6 @@ const AppNavbar = () => {
 
                         <ul className="dropdown-menu text-small bg-light text-dark">
                           <li>
-                            {" "}
                             <Nav.Link
                               className="dropdown-item  bg-light text-dark"
                               as={Link}
@@ -104,7 +117,6 @@ const AppNavbar = () => {
                             </Nav.Link>
                           </li>
                           <li>
-                            {" "}
                             <Nav.Link
                               className="dropdown-item  bg-light text-dark"
                               as={Link}
@@ -114,7 +126,6 @@ const AppNavbar = () => {
                             </Nav.Link>
                           </li>
                           <li>
-                            {" "}
                             <Nav.Link
                               className="dropdown-item  bg-light text-dark"
                               as={Link}
@@ -124,7 +135,6 @@ const AppNavbar = () => {
                             </Nav.Link>
                           </li>
                           <li>
-                            {" "}
                             <Nav.Link
                               className="dropdown-item  bg-light text-dark"
                               as={Link}
@@ -200,9 +210,12 @@ const AppNavbar = () => {
                       <li>
                         <button
                           type="button"
-                          className="dropdown-item d-flex align-items-center"
+                          className={`dropdown-item d-flex align-items-center ${
+                            theme === "light" ? "active" : ""
+                          }`}
                           data-bs-theme-value="light"
-                          aria-pressed="false"
+                          aria-pressed={theme === "light" ? "true" : "false"}
+                          onClick={() => handleThemeToggle("light")}
                         >
                           <svg
                             className="bi me-2 opacity-50 theme-icon"
@@ -224,9 +237,12 @@ const AppNavbar = () => {
                       <li>
                         <button
                           type="button"
-                          className="dropdown-item d-flex align-items-center"
+                          className={`dropdown-item d-flex align-items-center ${
+                            theme === "dark" ? "active" : ""
+                          }`}
                           data-bs-theme-value="dark"
-                          aria-pressed="false"
+                          aria-pressed={theme === "dark" ? "true" : "false"}
+                          onClick={() => handleThemeToggle("dark")}
                         >
                           <svg
                             className="bi me-2 opacity-50 theme-icon"
@@ -248,9 +264,12 @@ const AppNavbar = () => {
                       <li>
                         <button
                           type="button"
-                          className="dropdown-item d-flex align-items-center active"
+                          className={`dropdown-item d-flex align-items-center ${
+                            theme === "auto" ? "active" : ""
+                          }`}
                           data-bs-theme-value="auto"
-                          aria-pressed="true"
+                          aria-pressed={theme === "auto" ? "true" : "false"}
+                          onClick={() => handleThemeToggle("auto")}
                         >
                           <svg
                             className="bi me-2 opacity-50 theme-icon"
