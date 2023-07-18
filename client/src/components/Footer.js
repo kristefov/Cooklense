@@ -11,7 +11,9 @@ const Footer = () => {
       <footer className="bg-body-tetriary text-tetriary mt-5">
         <Container className="p-3 container-fluid d-flex flex-column align-center">
           <Row className="d-flex align-center justify-content-center flex-column flex-wrap row align-content-center">
-            <h5 className="align-self-center col-3 text-center mt-2 mb-4 text-warning bg-primary rounded-5 p-3">Created by:</h5>
+            <h5 className="align-self-center col-3 text-center mt-2 mb-4 text-warning bg-primary rounded-5 p-3">
+              Created by:
+            </h5>
             <Row className="row  col-8 p-3 container-fluid justify-content-center align-items-center d-flex flex-row align-center row">
               <Col className="col-2 text-center ">
                 <a
@@ -23,7 +25,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/6205151?s=64&v=4"
                   ></Image>{" "}
-                  dExIT
+                  Rihards
                 </a>
               </Col>
               <Col className="col-2 text-center">
@@ -36,7 +38,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/49992946?s=64&v=4"
                   ></Image>{" "}
-                  Kristiyantefov
+                  Kris
                 </a>
               </Col>
               <Col className="col-2 text-center">
@@ -49,7 +51,7 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/87772337?s=64&v=4"
                   ></Image>
-                  Abstynent
+                  Lukasz
                 </a>
               </Col>
               <Col className="col-2 text-center">
@@ -62,21 +64,20 @@ const Footer = () => {
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/80605132?s=64&v=4"
                   ></Image>{" "}
-                 SalmY001
+                  Yvonne
                 </a>
               </Col>
               <Col className="col-2 text-center">
                 <a
                   className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"
                   href="https://github.com/Ze7Hu"
-
                 >
                   <Image
                     width="32"
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/123417090?s=64&v=4"
                   ></Image>{" "}
-                 Ze7Hu
+                  Hodan
                 </a>
               </Col>
               <Col className="col-2 text-center">
