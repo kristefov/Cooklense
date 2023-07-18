@@ -57,7 +57,7 @@ const SearchResults = () => {
   });
 
   return (
-    <Container as="main" className="h-100 mt-5 mb-5 px-5">
+    <Container style={{ marginTop: "10vh" }} className="h-100  mb-5 px-5">
       <Row className="justify-content-center">
         {showFilters ? (
           <Col sm={3}>

@@ -70,11 +70,11 @@ const Home = () => {
         as="main"
         className="h-100 mb-5 d-flex flex-wrap justify-content-center mt-5 px-5"
       >
-        <h1 className="text-center"> Search for recipes!</h1>
         <Container
           className="justify-content-center align-items-center h-90"
           style={{ marginTop: "10vh", height: "50vh" }}
         >
+          <h1 className="text-center"> Search for recipes!</h1>
           <Form>
             <Row>
               <Row xs={12} md={8}>
