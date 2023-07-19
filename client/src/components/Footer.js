@@ -1,7 +1,17 @@
 // NAVBAR
 import React from "react";
 
-import { Navbar, Nav, Container, Col, Row, Image } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Col,
+  Row,
+  Image,
+  Button,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import icon from "../assets/images/download.png";
 
 const Footer = () => {
   // set modal display state
@@ -10,6 +20,24 @@ const Footer = () => {
     <>
       <footer className="bg-body-tetriary text-tetriary mt-5">
         <Container className="p-3 container-fluid d-flex flex-column align-center">
+          <Row
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              right: "20px",
+              maxWidth: "130px",
+            }}
+            className="align-self-center col-2 text-center mt-1 mb-1 text-warning  rounded-5 p-1"
+          >
+            <p>BUY ME A COFFEE:</p>
+            <a href="https://donate.stripe.com/test_28o0083KAd1c9DWfYY">
+              <Image
+                style={{ maxWidth: "80px", borderRadius: "20px" }}
+                src={icon}
+              />
+            </a>
+          </Row>
+
           <Row className="d-flex align-center justify-content-center flex-column flex-wrap row align-content-center">
             <h5 className="align-self-center col-3 text-center mt-2 mb-4 text-warning bg-primary rounded-5 p-3">
               Created by:
@@ -63,10 +91,11 @@ const Footer = () => {
                     width="32"
                     className="rounded-circle"
                     src="https://avatars.githubusercontent.com/u/80605132?s=64&v=4"
-                  ></Image>{" "}
+                  ></Image>
                   Yvonne
                 </a>
               </Col>
+
               <Col className="col-2 text-center">
                 <a
                   className="nav-link d-flex flex-column-reverse flex-wrap align-center justify-content-center align-items-center"
