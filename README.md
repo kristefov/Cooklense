@@ -8,7 +8,7 @@
 
 #
 
-<img src="./client/src/assets/images/ezgif.com-crop.gif" width="100%">
+<img src="./client/src/assets/images/ezgif.com-gif-maker.gif" width="100%">
 
 #
 
