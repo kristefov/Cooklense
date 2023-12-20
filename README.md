@@ -74,7 +74,7 @@ For and suggestions or contributions you can reach me at my email address or you
 
 Link to repository:
 
-https://github.com/kristiyantefov/cooklense
+https://github.com/kristefov/cooklense
 
 Link to website:
 
@@ -84,7 +84,7 @@ https://cooklense-6466eecac055.herokuapp.com/
 
 ## Authors
 
-- [Kristiyan](https://github.com/kristiyantefov)
+- [Kristiyan](https://github.com/kristefov)
 
 - [Rihards](https://github.com/dexit)
 
